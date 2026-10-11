@@ -1,0 +1,30 @@
+export type OrderMode = "dine_in" | "takeaway";
+export type OrderStatus = "placed" | "accepted" | "preparing" | "ready" | "completed" | "rejected" | "cancelled";
+export type PaymentMethod = "online" | "cash";
+export type PaymentPlan = { kind: "online" } | { kind: "cash" } | { kind: "split"; onlineAmount: number };
+export type CartLine = { itemId: string; optionIds: string[]; qty: number; note?: string };
+export type Coupon = {
+  code: string;
+  type: "percent" | "flat";
+  value: number;
+  minOrder: number;
+  maxDiscount: number | null;
+  expiresAt: string | null;
+  usageLimit: number | null;
+  usedCount: number;
+  firstOrderOnly: boolean;
+  active: boolean;
+};
+export type PricedLine = CartLine & { name: string; unitPrice: number; lineTotal: number; optionLabels: string[] };
+export type Bill = {
+  lines: PricedLine[];
+  subtotal: number;
+  couponDiscount: number;
+  loyaltyDiscount: number;
+  pointsRedeemed: number;
+  taxable: number;
+  cgst: number;
+  sgst: number;
+  total: number;
+};
+export type Segment = "all_opted_in" | "new" | "regular" | "vip" | "inactive_30d";
