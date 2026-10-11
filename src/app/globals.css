@@ -27,6 +27,9 @@
 
   --font-sans: var(--font-karla), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-playfair), ui-serif, Georgia, serif;
+  /* Logo lockup only: "GLUTTONS" retro flared serif, "garage" rounded sans. */
+  --font-wordmark: var(--font-bevan), var(--font-display);
+  --font-wordmark-sub: var(--font-nunito), var(--font-sans);
 
   --shadow-card: 0 1px 2px rgb(28 26 25 / 0.08), 0 2px 8px rgb(28 26 25 / 0.06);
   --shadow-lift: 0 4px 16px rgb(28 26 25 / 0.14);
@@ -197,6 +200,23 @@
     opacity: 1;
     transform: none;
   }
+}
+
+/* Checkerboard motif from the cafe floor (ink/cream). Size via --checker (default 12px). */
+@utility checker {
+  background-color: var(--color-cream);
+  background-image: conic-gradient(var(--color-ink) 25%, transparent 0 50%, var(--color-ink) 0 75%, transparent 0);
+  background-size: calc(var(--checker, 12px) * 2) calc(var(--checker, 12px) * 2);
+}
+
+/* Gentle spin for decorative gears; collapsed by the reduced-motion rule below. */
+@keyframes gear-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@utility animate-gear {
+  animation: gear-spin 60s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

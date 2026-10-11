@@ -8,7 +8,7 @@ const toMin = (hhmm: string): number => {
 };
 const pad = (n: number) => String(n).padStart(2, "0");
 const fmt24 = (min: number) => `${pad(Math.floor(min / 60))}:${pad(min % 60)}`;
-const fmt12 = (hhmm: string): string => {
+export const fmt12 = (hhmm: string): string => {
   const [h, m] = hhmm.split(":").map(Number);
   return `${h % 12 === 0 ? 12 : h % 12}:${pad(m)} ${h < 12 ? "AM" : "PM"}`;
 };

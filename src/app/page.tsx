@@ -1,11 +1,24 @@
-import { Button } from "@/components/ui/button";
+import { SiteShell } from "@/components/site/SiteShell";
+import { Experience } from "@/components/site/Experience";
+import { Gallery } from "@/components/site/Gallery";
+import { GuestFavourites } from "@/components/site/GuestFavourites";
+import { Hero } from "@/components/site/Hero";
+import { Highlights } from "@/components/site/Highlights";
+import { Checkerband } from "@/components/site/primitives/Checkerband";
+import { Reviews } from "@/components/site/Reviews";
+import { Visit } from "@/components/site/Visit";
 
 export default function Home() {
   return (
-    <main className="flex flex-1 flex-col items-center justify-center gap-6 px-4 text-center">
-      <h1 className="reveal text-5xl font-bold text-primary">Gluttons Garage</h1>
-      <p className="text-muted-foreground">Fusion happens here.</p>
-      <Button size="lg">Order now</Button>
-    </main>
+    <SiteShell>
+      <Hero />
+      <Checkerband />
+      <GuestFavourites />
+      <Highlights />
+      <Experience />
+      <Reviews />
+      <Gallery />
+      <Visit />
+    </SiteShell>
   );
 }
