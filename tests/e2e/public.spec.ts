@@ -76,6 +76,30 @@ test.describe("menu page", () => {
     await expect(page.getByRole("heading", { level: 3, name: veg.name, exact: true })).toHaveCount(1);
   });
 
+  // A dish deep in the page (pizza section, ~25 sections down) that the home rail links to.
+  const deep = items.find((i) => i.name === "Creamy Broccoli Pizza")!;
+
+  async function expectInViewport(page: Page, id: string) {
+    await page.waitForTimeout(500);
+    const box = await page.locator(`[id="${id}"]`).boundingBox();
+    const vp = page.viewportSize()!;
+    expect(box).not.toBeNull();
+    expect(box!.y).toBeGreaterThanOrEqual(0);
+    expect(box!.y).toBeLessThan(vp.height - 40);
+  }
+
+  test("deep link /menu/#<dish> lands on that dish", async ({ page }) => {
+    await page.goto(`/menu/#${deep.id}`);
+    await expectInViewport(page, deep.id);
+  });
+
+  test("home favourite card opens the menu at that dish", async ({ page }) => {
+    await page.goto("/");
+    await page.locator(`a[href$="/menu/#${deep.id}"]`).first().click();
+    await expect(page).toHaveURL(new RegExp(`/menu/#${deep.id}$`));
+    await expectInViewport(page, deep.id);
+  });
+
   test("no console errors", async ({ page }) => {
     const errors = trackErrors(page);
     await page.goto("/menu/");

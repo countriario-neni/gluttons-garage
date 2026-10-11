@@ -9,6 +9,25 @@ import { filterMenu } from "@/lib/menu";
 import { MenuItemRow } from "./MenuItemRow";
 import { Container } from "./primitives/Container";
 
+/**
+ * Scroll an element to its scroll-margin position and keep re-aligning while it moves.
+ * Menu sections use content-visibility: auto, so sections near the target render after the jump
+ * and can shift it away from their estimated size; this settles once two frames agree (max 20).
+ */
+function scrollToSettled(el: HTMLElement) {
+  let last = Number.NaN;
+  let frames = 0;
+  const step = () => {
+    el.scrollIntoView({ block: "start" });
+    const top = el.getBoundingClientRect().top;
+    if (top !== last && ++frames < 20) {
+      last = top;
+      requestAnimationFrame(step);
+    }
+  };
+  step();
+}
+
 /** Full read-only menu: sticky search + veg filter + category chips, sections per category. */
 export function MenuBrowser() {
   const [query, setQuery] = useState("");
@@ -18,6 +37,16 @@ export function MenuBrowser() {
   const chipsRef = useRef<HTMLUListElement>(null);
   const toolbarRef = useRef<HTMLDivElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
+  /** Set by the search / veg controls so only user filtering (never mount or deep links) resets scroll. */
+  const userFiltered = useRef(false);
+  const changeQuery = (q: string) => {
+    userFiltered.current = true;
+    setQuery(q);
+  };
+  const changeVeg = (v: boolean) => {
+    userFiltered.current = true;
+    setVegOnly(v);
+  };
 
   const sections = useMemo(() => {
     const shown = filterMenu(items, { query: deferredQuery, vegOnly });
@@ -53,11 +82,19 @@ export function MenuBrowser() {
     };
   }, [sections]);
 
-  // When the filter changes while scrolled deep into the list, bring the results top back into view.
+  // Deep links (/menu/#dish-id or #cat-id): land precisely despite content-visibility estimates.
+  useEffect(() => {
+    const id = decodeURIComponent(window.location.hash.slice(1));
+    const el = id ? document.getElementById(id) : null;
+    if (el) scrollToSettled(el);
+  }, []);
+
+  // After the user changes the filter while deep in the list, bring the results top back into view.
   useEffect(() => {
     const results = resultsRef.current;
     const toolbar = toolbarRef.current;
-    if (!results || !toolbar) return;
+    if (!userFiltered.current || !results || !toolbar) return;
+    userFiltered.current = false;
     // Where the results start when the toolbar is stuck under the 4.5rem header.
     const target = results.getBoundingClientRect().top + window.scrollY - (72 + toolbar.offsetHeight);
     if (window.scrollY > target) window.scrollTo({ top: Math.max(0, target) });
@@ -81,7 +118,7 @@ export function MenuBrowser() {
             <input
               type="search"
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={(e) => changeQuery(e.target.value)}
               placeholder="Search pancakes, peri peri, soup…"
               aria-label="Search the menu"
               className="h-12 w-full rounded-full border border-input bg-card pr-12 pl-12 text-base placeholder:text-muted-foreground [&::-webkit-search-cancel-button]:hidden"
@@ -89,7 +126,7 @@ export function MenuBrowser() {
             {query && (
               <button
                 type="button"
-                onClick={() => setQuery("")}
+                onClick={() => changeQuery("")}
                 aria-label="Clear search"
                 className="absolute top-1/2 right-1 grid size-11 -translate-y-1/2 place-items-center rounded-full text-muted-foreground hover:text-foreground"
               >
@@ -98,7 +135,7 @@ export function MenuBrowser() {
             )}
           </div>
           <div className="flex items-center gap-3 sm:pl-2">
-            <Switch checked={vegOnly} onCheckedChange={setVegOnly} aria-labelledby="veg-only-label" />
+            <Switch checked={vegOnly} onCheckedChange={changeVeg} aria-labelledby="veg-only-label" />
             <span id="veg-only-label" className="text-sm font-bold">
               Veg only
             </span>
@@ -115,6 +152,13 @@ export function MenuBrowser() {
                   <a
                     href={`#cat-${c.id}`}
                     data-chip={c.id}
+                    onClick={(e) => {
+                      const el = document.getElementById(`cat-${c.id}`);
+                      if (!el) return;
+                      e.preventDefault();
+                      history.replaceState(null, "", `#cat-${c.id}`);
+                      scrollToSettled(el);
+                    }}
                     aria-current={active === c.id ? "true" : undefined}
                     className={cn(
                       "inline-flex h-11 items-center rounded-full px-4 text-sm font-bold whitespace-nowrap transition-colors",
@@ -145,7 +189,7 @@ export function MenuBrowser() {
               id={`cat-${c.id}`}
               data-menu-section
               aria-labelledby={`h-${c.id}`}
-              className="scroll-mt-64 sm:scroll-mt-56"
+              className="scroll-mt-64 [contain-intrinsic-size:auto_800px] [content-visibility:auto] sm:scroll-mt-56"
             >
               <div className="mb-5 flex items-baseline gap-3 border-b-2 border-primary pb-3">
                 <h2 id={`h-${c.id}`} className="text-3xl font-bold text-primary sm:text-4xl">

@@ -23,6 +23,11 @@ export function Hero() {
         aria-hidden="true"
         className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,var(--color-ink)_8%,color-mix(in_oklab,var(--color-ink)_78%,transparent)_45%,color-mix(in_oklab,var(--color-ink)_45%,transparent)_100%)] lg:bg-[linear-gradient(100deg,var(--color-ink)_10%,color-mix(in_oklab,var(--color-ink)_80%,transparent)_45%,color-mix(in_oklab,var(--color-ink)_25%,transparent)_100%)]"
       />
+      {/* Top scrim: keeps the transparent header (cream wordmark + nav) legible over light ceiling areas. */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 -z-10 h-44 bg-[linear-gradient(to_bottom,color-mix(in_oklab,var(--color-ink)_85%,transparent),transparent)]"
+      />
       <Gear className="animate-gear pointer-events-none absolute -top-24 -right-24 -z-10 hidden size-[28rem] text-cream/10 lg:block" strokeWidth={1} />
 
       <div className="mx-auto w-full max-w-7xl px-4 pt-32 pb-24 sm:px-6 sm:pb-14 lg:px-8 lg:pb-24">

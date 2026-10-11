@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Camera, MessageCircle, Phone, ThumbsUp } from "lucide-react";
 import { cafe } from "@/data/cafe";
 import { callHref, chatHref, navLinks } from "./links";
-import { DeliveryLinks } from "./DeliveryLinks";
 import { Checkerband } from "./primitives/Checkerband";
 import { Container } from "./primitives/Container";
 import { Gear } from "./primitives/Gear";
@@ -17,6 +16,10 @@ export function SiteFooter() {
     ...(cafe.facebook ? [{ label: "Facebook", href: cafe.facebook, Icon: ThumbsUp }] : []),
     { label: "WhatsApp", href: chatHref, Icon: MessageCircle },
   ];
+  const delivery = [
+    { label: "Swiggy", href: cafe.delivery.swiggy },
+    { label: "Zomato", href: cafe.delivery.zomato },
+  ].filter((d): d is { label: string; href: string } => Boolean(d.href));
 
   return (
     <footer className="relative overflow-hidden bg-ink text-cream">
@@ -30,7 +33,7 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <h3 className={colTitle}>Explore</h3>
+          <h2 className={colTitle}>Explore</h2>
           <ul className="mt-3">
             {navLinks.map((l) => (
               <li key={l.href}>
@@ -43,7 +46,7 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <h3 className={colTitle}>Visit</h3>
+          <h2 className={colTitle}>Visit</h2>
           <address className="mt-3 max-w-56 text-kitchen-soft not-italic">{cafe.address}</address>
           <a href={callHref} className={link}>
             <Phone className="size-4" aria-hidden="true" />
@@ -53,7 +56,7 @@ export function SiteFooter() {
 
         <div className="space-y-8">
           <div>
-            <h3 className={colTitle}>Follow</h3>
+            <h2 className={colTitle}>Follow</h2>
             <ul className="mt-3">
               {socials.map(({ label, href, Icon }) => (
                 <li key={label}>
@@ -65,7 +68,20 @@ export function SiteFooter() {
               ))}
             </ul>
           </div>
-          <DeliveryLinks />
+          {delivery.length > 0 && (
+            <div>
+              <h2 className={colTitle}>Delivery</h2>
+              <ul className="mt-3">
+                {delivery.map((d) => (
+                  <li key={d.label}>
+                    <a href={d.href} target="_blank" rel="noopener noreferrer" className={link}>
+                      Order on {d.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </Container>
       <Container className="relative flex flex-col gap-2 border-t border-kitchen-line py-6 text-sm text-kitchen-soft sm:flex-row sm:justify-between">

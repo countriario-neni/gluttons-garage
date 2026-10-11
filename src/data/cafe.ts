@@ -7,6 +7,8 @@ export type Cafe = {
   whatsapp: string;
   instagram: string;
   facebook: string | null;
+  /** Delivery partner listings; shown on the public site only when set. */
+  delivery: { swiggy: string | null; zomato: string | null };
   mapsUrl: string;
   mapsEmbed: string;
   /** Keyed by JS day: 0 = Sunday ... 6 = Saturday. */
@@ -26,6 +28,7 @@ export const cafe: Cafe = {
   whatsapp: "917702368884",
   instagram: "https://www.instagram.com/gluttons_garage/",
   facebook: null,
+  delivery: { swiggy: null, zomato: null },
   mapsUrl: "https://maps.app.goo.gl/WDJRMVKBnvjigCqMA",
   mapsEmbed: "https://www.google.com/maps?q=Gluttons+Garage,+Beach+Road,+Pandurangapuram,+Visakhapatnam&output=embed",
   hours: {
