@@ -115,11 +115,12 @@ export const publicMessages = (j: PublicOrder): MessageLog[] =>
 
 /**
  * SQL functions raise bare codes ("BAD_AMOUNT"); surface them as Error(code) like LocalStore.
- * Postgres "permission denied" (42501) means the anon role called a staff function.
+ * Postgres "permission denied" (42501) means the anon role called a staff function; PostgREST
+ * rejects an expired or invalid session token with PGRST301 / HTTP 401. Both mean "sign in again".
  */
-export function errorCode(e: { message?: string; code?: string }): string {
+export function errorCode(e: { message?: string; code?: string; status?: number }): string {
   if (e.message && /^[A-Z][A-Z0-9_]*$/.test(e.message)) return e.message;
-  if (e.code === "42501") return "UNAUTHENTICATED";
+  if (e.code === "42501" || e.code === "PGRST301" || e.status === 401 || /JWT expired/i.test(e.message ?? "")) return "UNAUTHENTICATED";
   if (e.code === "22P02") return "BAD_INPUT";
   return e.message || "UNKNOWN_ERROR";
 }

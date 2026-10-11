@@ -48,19 +48,78 @@ const stats = async (phone: string) => (await rows<{ id: string; points: number 
 const richPhone = async () => (await rows<{ phone: string; points: number }>(db, "admin", "select phone, points from customer_stats where points >= 300 order by phone limit 1"))[0];
 
 describe("seed", () => {
-  it("matches generateSeed counts and is shifted to now", async () => {
-    const [{ anchor }] = await rows<{ anchor: string }>(db, "admin", "select anchor from seed_meta");
-    const s = generateSeed(new Date(anchor));
-    const count = async (t: string) => Number((await rows<{ c: number }>(db, "admin", `select count(*)::int c from ${t}`))[0].c);
+  const TERMINAL = ["completed", "rejected", "cancelled"];
+  const count = async (t: string) => (await rows<{ c: number }>(db, "admin", `select count(*)::int c from ${t}`))[0].c;
+  const anchorOf = async () => new Date((await rows<{ anchor: string }>(db, "admin", "select anchor from seed_meta"))[0].anchor);
+  const istTime = (iso: string) => new Date(new Date(iso).getTime() + 330 * 60000).toISOString().slice(11, 19);
+  const reseed = (at: Date | null) => rows(db, "admin", "select public._reseed($1::timestamptz)", [at?.toISOString() ?? null]);
+  /** Ledger matches the kept orders: earn floor(total/10) per completed order, minus redemptions. */
+  const ledgerConsistent = async () =>
+    rows(
+      db,
+      "admin",
+      `select c.id from customers c
+        where coalesce((select sum(points) from loyalty_ledger l where l.customer_id = c.id), 0)
+           <> coalesce((select sum(case when o.status = 'completed' then floor(o.total / 10.0)::int else 0 end) - sum(o.points_redeemed)
+                          from orders o where o.customer_id = c.id), 0)`,
+    );
+
+  it("reseeded at the anchor, the snapshot equals generateSeed", async () => {
+    const anchor = await anchorOf();
+    const s = generateSeed(anchor);
+    await reseed(anchor);
     expect(await count("customers")).toBe(s.customers.length);
     expect(await count("orders")).toBe(s.orders.length);
     expect(await count("loyalty_ledger")).toBe(s.ledger.length);
+    expect(await count("payments")).toBe(s.orders.reduce((a, o) => a + o.payments.length, 0));
     expect(await count("menu_items")).toBe(s.items.length);
     expect(await count("item_options")).toBe(s.items.reduce((a, i) => a + i.options.length, 0));
-    const [{ newest }] = await rows<{ newest: number }>(db, "admin", "select extract(epoch from now() - max(created_at))::int newest from orders");
-    expect(newest).toBeLessThan(10 * 60); // live orders are a few minutes old
-    const totals = await rows<{ t: number }>(db, "admin", "select coalesce(sum(total),0)::int t from orders");
-    expect(totals[0].t).toBe(s.orders.reduce((a, o) => a + o.bill.total, 0));
+    const [{ t }] = await rows<{ t: number }>(db, "admin", "select coalesce(sum(total),0)::int t from orders");
+    expect(t).toBe(s.orders.reduce((a, o) => a + o.bill.total, 0));
+    expect(await ledgerConsistent()).toEqual([]);
+  });
+
+  it("history shifts by whole days (time of day kept), skips the future, keeps the ledger consistent", async () => {
+    const anchor = await anchorOf();
+    const s = generateSeed(anchor);
+    // 3 days after the anchor at 08:05 IST: most of the anchor day's history (08:00-15:00 IST) would be in the future.
+    const istDay = new Date(anchor.getTime() + 330 * 60000).toISOString().slice(0, 10);
+    const at = new Date(new Date(`${istDay}T08:05:00+05:30`).getTime() + 3 * 86400000);
+    await reseed(at);
+    const orders = await rows<{ id: string; code: string; status: string; created_at: string; pickup_time: string | null; mode: string }>(
+      db,
+      "admin",
+      "select id, short_code code, status, to_json(created_at)#>>'{}' created_at, pickup_time, mode from orders",
+    );
+    expect(orders.length).toBeLessThan(s.orders.length);
+    expect(orders.every((o) => new Date(o.created_at) <= at)).toBe(true);
+    // skipped orders took their children with them
+    const kept = new Set(orders.map((o) => o.code));
+    const skipped = s.orders.filter((o) => !kept.has(o.code));
+    expect(skipped.length).toBeGreaterThan(0);
+    expect(skipped.every((o) => TERMINAL.includes(o.status))).toBe(true);
+    expect(await count("payments")).toBe(s.orders.filter((o) => kept.has(o.code)).reduce((a, o) => a + o.payments.length, 0));
+    expect(await count("order_items")).toBe(s.orders.filter((o) => kept.has(o.code)).reduce((a, o) => a + o.bill.lines.length, 0));
+    expect(await ledgerConsistent()).toEqual([]);
+    // a historical order keeps its time of day
+    const first = s.orders[0];
+    expect(istTime(orders.find((o) => o.code === first.code)!.created_at)).toBe(istTime(first.createdAt));
+    // the 3 in-flight orders are re-stamped relative to now, pickup ~30 min ahead as in generateSeed
+    const live = orders.filter((o) => !TERMINAL.includes(o.status));
+    expect(live).toHaveLength(3);
+    for (const o of live) expect((at.getTime() - new Date(o.created_at).getTime()) / 60000).toBeLessThanOrEqual(30);
+    const takeaway = live.find((o) => o.mode === "takeaway")!;
+    expect(takeaway.pickup_time).toBe(istTime(new Date(at.getTime() + 30 * 60000).toISOString()).slice(0, 5));
+    await reseed(null);
+  });
+
+  it("reset at the real now: nothing in the future, 3 live orders minutes old", async () => {
+    const future = await rows(db, "admin", "select 1 from orders where created_at > now()");
+    expect(future).toEqual([]);
+    const live = await rows<{ age: number }>(db, "admin", "select extract(epoch from now() - created_at)::int age from orders where status not in ('completed','rejected','cancelled')");
+    expect(live).toHaveLength(3);
+    expect(live.every((o) => o.age >= 0 && o.age < 30 * 60)).toBe(true);
+    expect(await ledgerConsistent()).toEqual([]);
   });
 });
 
@@ -310,6 +369,23 @@ describe("staff and owner functions", () => {
     expect(s).toMatchObject({ tables: 4, gst_percent: 5 });
     expect(await place(input())).toEqual({ ok: false, error: "NOT_ACCEPTING" });
     await expect(call(db, "owner", "update_settings", [{ tables: "many" }])).rejects.toThrow("BAD_INPUT");
+    const loyalty = { earnPerRupees: 10, redeemBlock: 100, redeemValue: 50, maxShare: 0.5 };
+    for (const bad of [
+      { ...loyalty, earnPerRupees: 0 },
+      { ...loyalty, redeemBlock: -100 },
+      { ...loyalty, redeemValue: 2.5 },
+      { ...loyalty, redeemBlock: "100" },
+      { ...loyalty, maxShare: 0 },
+      { ...loyalty, maxShare: 1.5 },
+      { ...loyalty, maxShare: "0.5" },
+      { earnPerRupees: 10, redeemBlock: 100, redeemValue: 50 },
+      { ...loyalty, extra: 1 },
+      [],
+    ]) {
+      await expect(call(db, "owner", "update_settings", [{ loyalty: bad }]), JSON.stringify(bad)).rejects.toThrow("BAD_INPUT");
+    }
+    await call(db, "owner", "update_settings", [{ loyalty: { ...loyalty, maxShare: 1 } }]);
+    expect((await rows<{ loyalty: unknown }>(db, "anon", "select loyalty from public_settings"))[0].loyalty).toEqual({ ...loyalty, maxShare: 1 });
     await call(db, "owner", "upsert_coupon", [{ code: "welcome10", type: "percent", value: 15, minOrder: 0, maxDiscount: 100, expiresAt: null, usageLimit: null, usedCount: 0, firstOrderOnly: true, active: true }]);
     expect(await rows(db, "admin", "select code, value from coupons where upper(code) = 'WELCOME10'")).toEqual([{ code: "WELCOME10", value: 15 }]);
 
@@ -318,8 +394,8 @@ describe("staff and owner functions", () => {
     expect(after.is_available).toBe(true);
     expect((await rows<{ accepting_orders: boolean }>(db, "anon", "select accepting_orders from public_settings"))[0].accepting_orders).toBe(true);
     expect(await rows(db, "admin", "select value from coupons where code = 'WELCOME10'")).toEqual([{ value: 10 }]);
-    const [{ newest }] = await rows<{ newest: number }>(db, "admin", "select extract(epoch from now() - max(created_at))::int newest from orders");
-    expect(newest).toBeLessThan(10 * 60);
+    expect(await rows(db, "admin", "select 1 from orders where created_at > now()")).toEqual([]);
+    expect(await rows(db, "admin", "select 1 from orders where status not in ('completed','rejected','cancelled')")).toHaveLength(3);
     // codes continue from the seed after a reset
     const r = await ok(input());
     const [{ next_code }] = await rows<{ next_code: number }>(db, "admin", "select next_code from seed_meta");

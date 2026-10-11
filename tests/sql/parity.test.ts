@@ -25,7 +25,9 @@ let phoneSeq = 9300000000;
 beforeAll(async () => {
   db = await createDb();
   anchor = new Date((await rows<{ anchor: string }>(db, "admin", "select anchor from seed_meta"))[0].anchor);
-  // Same generateSeed(anchor) data as seed.sql, so balances, coupons and first-order flags match.
+  // Reseed at the anchor itself (no shift, nothing skipped) so the SQL data is exactly generateSeed(anchor),
+  // like LocalStore's below: balances, coupons and first-order flags then match whatever the time of day.
+  await rows(db, "admin", "select public._reseed($1::timestamptz)", [anchor.toISOString()]);
   local = new LocalStore({ storage: memoryKV(), channel: null, now: () => anchor });
   await local.staffSignIn("owner@gluttonsgarage.demo", "garage123");
   for (const c of fixtures.coupons as Coupon[]) {

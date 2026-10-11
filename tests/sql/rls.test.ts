@@ -72,6 +72,19 @@ describe("anon", () => {
   });
 });
 
+describe("future objects", () => {
+  it("a table created after the migrations is not reachable by the API roles", async () => {
+    await rows(db, "admin", "create table public.later_table (id int)");
+    await rows(db, "admin", "create sequence public.later_seq");
+    for (const who of ["anon", "kitchen"] as const) {
+      await expect(rows(db, who, "select * from later_table"), who).rejects.toThrow(/permission denied/);
+      await expect(rows(db, who, "select nextval('later_seq')"), who).rejects.toThrow(/permission denied/);
+    }
+    await rows(db, "admin", "drop table public.later_table");
+    await rows(db, "admin", "drop sequence public.later_seq");
+  });
+});
+
 describe("authenticated", () => {
   it("kitchen is FORBIDDEN from owner-only functions", async () => {
     for (const [fn, args] of OWNER_CALLS) await expect(call(db, "kitchen", fn, args), fn).rejects.toThrow("FORBIDDEN");

@@ -194,6 +194,7 @@ export class LocalStore implements DataStore {
     return r.ok ? { ok: true as const, coupon, amount: r.amount } : { ok: false as const, reason: r.reason };
   }
   async listCoupons() {
+    this.requireStaff();
     return this.load().coupons;
   }
   async upsertCoupon(c: Coupon) {
@@ -389,12 +390,14 @@ export class LocalStore implements DataStore {
   // ---- customers & marketing --------------------------------------------
 
   async listCustomers() {
+    this.requireStaff();
     const db = this.load();
     return db.customers
       .map((c) => customerStats(db, c, this.now()))
       .sort((a, b) => (b.lastOrderAt ?? "").localeCompare(a.lastOrderAt ?? ""));
   }
   async getCustomer(id: string) {
+    this.requireStaff();
     const db = this.load();
     const c = db.customers.find((x) => x.id === id);
     if (!c) return null;
@@ -413,6 +416,7 @@ export class LocalStore implements DataStore {
   }
 
   async listCampaigns() {
+    this.requireStaff();
     return newestFirst(this.load().campaigns);
   }
   async sendCampaign(c: { name: string; segment: Segment; body: string }): Promise<Campaign> {

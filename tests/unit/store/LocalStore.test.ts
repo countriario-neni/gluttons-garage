@@ -60,6 +60,7 @@ beforeEach(() => {
 
 describe("placeOrder", () => {
   it("stores order, upserts customer by phone, writes 2 message logs", async () => {
+    await owner(store); // listCustomers is staff-only
     const max = await maxCode(store);
     const r = ok(await store.placeOrder(input({ phone: "+91 98765 43210" })));
     expect(r.order.status).toBe("placed");
@@ -128,6 +129,7 @@ describe("placeOrder", () => {
   });
 
   it("coupons are case-insensitive and usedCount increments", async () => {
+    await owner(store); // listCoupons is staff-only; placing orders doesn't need a session
     const before = (await store.listCoupons()).find((c) => c.code === "WELCOME10")!.usedCount;
     const r = ok(await store.placeOrder(input({ couponCode: " welcome10 ", phone: "9123456780" })));
     expect(r.order.couponCode).toBe("WELCOME10");
@@ -333,13 +335,27 @@ describe("staff auth and roles", () => {
     await expect(store.resetDemo()).rejects.toThrow("FORBIDDEN");
   });
 
+  it("CRM reads are staff-only (UNAUTHENTICATED when signed out, like Supabase RLS)", async () => {
+    await expect(store.listCoupons()).rejects.toThrow("UNAUTHENTICATED");
+    await expect(store.listCustomers()).rejects.toThrow("UNAUTHENTICATED");
+    await expect(store.getCustomer("seed-c-1")).rejects.toThrow("UNAUTHENTICATED");
+    await expect(store.listCampaigns()).rejects.toThrow("UNAUTHENTICATED");
+    await store.staffSignIn("kitchen@gluttonsgarage.demo", "garage123");
+    expect((await store.listCoupons()).length).toBeGreaterThan(0);
+    expect((await store.getCustomer("seed-c-1"))!.stats.id).toBe("seed-c-1");
+    await store.staffSignOut();
+    await expect(store.listCustomers()).rejects.toThrow("UNAUTHENTICATED");
+  });
+
   it("anonymous calling owner-only throws UNAUTHENTICATED", async () => {
     await expect(store.updateSettings({ tables: 5 })).rejects.toThrow("UNAUTHENTICATED");
   });
 
   it("menu and notes writes are staff-only; upsertItem is owner-only", async () => {
     const item = (await store.getMenu()).items[0];
+    await owner(store);
     const cust = (await store.listCustomers())[0];
+    await store.staffSignOut();
     await expect(store.setItemAvailability(item.id, false)).rejects.toThrow("UNAUTHENTICATED");
     await expect(store.upsertItem(item)).rejects.toThrow("UNAUTHENTICATED");
     await expect(store.updateCustomerNotes(cust.id, "x")).rejects.toThrow("UNAUTHENTICATED");
@@ -378,11 +394,11 @@ describe("owner features", () => {
   });
 
   it("customer stats: favourites, avgBill, tags, notes", async () => {
+    await owner(store);
     const c = (await store.listCustomers())[0];
     expect(c.orders).toBeGreaterThan(0);
     expect(c.favourites.length).toBeLessThanOrEqual(3);
     expect(c.avgBill).toBe(Math.round(c.totalSpend / c.orders));
-    await owner(store);
     await store.updateCustomerNotes(c.id, "likes window seat");
     expect((await store.getCustomer(c.id))!.stats.notes).toBe("likes window seat");
     const r = ok(await store.placeOrder(input({ phone: "9555500001", name: "Fresh Face" })));

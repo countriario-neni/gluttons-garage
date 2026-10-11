@@ -931,7 +931,11 @@ begin
       when 'socials' then jsonb_typeof(v) = 'object' and length(v::text) <= 1000
       when 'delivery' then jsonb_typeof(v) = 'object' and length(v::text) <= 1000
       when 'hours' then jsonb_typeof(v) = 'object' and length(v::text) <= 1000
-      when 'loyalty' then jsonb_typeof(v) = 'object' and length(v::text) <= 500
+      -- exactly the LOYALTY keys: positive integers, and a share in (0, 1]
+      when 'loyalty' then jsonb_typeof(v) = 'object'
+        and (select array_agg(x order by x) from jsonb_object_keys(v) x) = array['earnPerRupees', 'maxShare', 'redeemBlock', 'redeemValue']
+        and public._jint(v -> 'earnPerRupees') > 0 and public._jint(v -> 'redeemBlock') > 0 and public._jint(v -> 'redeemValue') > 0
+        and (case when jsonb_typeof(v -> 'maxShare') = 'number' then (v ->> 'maxShare')::numeric > 0 and (v ->> 'maxShare')::numeric <= 1 else false end)
       else false end;
     if not coalesce(ok, false) then raise exception 'BAD_INPUT'; end if;
   end loop;
@@ -1030,11 +1034,20 @@ begin
                             'sentCount', c.sent_count, 'createdAt', public._iso(c.created_at));
 end $$;
 
--- Restores the seed snapshot (seed_* tables), shifted so the seed's anchor time becomes now().
-create function public._reseed() returns void
+-- Restores the seed snapshot (seed_* tables) relative to p_now (default now()):
+--   * history moves by whole IST days, so times of day (lunch/dinner peaks, opening hours) are kept;
+--     historical orders that would land after p_now are skipped with their items, payments and ledger rows;
+--   * the in-flight (non-terminal) orders keep their offset from the anchor, so they are always minutes old,
+--     and a takeaway pickup keeps its distance from the order time (as generateSeed does).
+-- p_now exists for tests; reset_demo() always uses now().
+create function public._reseed(p_now timestamptz default null) returns void
 language plpgsql security definer set search_path = public, pg_temp
 as $$
-declare d interval := public._now() - (select anchor from public.seed_meta);
+declare
+  v_now timestamptz := coalesce(p_now, public._now());
+  v_anchor timestamptz := (select anchor from public.seed_meta);
+  d interval := make_interval(days => (v_now at time zone 'Asia/Kolkata')::date - (v_anchor at time zone 'Asia/Kolkata')::date);
+  live interval := v_now - v_anchor;
 begin
   truncate public.message_log, public.campaigns, public.loyalty_ledger, public.payments, public.order_items,
            public.orders, public.customers, public.coupons, public.item_options, public.menu_items,
@@ -1046,23 +1059,43 @@ begin
   insert into public.item_options select * from public.seed_item_options;
   insert into public.tables select * from public.seed_tables;
   insert into public.customers (id, phone, name, marketing_opt_in, notes, tags, created_at)
-    select id, phone, name, marketing_opt_in, notes, tags, created_at + d from public.seed_customers;
+    select id, phone, name, marketing_opt_in, notes, tags, least(created_at + d, v_now) from public.seed_customers;
   insert into public.coupons (code, type, value, min_order, max_discount, expires_at, usage_limit, used_count, first_order_only, active, created_at)
-    select code, type, value, min_order, max_discount, expires_at + d, usage_limit, used_count, first_order_only, active, created_at + d
+    select code, type, value, min_order, max_discount, expires_at + d, usage_limit, used_count, first_order_only, active, least(created_at + d, v_now)
       from public.seed_coupons;
+
   insert into public.orders (id, short_code, customer_id, customer_name, phone, mode, table_number, pickup_time, status,
                              subtotal, discount, loyalty_discount, points_redeemed, taxable, cgst, sgst, total, online_due,
                              payment_status, coupon_code, idempotency_key, created_at, updated_at)
     select id, short_code, customer_id, customer_name, phone, mode, table_number,
-           case when pickup_time ~ '^[0-9]{2}:[0-9]{2}$' then to_char(pickup_time::time + d, 'HH24:MI') end, status,
-           subtotal, discount, loyalty_discount, points_redeemed, taxable, cgst, sgst, total, online_due,
-           payment_status, coupon_code, idempotency_key, created_at + d, updated_at + d
-      from public.seed_orders order by seq;
-  insert into public.order_items select * from public.seed_order_items;
+           case when terminal or pickup_time is null then pickup_time
+                else to_char(((created_at + shift) at time zone 'Asia/Kolkata')::time
+                             + (pickup_time::time - (created_at at time zone 'Asia/Kolkata')::time), 'HH24:MI') end,
+           status, subtotal, discount, loyalty_discount, points_redeemed, taxable, cgst, sgst, total, online_due,
+           payment_status, coupon_code, idempotency_key, created_at + shift, least(updated_at + shift, v_now)
+      from (select o.*, o.status in ('completed', 'rejected', 'cancelled') as terminal,
+                   case when o.status in ('completed', 'rejected', 'cancelled') then d else live end as shift
+              from public.seed_orders o) s
+     where created_at + shift <= v_now
+     order by seq;
+
+  -- Children follow their order's shift (live - seed created_at); rows of skipped orders have no match.
+  insert into public.order_items select i.* from public.seed_order_items i join public.orders o on o.id = i.order_id;
   insert into public.payments (id, order_id, method, channel, amount, status, reference, created_at, recorded_by)
-    select id, order_id, method, channel, amount, status, reference, created_at + d, recorded_by from public.seed_payments order by seq;
+    select p.id, p.order_id, p.method, p.channel, p.amount, p.status, p.reference,
+           least(p.created_at + (o.created_at - so.created_at), v_now), p.recorded_by
+      from public.seed_payments p
+      join public.orders o on o.id = p.order_id
+      join public.seed_orders so on so.id = o.id
+     order by p.seq;
   insert into public.loyalty_ledger (id, customer_id, order_id, points, reason, created_at)
-    select id, customer_id, order_id, points, reason, created_at + d from public.seed_loyalty_ledger order by seq;
+    select l.id, l.customer_id, l.order_id, l.points, l.reason,
+           least(l.created_at + coalesce(o.created_at - so.created_at, d), v_now)
+      from public.seed_loyalty_ledger l
+      left join public.orders o on o.id = l.order_id
+      left join public.seed_orders so on so.id = l.order_id
+     where l.order_id is null or o.id is not null
+     order by l.seq;
   perform setval('public.order_code_seq', (select next_code from public.seed_meta), false);
 end $$;
 

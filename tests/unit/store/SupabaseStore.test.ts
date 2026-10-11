@@ -93,6 +93,15 @@ describe("error mapping", () => {
     const { store } = fakeClient({ rpc: () => ({ error: { message: "permission denied for function reset_demo", code: "42501" } }) });
     await expect(store.resetDemo()).rejects.toThrow(new Error("UNAUTHENTICATED"));
     expect(errorCode({ message: "invalid input syntax for type uuid", code: "22P02" })).toBe("BAD_INPUT");
+  });
+
+  it("maps PostgREST auth failures (expired/invalid JWT) to UNAUTHENTICATED", async () => {
+    expect(errorCode({ message: "JWT expired", code: "PGRST301" })).toBe("UNAUTHENTICATED");
+    expect(errorCode({ message: "JWT expired" })).toBe("UNAUTHENTICATED");
+    expect(errorCode({ message: "Unauthorized", status: 401 })).toBe("UNAUTHENTICATED");
+    const rpc = vi.fn(async () => ({ data: null, error: { message: "Invalid JWT", code: "XX000" }, status: 401 }));
+    const store = new SupabaseStore({ rpc, auth: {} } as never);
+    await expect(store.listOrders({})).rejects.toThrow(new Error("UNAUTHENTICATED"));
     expect(errorCode({ message: "Failed to fetch" })).toBe("Failed to fetch");
   });
 });
@@ -203,5 +212,28 @@ describe("subscribe", () => {
     await vi.advanceTimersByTimeAsync(3000);
     expect(fired).toBe(1);
     expect(f.client.channel).not.toHaveBeenCalled();
+  });
+
+  it("keeps polling after the RPC rejects (network error)", async () => {
+    vi.useFakeTimers();
+    let mode: "ok" | "throw" = "ok";
+    let status = "placed";
+    const f = fakeClient({ rpc: () => ({ data: { ...publicOrder, status } }) });
+    const inner = f.rpc.getMockImplementation()!;
+    f.rpc.mockImplementation(async (fn: string, args?: unknown) => {
+      if (mode === "throw") throw new TypeError("Failed to fetch");
+      return inner(fn, args);
+    });
+    await f.store.getOrder(ID);
+    let fired = 0;
+    const off = f.store.subscribe("orders", () => fired++);
+    await vi.advanceTimersByTimeAsync(1000); // snapshot
+    mode = "throw";
+    await vi.advanceTimersByTimeAsync(2000); // two failing ticks: no throw escapes, busy is released
+    mode = "ok";
+    status = "ready";
+    await vi.advanceTimersByTimeAsync(1000);
+    expect(fired).toBe(1);
+    off();
   });
 });

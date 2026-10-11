@@ -19,7 +19,9 @@ In **SQL Editor**, open a new query for each file below, paste the whole file, a
    adds `orders`, `message_log` and `menu_items` to the `supabase_realtime` publication.
 2. `supabase/migrations/0002_functions.sql` adds `place_order`, the payment and status functions and the WhatsApp message templates.
 3. `supabase/migrations/0003_rls.sql` turns on RLS, adds the policies and sets the grants.
-4. `supabase/seed.sql` loads the menu, settings, 40 sample customers and about 500 orders, shifted so the newest is a few minutes old.
+4. `supabase/seed.sql` loads the menu, settings, 40 sample customers and about 500 orders. History is moved forward by
+   whole days, so orders keep their time of day, and anything that would land in the future is skipped. The three
+   in-flight orders on the kitchen board are always a few minutes old. "Reset demo" (owner) does the same again.
 
 `seed.sql` is generated. If `src/data/seed.ts` or the menu changes, run `npm run db:seed` to regenerate it, then run it
 again in the SQL editor. It's safe to re-run, and it resets the demo.
@@ -73,6 +75,9 @@ For local development, put the same two values in `.env.local` (it's git-ignored
 
 The schema is built for a public demo with sample data. Before real customers use it:
 
+- [ ] **A phone number is enough to act as that customer.** Anyone who knows a customer's number can call `place_order`
+      with it. That overwrites the customer's saved name and marketing opt-in, and spends their loyalty points on a new
+      order. Add OTP or phone verification before redemption and profile updates go to production.
 - [ ] **Loyalty lookup leaks first names.** `lookup_loyalty(phone)` is callable by anyone. It returns the first name and
       points balance for any phone number (LocalStore does the same). Consider requiring an OTP before showing the balance.
 - [ ] **Payment confirmation is a stand-in.** `confirm_online_payment` is callable by anon so the demo checkout works.

@@ -51,8 +51,8 @@ export class SupabaseStore implements DataStore {
   }
 
   private async rpc<T>(fn: string, args?: Record<string, unknown>): Promise<T> {
-    const { data, error } = await this.sb.rpc(fn, args);
-    if (error) throw new Error(errorCode(error));
+    const { data, error, status } = await this.sb.rpc(fn, args);
+    if (error) throw new Error(errorCode({ ...error, status }));
     return data as T;
   }
 
@@ -92,15 +92,22 @@ export class SupabaseStore implements DataStore {
     const timer = setInterval(async () => {
       if (busy) return;
       busy = true;
-      for (const id of this.watched) {
-        const { data, error } = await this.sb.rpc("get_order_public", { p_order_id: id });
-        if (error) continue;
-        const snap = JSON.stringify(data);
-        const prev = last.get(id);
-        last.set(id, snap);
-        if (prev !== undefined && prev !== snap) cb();
+      try {
+        for (const id of this.watched) {
+          // A network blip (rejected promise or error result) just skips this order until the next tick.
+          const res = await this.sb.rpc("get_order_public", { p_order_id: id }).then(
+            (r) => r,
+            () => null,
+          );
+          if (!res || res.error) continue;
+          const snap = JSON.stringify(res.data);
+          const prev = last.get(id);
+          last.set(id, snap);
+          if (prev !== undefined && prev !== snap) cb();
+        }
+      } finally {
+        busy = false;
       }
-      busy = false;
     }, this.pollMs);
     return () => clearInterval(timer);
   }
