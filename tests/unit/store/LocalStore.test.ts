@@ -48,7 +48,10 @@ const ok = (r: PlaceOrderResult) => {
   return r;
 };
 const owner = async (s: LocalStore) => void (await s.staffSignIn("owner@gluttonsgarage.demo", "garage123"));
-const maxCode = async (s: LocalStore) => Math.max(...(await s.listOrders({})).map((o) => Number(o.code.slice(3))));
+const maxCode = async (s: LocalStore) => {
+  await owner(s); // listOrders is staff-only
+  return Math.max(...(await s.listOrders({})).map((o) => Number(o.code.slice(3))));
+};
 /** A seeded customer with a healthy points balance. */
 const richCustomer = async (s: LocalStore) => (await s.listCustomers()).find((c) => c.points >= 300)!;
 
@@ -87,7 +90,20 @@ describe("placeOrder", () => {
     const b = ok(await store.placeOrder(i));
     expect(b.order.id).toBe(a.order.id);
     expect(b.onlineDue).toBe(a.onlineDue);
+    await owner(store);
     expect((await store.listMessages({ orderId: a.order.id })).length).toBe(2);
+  });
+
+  it("customers (not signed in) see only to_customer messages of one order; listOrders needs staff", async () => {
+    const a = ok(await store.placeOrder(input()));
+    const mine = await store.listMessages({ orderId: a.order.id });
+    expect(mine).toHaveLength(1);
+    expect(mine[0].direction).toBe("to_customer");
+    expect(await store.listMessages({})).toEqual([]);
+    expect(await store.listMessages({ limit: 1000 })).toEqual([]);
+    await expect(store.listOrders({})).rejects.toThrow("UNAUTHENTICATED");
+    await owner(store);
+    expect((await store.listMessages({ orderId: a.order.id })).map((m) => m.direction).sort()).toEqual(["to_cafe", "to_customer"]);
   });
 
   it("recomputes bill from the menu (ignores tampered client price)", async () => {
@@ -122,6 +138,7 @@ describe("placeOrder", () => {
     ["BAD_OPTION", async () => ({ lines: [{ itemId: cheap.id, optionIds: ["nope"], qty: 1 }] })],
   ] as const)("rejects with %s", async (code, setup) => {
     const over = await setup(store);
+    await owner(store); // listOrders is staff-only
     const before = (await store.listOrders({})).length;
     const r = await store.placeOrder(input(over as Partial<PlaceOrderInput>));
     expect(r).toEqual({ ok: false, error: code });
@@ -416,6 +433,7 @@ describe("owner features", () => {
   });
 
   it("listOrders filters by date range and status, newest first", async () => {
+    await owner(store);
     const all = await store.listOrders({});
     expect(all.length).toBeGreaterThan(100);
     for (let i = 1; i < all.length; i++) expect(all[i - 1].createdAt >= all[i].createdAt).toBe(true);

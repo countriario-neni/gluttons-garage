@@ -380,6 +380,7 @@ export class LocalStore implements DataStore {
     return this.load().orders.find((o) => o.id === id) ?? null;
   }
   async listOrders(q: { from?: string; to?: string; statuses?: OrderStatus[] }) {
+    this.requireStaff();
     return newestFirst(
       this.load().orders.filter(
         (o) => (!q.from || o.createdAt >= q.from) && (!q.to || o.createdAt <= q.to) && (!q.statuses || q.statuses.includes(o.status)),
@@ -433,7 +434,12 @@ export class LocalStore implements DataStore {
     });
   }
   async listMessages(q: { orderId?: string; limit?: number }) {
-    const rows = newestFirst(this.load().messages.filter((m) => !q.orderId || m.orderId === q.orderId));
+    // Same as the Supabase store: customers only ever see the messages of one order, never the café's own log.
+    const staff = this.currentStaff();
+    if (!staff && !q.orderId) return [];
+    const rows = newestFirst(
+      this.load().messages.filter((m) => (!q.orderId || m.orderId === q.orderId) && (staff || m.direction === "to_customer")),
+    );
     return q.limit ? rows.slice(0, q.limit) : rows;
   }
 
