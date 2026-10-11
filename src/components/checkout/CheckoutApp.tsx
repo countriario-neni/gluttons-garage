@@ -13,9 +13,9 @@ import { Container } from "@/components/site/primitives/Container";
 import { maxRedeemablePoints, pointsEarned } from "@/domain/loyalty";
 import { formatINR } from "@/domain/money";
 import { priceOrder } from "@/domain/pricing";
-import type { Coupon, PaymentPlan } from "@/domain/types";
+import type { CartLine, Coupon, PaymentPlan } from "@/domain/types";
 import { isIndianMobile, splitRemainder } from "@/domain/validation";
-import { useCart, useCartHydrated } from "@/lib/cart";
+import { ensureCartHydrated, lineKey, useCart, useCartHydrated } from "@/lib/cart";
 import { uuidV4 } from "@/lib/uuid";
 import { StoreProvider, useStore } from "@/store";
 import type { Order } from "@/store/DataStore";
@@ -31,9 +31,43 @@ import { PlanPicker, type PlanKind } from "./PlanPicker";
 /** Order placed but the online part is unpaid: survives a reload so payment can resume. */
 const PENDING_KEY = "gg-pending-payment";
 const digitsOf = (p: string) => p.replace(/\D/g, "").slice(-10);
+const forgetPending = () => {
+  try {
+    sessionStorage.removeItem(PENDING_KEY);
+  } catch {}
+};
+/** Same items, options, notes and quantities, in any order. */
+const sameLines = (a: CartLine[], b: CartLine[]) => {
+  const key = (ls: CartLine[]) =>
+    ls
+      .map((l) => `${lineKey(l)}×${l.qty}`)
+      .sort()
+      .join("|");
+  return key(a) === key(b);
+};
 
 type Errors = Partial<Record<ErrorField, string>>;
 type Placed = { order: Order; onlineDue: number };
+
+/** Scrolls to and focuses the first field with an error (in visual order). */
+const focusFirst = (e: Errors) => {
+  const order: [ErrorField, string][] = [
+    ["mode", "mode-anchor"],
+    ["lines", "lines-anchor"],
+    ["name", "name"],
+    ["phone", "phone"],
+    ["coupon", "coupon"],
+    ["points", "phone"],
+    ["split", "split-amount"],
+    ["form", "form-error"],
+  ];
+  const hit = order.find(([f]) => e[f]);
+  const el = hit && document.getElementById(hit[1]);
+  if (el) {
+    el.scrollIntoView({ block: "center" });
+    if (el instanceof HTMLInputElement) el.focus({ preventScroll: true });
+  }
+};
 
 export function CheckoutApp() {
   return (
@@ -47,7 +81,10 @@ function Section({ title, step, children, className }: { title: string; step: nu
   return (
     <section aria-labelledby={`step-${step}`} className={cn("rounded-3xl border border-border bg-card p-5 shadow-card sm:p-6", className)}>
       <h2 id={`step-${step}`} className="mb-4 flex items-center gap-3 text-xl font-bold text-primary">
-        <span aria-hidden="true" className="grid size-7 place-items-center rounded-full bg-primary font-sans text-sm text-primary-foreground">
+        <span
+          aria-hidden="true"
+          className="grid size-7 place-items-center rounded-full bg-primary font-sans text-sm text-primary-foreground"
+        >
           {step}
         </span>
         {title}
@@ -72,6 +109,9 @@ function CheckoutScreen() {
   const [loyalty, setLoyalty] = useState<{ phone: string; points: number; isFirstOrder: boolean; name: string | null } | null>(null);
   const [redeem, setRedeem] = useState(false);
   const [coupon, setCoupon] = useState<Coupon | null>(null);
+  const [couponCode, setCouponCode] = useState("");
+  const [notice, setNotice] = useState<string | null>(null);
+  const [focusReq, setFocusReq] = useState<{ errors: Errors } | null>(null);
   const [plan, setPlan] = useState<PlanKind>("online");
   const [splitInput, setSplitInput] = useState("");
   const [errors, setErrors] = useState<Errors>({});
@@ -91,11 +131,27 @@ function CheckoutScreen() {
       id = sessionStorage.getItem(PENDING_KEY);
     } catch {}
     if (!id) return;
-    void store.getOrder(id).then((o) => {
-      const due = o?.payments.find((p) => p.method === "online" && p.status !== "success")?.amount ?? 0;
-      if (o && o.paymentStatus !== "paid" && due > 0 && !["rejected", "cancelled", "completed"].includes(o.status)) setPlaced({ order: o, onlineDue: due });
-      else sessionStorage.removeItem(PENDING_KEY);
-    });
+    store
+      .getOrder(id)
+      .then(async (o) => {
+        const due = o?.payments.find((p) => p.method === "online" && p.status !== "success")?.amount ?? 0;
+        if (!o || o.paymentStatus === "paid" || due <= 0 || ["rejected", "cancelled", "completed"].includes(o.status))
+          return forgetPending();
+        await ensureCartHydrated();
+        const lines = useCart.getState().lines;
+        if (lines.length > 0 && !sameLines(lines, o.bill.lines)) {
+          // The customer has started a different order: the new cart wins.
+          forgetPending();
+          setNotice(`Your earlier order ${o.code} was left unpaid. You're now checking out your new cart.`);
+          return;
+        }
+        if (lines.length > 0) useCart.getState().clear(); // same items re-added: resume, don't order twice
+        setPlaced({ order: o, onlineDue: due });
+      })
+      .catch(() => {
+        forgetPending();
+        setErrors({ form: "We couldn't load your earlier unpaid order. You can carry on with a new one." });
+      });
   }, [store]);
 
   // Loyalty lookup, debounced, for a valid phone.
@@ -120,7 +176,14 @@ function CheckoutScreen() {
 
   // Live bill preview (the store re-prices authoritatively on placeOrder).
   const now = new Date();
-  const base = { lines: cart.lines, menu: items, coupon, isFirstOrder: myLoyalty?.isFirstOrder ?? true, pointsBalance: myLoyalty?.points ?? 0, now };
+  const base = {
+    lines: cart.lines,
+    menu: items,
+    coupon,
+    isFirstOrder: myLoyalty?.isFirstOrder ?? true,
+    pointsBalance: myLoyalty?.points ?? 0,
+    now,
+  };
   const pass1 = priceOrder({ ...base, pointsToRedeem: 0 });
   const redeemable = pass1.ok && myLoyalty ? maxRedeemablePoints(myLoyalty.points, pass1.bill.subtotal - pass1.bill.couponDiscount) : 0;
   const priced = redeem && redeemable > 0 ? priceOrder({ ...base, pointsToRedeem: redeemable }) : pass1;
@@ -139,8 +202,10 @@ function CheckoutScreen() {
   const applyCoupon = async (code: string) => {
     clearErr("coupon");
     const r = await store.validateCoupon(code, pass1.ok ? pass1.bill.subtotal : 0, phoneDigits);
-    if (r.ok) setCoupon(r.coupon);
-    else setErrors((e) => ({ ...e, coupon: errorCopy(r.reason).text }));
+    if (r.ok) {
+      setCoupon(r.coupon);
+      setCouponCode("");
+    } else setErrors((e) => ({ ...e, coupon: errorCopy(r.reason).text }));
   };
 
   const validate = (): Errors => {
@@ -154,27 +219,26 @@ function CheckoutScreen() {
     return e;
   };
 
-  const focusFirst = (e: Errors) => {
-    const order: [ErrorField, string][] = [["mode", "mode-anchor"], ["lines", "lines-anchor"], ["name", "name"], ["phone", "phone"], ["coupon", "coupon"], ["points", "phone"], ["split", "split-amount"], ["form", "form-error"]];
-    const hit = order.find(([f]) => e[f]);
-    const el = hit && document.getElementById(hit[1]);
-    if (el) {
-      el.scrollIntoView({ block: "center" });
-      if (el instanceof HTMLInputElement) el.focus({ preventScroll: true });
-    }
-  };
+  useEffect(() => {
+    // Runs after the error UI (e.g. the coupon input replacing its chip) has rendered.
+    if (focusReq) focusFirst(focusReq.errors);
+  }, [focusReq]);
 
   const placeOrder = async () => {
     if (pendingRef.current) return;
     const e = validate();
     setErrors(e);
     setBadItemId(previewBad);
-    if (Object.values(e).some(Boolean)) return focusFirst(e);
+    if (Object.values(e).some(Boolean)) return setFocusReq({ errors: e });
 
     pendingRef.current = true;
     setPending(true);
     const p: PaymentPlan =
-      effectivePlan === "cash" ? { kind: "cash" } : effectivePlan === "split" ? { kind: "split", onlineAmount: splitAmount } : { kind: "online" };
+      effectivePlan === "cash"
+        ? { kind: "cash" }
+        : effectivePlan === "split"
+          ? { kind: "split", onlineAmount: splitAmount }
+          : { kind: "online" };
     try {
       const r = await store.placeOrder({
         idempotencyKey: idemKey,
@@ -196,8 +260,13 @@ function CheckoutScreen() {
         setErrors(next);
         if (r.error === "ITEM_UNAVAILABLE" || r.error === "BAD_OPTION") setBadItemId(previewBad ?? cart.lines[0]?.itemId ?? null);
         if (r.error === "BAD_POINTS") setRedeem(false);
+        if (r.error.startsWith("COUPON_")) {
+          // Put the rejected code back into the input (with the error) instead of leaving a dead "applied" chip.
+          if (coupon) setCouponCode(coupon.code);
+          setCoupon(null);
+        }
         setIdemKey(uuidV4());
-        focusFirst(next);
+        setFocusReq({ errors: next });
         return;
       }
       clear();
@@ -220,9 +289,7 @@ function CheckoutScreen() {
   };
 
   const goTrack = (id: string) => {
-    try {
-      sessionStorage.removeItem(PENDING_KEY);
-    } catch {}
+    forgetPending();
     router.push(`/track/?id=${encodeURIComponent(id)}`);
   };
 
@@ -237,7 +304,16 @@ function CheckoutScreen() {
   if (placed) {
     return (
       <>
-        <PlacedPanel placed={placed} onPay={() => setPayOpen(true)} onPayAtCounter={placed.order.mode === "dine_in" ? () => goTrack(placed.order.id) : undefined} />
+        <PlacedPanel
+          placed={placed}
+          onPay={() => setPayOpen(true)}
+          onCancel={() => {
+            forgetPending();
+            setPayOpen(false);
+            setPlaced(null);
+          }}
+          onPayAtCounter={placed.order.mode === "dine_in" ? () => goTrack(placed.order.id) : undefined}
+        />
         <PaymentSheet
           open={payOpen}
           onOpenChange={setPayOpen}
@@ -256,7 +332,10 @@ function CheckoutScreen() {
         <ShoppingBag className="mx-auto size-14 text-line" aria-hidden="true" />
         <h1 className="mt-4 text-3xl font-bold text-primary">Your cart is empty</h1>
         <p className="mt-2 text-muted-foreground">Add a few favourites from the menu and come back here to pay.</p>
-        <Link href="/order/" className="mt-6 inline-flex h-12 items-center rounded-full bg-accent px-6 font-bold text-accent-foreground shadow-card">
+        <Link
+          href="/order/"
+          className="mt-6 inline-flex h-12 items-center rounded-full bg-accent px-6 font-bold text-accent-foreground shadow-card"
+        >
           Browse the menu
         </Link>
       </Container>
@@ -265,7 +344,11 @@ function CheckoutScreen() {
 
   const total = bill?.total ?? 0;
   const buttonLabel =
-    effectivePlan === "cash" ? "Place order" : effectivePlan === "split" && splitCheck?.ok ? `Place order · pay ${formatINR(splitAmount)}` : `Place order · pay ${formatINR(total)}`;
+    effectivePlan === "cash"
+      ? "Place order"
+      : effectivePlan === "split" && splitCheck?.ok
+        ? `Place order · pay ${formatINR(splitAmount)}`
+        : `Place order · pay ${formatINR(total)}`;
 
   return (
     <Container className="max-w-6xl pt-6 pb-40 lg:pt-10 lg:pb-16">
@@ -274,8 +357,17 @@ function CheckoutScreen() {
       </Link>
       <h1 className="mt-1 text-3xl font-bold text-primary sm:text-4xl">Checkout</h1>
 
+      {notice && (
+        <p role="status" className="mt-4 rounded-2xl border border-border bg-secondary p-4 text-sm">
+          {notice}
+        </p>
+      )}
       {errors.form && (
-        <p id="form-error" role="alert" className="mt-4 flex items-start gap-2 rounded-2xl bg-destructive/10 p-4 font-bold text-destructive">
+        <p
+          id="form-error"
+          role="alert"
+          className="mt-4 flex items-start gap-2 rounded-2xl bg-destructive/10 p-4 font-bold text-destructive"
+        >
           <AlertCircle className="mt-0.5 size-5 shrink-0" aria-hidden="true" /> {errors.form}
         </p>
       )}
@@ -328,7 +420,10 @@ function CheckoutScreen() {
                   placeholder="So we can call out your order"
                   aria-invalid={fieldErr("name") ? true : undefined}
                   aria-describedby={fieldErr("name") ? "name-err" : undefined}
-                  className={cn("h-12 w-full rounded-xl border bg-background px-4 text-base placeholder:text-muted-foreground", fieldErr("name") ? "border-destructive" : "border-input")}
+                  className={cn(
+                    "h-12 w-full rounded-xl border bg-background px-4 text-base placeholder:text-muted-foreground",
+                    fieldErr("name") ? "border-destructive" : "border-input",
+                  )}
                 />
                 {fieldErr("name") && (
                   <p id="name-err" role="alert" className="mt-1.5 text-sm font-bold text-destructive">
@@ -341,7 +436,10 @@ function CheckoutScreen() {
                   Mobile number
                 </label>
                 <div className="relative">
-                  <span aria-hidden="true" className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 font-bold text-muted-foreground">
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 font-bold text-muted-foreground"
+                  >
                     +91
                   </span>
                   <input
@@ -357,7 +455,10 @@ function CheckoutScreen() {
                     placeholder="98765 43210"
                     aria-invalid={fieldErr("phone") ? true : undefined}
                     aria-describedby={fieldErr("phone") ? "phone-err" : "phone-help"}
-                    className={cn("h-12 w-full rounded-xl border bg-background pr-4 pl-14 text-base tracking-wide placeholder:text-muted-foreground", fieldErr("phone") ? "border-destructive" : "border-input")}
+                    className={cn(
+                      "h-12 w-full rounded-xl border bg-background pr-4 pl-14 text-base tracking-wide placeholder:text-muted-foreground",
+                      fieldErr("phone") ? "border-destructive" : "border-input",
+                    )}
                   />
                 </div>
                 {fieldErr("phone") ? (
@@ -372,7 +473,12 @@ function CheckoutScreen() {
               </div>
             </div>
             <label className="mt-4 flex min-h-11 cursor-pointer items-center gap-3">
-              <input type="checkbox" checked={optIn} onChange={(e) => setOptIn(e.target.checked)} className="size-5 shrink-0 accent-primary" />
+              <input
+                type="checkbox"
+                checked={optIn}
+                onChange={(e) => setOptIn(e.target.checked)}
+                className="size-5 shrink-0 accent-primary"
+              />
               <span className="text-sm">Send order updates and offers on WhatsApp</span>
             </label>
             {myLoyalty && (
@@ -394,6 +500,11 @@ function CheckoutScreen() {
 
           <Section title="Offers" step={3}>
             <CouponField
+              code={couponCode}
+              onCode={(c) => {
+                setCouponCode(c);
+                clearErr("coupon");
+              }}
               applied={coupon?.code ?? null}
               discount={bill?.couponDiscount ?? 0}
               error={errors.coupon ?? null}
@@ -427,7 +538,11 @@ function CheckoutScreen() {
         <aside aria-label="Bill" className="lg:sticky lg:top-24">
           <div className="rounded-3xl border border-border bg-card p-5 shadow-card sm:p-6">
             <h2 className="mb-4 text-xl font-bold text-primary">Bill details</h2>
-            {bill ? <BillSummary bill={bill} couponCode={coupon?.code ?? null} /> : <p className="text-sm text-muted-foreground">Fix the highlighted items to see your bill.</p>}
+            {bill ? (
+              <BillSummary bill={bill} couponCode={coupon?.code ?? null} />
+            ) : (
+              <p className="text-sm text-muted-foreground">Fix the highlighted items to see your bill.</p>
+            )}
             {effectivePlan === "split" && splitCheck?.ok && (
               <p className="mt-3 rounded-xl bg-secondary p-3 text-sm font-bold">
                 Pay {formatINR(splitAmount)} now, {formatINR(splitCheck.cash)} at counter
@@ -451,7 +566,9 @@ function CheckoutScreen() {
                 {pending ? "Placing order…" : buttonLabel}
               </button>
             </div>
-            <p className="mt-2 hidden text-center text-xs text-muted-foreground lg:block">Total includes 5% GST. Demo mode: no money is charged.</p>
+            <p className="mt-2 hidden text-center text-xs text-muted-foreground lg:block">
+              Total includes 5% GST. Demo mode: no money is charged.
+            </p>
           </div>
         </aside>
       </div>

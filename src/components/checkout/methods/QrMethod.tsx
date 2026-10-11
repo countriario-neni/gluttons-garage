@@ -8,8 +8,6 @@ import { BrandBadge, MethodHeading, type MethodProps } from "./shared";
 
 const LIFETIME_S = 5 * 60;
 
-const cssColor = (name: string) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-
 /** Scan-to-pay: demo-only UPI QR (non-routable payee), 5:00 expiry and a "Simulate payment received" demo control. */
 export function QrMethod({ req, onPay }: MethodProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -24,7 +22,7 @@ export function QrMethod({ req, onPay }: MethodProps) {
       width: 208,
       margin: 1,
       errorCorrectionLevel: "M",
-      color: { dark: cssColor("--foreground"), light: cssColor("--card") },
+      // No colour option on purpose: the library's black-on-white default is the most scannable and never follows a theme.
     }).catch(() => {});
   }, [req, round, expired]);
 

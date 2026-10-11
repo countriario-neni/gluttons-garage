@@ -3,7 +3,8 @@ import type { Bill, CartLine, Coupon, PricedLine } from "./types";
 import { couponDiscount } from "./coupons";
 import { LOYALTY, maxRedeemablePoints } from "./loyalty";
 
-const SINGLE_CHOICE_GROUPS = new Set(["Dressing", "Choice", "Size"]);
+/** Option groups where a dish takes at most one pick (Add-ons are multi-select). */
+export const SINGLE_CHOICE_GROUPS: ReadonlySet<string> = new Set(["Dressing", "Choice", "Size"]);
 const GST_RATE = 0.05;
 
 type PriceError = "ITEM_UNAVAILABLE" | "EMPTY_CART" | "BAD_QTY" | "BAD_OPTION";

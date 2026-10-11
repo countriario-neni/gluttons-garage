@@ -2,14 +2,14 @@
 
 import { Building2, Clock4, CreditCard, Lock, QrCode, Smartphone, Wallet, Zap } from "lucide-react";
 import { cn } from "cn";
-import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react";
+import { useMemo, useRef, useState, type KeyboardEvent } from "react";
 import { ResponsiveSheet, SheetCloseButton, SheetDescription, SheetTitle } from "@/components/order/ResponsiveSheet";
 import { useClientValue } from "@/components/order/useOrderData";
 import { Switch } from "@/components/ui/switch";
 import { formatINR } from "@/domain/money";
 import { simulatePayment } from "@/integrations/payments/demo";
 import { razorpayAvailable, razorpayCheckout } from "@/integrations/payments/razorpay";
-import type { PayChannel, PayRequest, PayResult } from "@/integrations/payments/types";
+import type { PayChannel, PayRequest } from "@/integrations/payments/types";
 import { useStore } from "@/store";
 import type { Order } from "@/store/DataStore";
 import { CardMethod } from "./methods/CardMethod";
@@ -18,6 +18,7 @@ import { QrMethod } from "./methods/QrMethod";
 import type { MethodProps } from "./methods/shared";
 import { UpiMethod } from "./methods/UpiMethod";
 import { Failed, Processing, Success } from "./PayStatus";
+import { usePaymentSettle, type Phase } from "./usePaymentSettle";
 
 const METHODS = [
   { id: "upi", label: "UPI", hint: "GPay, PhonePe, Paytm, BHIM", Icon: Smartphone, Panel: UpiMethod },
@@ -29,7 +30,6 @@ const METHODS = [
 ] as const;
 type MethodId = (typeof METHODS)[number]["id"];
 
-type Phase = { kind: "select" } | { kind: "processing" } | { kind: "success"; reference: string } | { kind: "failed"; reason: string };
 
 /** Shown long enough for the tick to finish before routing to tracking. */
 const SUCCESS_HOLD_MS = 1300;
@@ -99,47 +99,12 @@ function SheetBody({
   const rzp = useClientValue(razorpayAvailable, false);
   const desktop = useClientValue(() => window.matchMedia("(min-width: 640px)").matches, false);
   const tabRefs = useRef<Record<string, HTMLButtonElement | null>>({});
-  const alive = useRef(true);
-  useEffect(() => {
-    alive.current = true;
-    return () => {
-      alive.current = false;
-    };
-  }, []);
-
   const req: PayRequest = useMemo(
     () => ({ orderId: order.id, orderCode: order.code, amount, customer: { name: order.customerName, phone: order.phone } }),
     [order.id, order.code, order.customerName, order.phone, amount],
   );
 
-  const settle = async (run: () => Promise<PayResult>) => {
-    setPhase({ kind: "processing" });
-    let result: PayResult;
-    try {
-      result = await run();
-    } catch {
-      result = { success: false, channel: "card", reference: "", failureReason: "The payment could not be started" };
-    }
-    let updated: Order | null = null;
-    try {
-      updated = await store.confirmOnlinePayment(order.id, {
-        channel: result.channel,
-        amount,
-        success: result.success,
-        reference: result.reference || "none",
-      });
-    } catch {
-      if (result.success) result = { ...result, success: false, failureReason: "We couldn't confirm the payment with the café" };
-    }
-    if (!alive.current) return;
-    if (result.success && updated) {
-      setPhase({ kind: "success", reference: result.reference });
-      const done = updated;
-      setTimeout(() => onPaid(done), SUCCESS_HOLD_MS);
-    } else {
-      setPhase({ kind: "failed", reason: result.failureReason ?? "Payment failed" });
-    }
-  };
+  const settle = usePaymentSettle({ store, orderId: order.id, amount, setPhase, onPaid, holdMs: SUCCESS_HOLD_MS });
 
   const onPay: MethodProps["onPay"] = (channel: PayChannel, opts) =>
     void settle(() => simulatePayment(channel, req, { forceFail, vpa: opts?.vpa, delayMs: simDelay() }));

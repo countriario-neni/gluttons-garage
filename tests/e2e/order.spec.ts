@@ -217,6 +217,72 @@ test.describe("ordering", () => {
     await expect(page.getByRole("dialog")).toHaveCount(0);
   });
 
+  test("a coupon rejected at placement shows its error on the coupon input and creates no order", async ({ page }) => {
+    const phone = "9876500006";
+    await page.goto("/t/?table=3");
+    await expect(page.getByRole("button", { name: /Dine-in · Table 3/ })).toBeVisible();
+    await addPlain(page, plain.name);
+    await page.locator("[data-cart-bar]").getByRole("link", { name: /checkout/i }).click();
+    // Lift the cart over TIRAMISU50's ₹400 minimum, apply it, then drop back under it.
+    const inc = page.getByRole("button", { name: `Increase quantity ${plain.name}` });
+    await inc.click();
+    await inc.click();
+    await page.getByLabel("Coupon code").fill("TIRAMISU50");
+    await page.getByRole("button", { name: "Apply" }).click();
+    await expect(page.getByText("TIRAMISU50 applied")).toBeVisible();
+    await page.getByRole("button", { name: `Decrease quantity ${plain.name}` }).click();
+    await page.getByRole("button", { name: `Decrease quantity ${plain.name}` }).click();
+    await fillContact(page, phone);
+    await page.getByRole("button", { name: /place order/i }).click();
+
+    const input = page.getByLabel("Coupon code");
+    await expect(page.getByRole("alert").filter({ hasText: "Your order is below this coupon's minimum amount." })).toBeVisible();
+    await expect(input).toHaveValue("TIRAMISU50");
+    await expect(input).toHaveAttribute("aria-invalid", "true");
+    await expect(input).toBeFocused();
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+    expect(await ordersFor(page, phone)).toHaveLength(0);
+  });
+
+  test("an abandoned takeaway payment doesn't block a new cart", async ({ page }) => {
+    await page.goto("/order/");
+    await chooseTakeaway(page);
+    await addPlain(page, plain.name);
+    await page.locator("[data-cart-bar]").getByRole("link", { name: /checkout/i }).click();
+    await fillContact(page, "9876500007");
+    await page.getByRole("button", { name: /place order/i }).click();
+    const pay = page.getByRole("dialog", { name: /pay .* to gluttons garage/i });
+    await expect(pay).toBeVisible();
+    await page.keyboard.press("Escape"); // abandon
+    await expect(page.getByRole("heading", { name: /order GG-\d+ placed/i })).toBeVisible();
+
+    // Shopping again: the new cart wins over the unpaid order.
+    const other = items.find((i) => i.options.length === 0 && i.available && i.id !== plain.id)!;
+    await page.goto("/order/");
+    await addPlain(page, other.name);
+    await page.locator("[data-cart-bar]").getByRole("link", { name: /checkout/i }).click();
+    await expect(page.getByText(other.name, { exact: true })).toBeVisible();
+    await expect(page.getByText(/earlier order GG-\d+ was left unpaid/i)).toBeVisible();
+    await expect(page.getByRole("button", { name: /place order/i })).toBeVisible();
+  });
+
+  test("the placed panel can cancel an unpaid payment and start over", async ({ page }) => {
+    await page.goto("/t/?table=10");
+    await expect(page.getByRole("button", { name: /Dine-in · Table 10/ })).toBeVisible();
+    await addPlain(page, plain.name);
+    await page.locator("[data-cart-bar]").getByRole("link", { name: /checkout/i }).click();
+    await fillContact(page, "9876500008");
+    await page.getByRole("button", { name: /place order/i }).click();
+    await page.keyboard.press("Escape");
+    await page.reload(); // the pending payment survives a reload…
+    await expect(page.getByRole("heading", { name: /order GG-\d+ placed/i })).toBeVisible();
+    await page.getByRole("button", { name: /cancel this payment and start a new order/i }).click();
+    // …until it is cancelled: back to checkout with the (now empty) cart.
+    await expect(page.getByRole("heading", { name: "Your cart is empty" })).toBeVisible();
+    await page.reload();
+    await expect(page.getByRole("heading", { name: "Your cart is empty" })).toBeVisible();
+  });
+
   test("cart persists across reloads", async ({ page }) => {
     await page.goto("/t/?table=9");
     await expect(page.getByRole("button", { name: /Dine-in · Table 9/ })).toBeVisible();

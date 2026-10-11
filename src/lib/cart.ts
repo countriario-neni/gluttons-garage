@@ -4,14 +4,13 @@ import { useEffect, useSyncExternalStore } from "react";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { items as menuItems, type MenuItem } from "@/data/menu";
+import { SINGLE_CHOICE_GROUPS } from "@/domain/pricing";
 import type { CartLine, OrderMode } from "@/domain/types";
 
 export const CART_KEY = "gg-cart";
 export const CART_VERSION = 1;
 export const MAX_QTY = 50;
 export const MAX_NOTE = 200;
-/** Option groups where a dish takes exactly one pick (mirrors domain/pricing). */
-export const SINGLE_CHOICE_GROUPS = new Set(["Dressing", "Choice", "Size"]);
 
 type Persisted = { mode: OrderMode | null; table: number | null; pickupTime: string | null; lines: CartLine[] };
 

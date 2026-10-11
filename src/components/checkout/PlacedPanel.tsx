@@ -11,9 +11,12 @@ export function PlacedPanel({
   placed,
   onPay,
   onPayAtCounter,
+  onCancel,
 }: {
   placed: { order: Order; onlineDue: number };
   onPay: () => void;
+  /** Abandon this payment and go back to checkout with whatever is in the cart now. */
+  onCancel: () => void;
   onPayAtCounter?: () => void;
 }) {
   const { order, onlineDue } = placed;
@@ -43,7 +46,14 @@ export function PlacedPanel({
               <Banknote className="size-5" aria-hidden="true" /> Pay at counter instead
             </button>
           )}
-          <Link href="/order/" className="mt-2 text-sm font-bold text-primary underline underline-offset-4">
+          <button
+            type="button"
+            onClick={onCancel}
+            className="mt-2 inline-flex min-h-11 items-center justify-center text-sm font-bold text-primary underline underline-offset-4"
+          >
+            Cancel this payment and start a new order
+          </button>
+          <Link href="/order/" className="inline-flex min-h-11 items-center justify-center text-sm font-bold text-primary underline underline-offset-4">
             Back to menu
           </Link>
         </div>
