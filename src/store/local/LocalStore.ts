@@ -319,7 +319,7 @@ export class LocalStore implements DataStore {
   async confirmOnlinePayment(orderId: string, p: { channel: string; amount: number; success: boolean; reference: string }) {
     let changed = false;
     return this.tx(
-      ["orders"],
+      ["orders", "messages"],
       (db) => {
         const o = this.orderIn(db, orderId);
         if (CLOSED.has(o.status)) throw new Error("ORDER_CLOSED");
@@ -333,6 +333,7 @@ export class LocalStore implements DataStore {
         Object.assign(target, { channel: p.channel, reference: p.reference, status: p.success ? "success" : "failed" });
         o.paymentStatus = paymentStatusOf(o);
         o.updatedAt = at;
+        if (p.success) db.messages.push(this.msg(o, o.phone, "to_customer", messageFor("payment_received", o, row.amount)));
         changed = true;
         return o;
       },
@@ -342,7 +343,7 @@ export class LocalStore implements DataStore {
 
   async recordCashPayment(orderId: string, amount: number) {
     this.requireStaff();
-    return this.tx(["orders"], (db) => {
+    return this.tx(["orders", "messages"], (db) => {
       const o = this.orderIn(db, orderId);
       if (CLOSED.has(o.status)) throw new Error("ORDER_CLOSED");
       // Cash due excludes what is paid and the online part that is still pending.
@@ -353,6 +354,7 @@ export class LocalStore implements DataStore {
       else o.payments.push({ id: this.newId(), method: "cash", channel: "cash", amount, status: "success", reference: null, createdAt: this.now().toISOString() });
       o.paymentStatus = paymentStatusOf(o);
       o.updatedAt = this.now().toISOString();
+      db.messages.push(this.msg(o, o.phone, "to_customer", messageFor("payment_received", o, amount)));
       return o;
     });
   }

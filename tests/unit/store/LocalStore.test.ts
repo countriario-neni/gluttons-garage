@@ -191,6 +191,18 @@ describe("payments", () => {
     expect(paid.payments.find((p) => p.status === "success")).toMatchObject({ channel: "upi_qr", reference: "R1", method: "online" });
   });
 
+  it("writes a payment_received customer message on online success and on cash record, not on failure", async () => {
+    await owner(store);
+    const { order } = ok(await store.placeOrder(input({ plan: { kind: "split", onlineAmount: 100 } })));
+    const count = async () => (await store.listMessages({ orderId: order.id })).filter((m) => m.body.includes("received your payment")).length;
+    await store.confirmOnlinePayment(order.id, { channel: "card", amount: 100, success: false, reference: "F" });
+    expect(await count()).toBe(0);
+    await store.confirmOnlinePayment(order.id, { channel: "card", amount: 100, success: true, reference: "S" });
+    expect(await count()).toBe(1);
+    await store.recordCashPayment(order.id, order.bill.total - 100);
+    expect(await count()).toBe(2);
+  });
+
   it("split: online => partial, cash remainder => paid; over-due rejected", async () => {
     await owner(store);
     const { order } = ok(await store.placeOrder(input({ plan: { kind: "split", onlineAmount: 100 } })));
