@@ -1,0 +1,262 @@
+[
+  {
+    "slug": "dining-room-checkerboard-floor",
+    "kind": "about",
+    "src640": "/images/about/dining-room-checkerboard-floor-640.webp",
+    "src1280": "/images/about/dining-room-checkerboard-floor-1280.webp",
+    "alt": "Gluttons Garage dining room with rust velvet tub chairs and a black-and-cream checkerboard floor",
+    "width": 1000,
+    "height": 750,
+    "dish": null
+  },
+  {
+    "slug": "bbq-grilled-paneer-steaks",
+    "kind": "menu",
+    "src640": "/images/menu/bbq-grilled-paneer-steaks-640.webp",
+    "src1280": "/images/menu/bbq-grilled-paneer-steaks-1280.webp",
+    "alt": "Char-grilled paneer rounds glazed in BBQ sauce on a white plate",
+    "width": 1000,
+    "height": 486,
+    "dish": "BBQ grilled paneer steaks"
+  },
+  {
+    "slug": "storefront-daytime",
+    "kind": "about",
+    "src640": "/images/about/storefront-daytime-640.webp",
+    "src1280": "/images/about/storefront-daytime-1280.webp",
+    "alt": "Gluttons Garage storefront by day with white 3D letters on a black fascia",
+    "width": 1000,
+    "height": 1333,
+    "dish": null
+  },
+  {
+    "slug": "pasta-bolognese-pappardelle",
+    "kind": "menu",
+    "src640": "/images/menu/pasta-bolognese-pappardelle-640.webp",
+    "src1280": "/images/menu/pasta-bolognese-pappardelle-1280.webp",
+    "alt": "Ribbon pasta in meat ragu topped with grated parmesan",
+    "width": 1000,
+    "height": 750,
+    "dish": "pasta bolognese (pappardelle) with parmesan"
+  },
+  {
+    "slug": "bbq-grilled-paneer-steaks-alt",
+    "kind": "menu",
+    "src640": "/images/menu/bbq-grilled-paneer-steaks-alt-640.webp",
+    "src1280": "/images/menu/bbq-grilled-paneer-steaks-alt-1280.webp",
+    "alt": "BBQ-glazed grilled paneer rounds with sauce lines on a white serving plate",
+    "width": 1000,
+    "height": 486,
+    "dish": "BBQ grilled paneer steaks"
+  },
+  {
+    "slug": "choco-cereal-bowl",
+    "kind": "menu",
+    "src640": "/images/menu/choco-cereal-bowl-640.webp",
+    "src1280": "/images/menu/choco-cereal-bowl-1280.webp",
+    "alt": "Bowl of chocolate cereal in milk topped with pomegranate and orange",
+    "width": 1280,
+    "height": 658,
+    "dish": "chocolate cereal bowl with pomegranate and orange"
+  },
+  {
+    "slug": "crumb-fried-devilled-eggs",
+    "kind": "gallery",
+    "src640": "/images/gallery/crumb-fried-devilled-eggs-640.webp",
+    "src1280": "/images/gallery/crumb-fried-devilled-eggs-1280.webp",
+    "alt": "Four crumb-fried devilled egg halves with chilli flakes and herbs",
+    "width": 640,
+    "height": 512,
+    "dish": "crumb-fried devilled eggs"
+  },
+  {
+    "slug": "chicken-samosa-with-chips",
+    "kind": "menu",
+    "src640": "/images/menu/chicken-samosa-with-chips-640.webp",
+    "src1280": "/images/menu/chicken-samosa-with-chips-1280.webp",
+    "alt": "Broken-open meat-filled samosa served with potato chips and a dip",
+    "width": 1280,
+    "height": 658,
+    "dish": "chicken samosa with chips"
+  },
+  {
+    "slug": "chicken-cheese-croquettes",
+    "kind": "menu",
+    "src640": "/images/menu/chicken-cheese-croquettes-640.webp",
+    "src1280": "/images/menu/chicken-cheese-croquettes-1280.webp",
+    "alt": "Five crumb-fried chicken cheese balls topped with olive rings and a mayo drizzle",
+    "width": 1280,
+    "height": 632,
+    "dish": "chicken cheese balls / croquettes"
+  },
+  {
+    "slug": "egg-crepe-broccoli-wrap",
+    "kind": "menu",
+    "src640": "/images/menu/egg-crepe-broccoli-wrap-640.webp",
+    "src1280": "/images/menu/egg-crepe-broccoli-wrap-1280.webp",
+    "alt": "Folded egg crepes stuffed with broccoli, peppers and sausage",
+    "width": 1264,
+    "height": 1067,
+    "dish": "egg crepe / omelette wrap with broccoli"
+  },
+  {
+    "slug": "grilled-quesadilla-and-chicken-salad",
+    "kind": "hero",
+    "src640": "/images/hero/grilled-quesadilla-and-chicken-salad-640.webp",
+    "src1280": "/images/hero/grilled-quesadilla-and-chicken-salad-1280.webp",
+    "alt": "Grilled quesadilla wedges with chips beside a creamy chicken salad with croutons",
+    "width": 1280,
+    "height": 854,
+    "dish": "grilled chicken quesadilla with chips and creamy chicken salad"
+  },
+  {
+    "slug": "egg-crepe-sriracha",
+    "kind": "menu",
+    "src640": "/images/menu/egg-crepe-sriracha-640.webp",
+    "src1280": "/images/menu/egg-crepe-sriracha-1280.webp",
+    "alt": "Folded crepe filled with scrambled egg and finished with sriracha stripes",
+    "width": 1280,
+    "height": 658,
+    "dish": "egg-filled crepe with sriracha drizzle"
+  },
+  {
+    "slug": "grilled-egg-cheese-sandwich",
+    "kind": "menu",
+    "src640": "/images/menu/grilled-egg-cheese-sandwich-640.webp",
+    "src1280": "/images/menu/grilled-egg-cheese-sandwich-1280.webp",
+    "alt": "Panini-grilled egg and cheese sandwich with fries and a dip",
+    "width": 1280,
+    "height": 658,
+    "dish": "grilled egg and cheese sandwich with fries"
+  },
+  {
+    "slug": "cornflakes-with-milk",
+    "kind": "menu",
+    "src640": "/images/menu/cornflakes-with-milk-640.webp",
+    "src1280": "/images/menu/cornflakes-with-milk-1280.webp",
+    "alt": "Bowl of cornflakes with pomegranate and almonds beside a glass of milk",
+    "width": 1280,
+    "height": 1594,
+    "dish": "cornflakes with milk, pomegranate and almonds"
+  },
+  {
+    "slug": "cheese-garlic-pizza",
+    "kind": "menu",
+    "src640": "/images/menu/cheese-garlic-pizza-640.webp",
+    "src1280": "/images/menu/cheese-garlic-pizza-1280.webp",
+    "alt": "Sliced cheese garlic pizza with chilli flakes",
+    "width": 1280,
+    "height": 658,
+    "dish": "cheese garlic bread pizza"
+  },
+  {
+    "slug": "bbq-chicken-pizza-and-fish-fingers",
+    "kind": "hero",
+    "src640": "/images/hero/bbq-chicken-pizza-and-fish-fingers-640.webp",
+    "src1280": "/images/hero/bbq-chicken-pizza-and-fish-fingers-1280.webp",
+    "alt": "BBQ chicken pizza with olives and peppers beside crumb-fried fish fingers and chips",
+    "width": 1280,
+    "height": 854,
+    "dish": "BBQ chicken pizza with crumb-fried fish fingers and chips"
+  },
+  {
+    "slug": "storefront-night",
+    "kind": "hero",
+    "src640": "/images/hero/storefront-night-640.webp",
+    "src1280": "/images/hero/storefront-night-1280.webp",
+    "alt": "Gluttons Garage storefront at night with warm-lit letters and a vintage motorcycle",
+    "width": 1080,
+    "height": 356,
+    "dish": null
+  },
+  {
+    "slug": "dining-room-gear-mural",
+    "kind": "hero",
+    "src640": "/images/hero/dining-room-gear-mural-640.webp",
+    "src1280": "/images/hero/dining-room-gear-mural-1280.webp",
+    "alt": "Dining room with a black-and-white gear mural, tub chairs and checkerboard floor",
+    "width": 1080,
+    "height": 1440,
+    "dish": null
+  },
+  {
+    "slug": "herbed-potato-wedges",
+    "kind": "menu",
+    "src640": "/images/menu/herbed-potato-wedges-640.webp",
+    "src1280": "/images/menu/herbed-potato-wedges-1280.webp",
+    "alt": "Herbed potato wedges with a ramekin of tangy BBQ sauce",
+    "width": 1080,
+    "height": 1440,
+    "dish": "herbed potato wedges with BBQ dip"
+  },
+  {
+    "slug": "chettinad-chicken-tenders",
+    "kind": "menu",
+    "src640": "/images/menu/chettinad-chicken-tenders-640.webp",
+    "src1280": "/images/menu/chettinad-chicken-tenders-1280.webp",
+    "alt": "Spiced grilled chicken tenders with onion rings, lime and a peanut dip",
+    "width": 800,
+    "height": 1067,
+    "dish": "Chettinad / tandoori chicken tenders with peanut dip"
+  },
+  {
+    "slug": "dessert-counter",
+    "kind": "gallery",
+    "src640": "/images/gallery/dessert-counter-640.webp",
+    "src1280": "/images/gallery/dessert-counter-1280.webp",
+    "alt": "Dessert counter with tiramisu, cheesecake, brownies, cupcakes and muffins",
+    "width": 800,
+    "height": 600,
+    "dish": null
+  },
+  {
+    "slug": "vanilla-milkshake",
+    "kind": "gallery",
+    "src640": "/images/gallery/vanilla-milkshake-640.webp",
+    "src1280": "/images/gallery/vanilla-milkshake-1280.webp",
+    "alt": "Thick vanilla milkshake in a glass bottle with a paper straw",
+    "width": 800,
+    "height": 1067,
+    "dish": "vanilla / banana milkshake"
+  },
+  {
+    "slug": "logo-mural",
+    "kind": "about",
+    "src640": "/images/about/logo-mural-640.webp",
+    "src1280": "/images/about/logo-mural-1280.webp",
+    "alt": "Painted wall mural of the Gluttons Garage logo with the words Fusion Happens",
+    "width": 800,
+    "height": 1067,
+    "dish": null
+  },
+  {
+    "slug": "broccoli-cheese-pizza",
+    "kind": "gallery",
+    "src640": "/images/gallery/broccoli-cheese-pizza-640.webp",
+    "src1280": "/images/gallery/broccoli-cheese-pizza-1280.webp",
+    "alt": "Creamy broccoli and cheese pizza in front of the gear mural wall",
+    "width": 800,
+    "height": 1067,
+    "dish": "creamy broccoli cheese pizza"
+  },
+  {
+    "slug": "chicken-salad-croutons-closeup",
+    "kind": "gallery",
+    "src640": "/images/gallery/chicken-salad-croutons-closeup-640.webp",
+    "src1280": "/images/gallery/chicken-salad-croutons-closeup-1280.webp",
+    "alt": "Close-up of golden croutons over a creamy chicken salad",
+    "width": 800,
+    "height": 1754,
+    "dish": "creamy chicken salad with croutons"
+  },
+  {
+    "slug": "chicken-salad-croutons",
+    "kind": "gallery",
+    "src640": "/images/gallery/chicken-salad-croutons-640.webp",
+    "src1280": "/images/gallery/chicken-salad-croutons-1280.webp",
+    "alt": "Bowl of creamy chicken salad with croutons on a glass table",
+    "width": 800,
+    "height": 1754,
+    "dish": "creamy chicken salad with croutons"
+  }
+]
