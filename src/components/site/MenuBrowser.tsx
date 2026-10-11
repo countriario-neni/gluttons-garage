@@ -14,7 +14,7 @@ import { Container } from "./primitives/Container";
  * Menu sections use content-visibility: auto, so sections near the target render after the jump
  * and can shift it away from their estimated size; this settles once two frames agree (max 20).
  */
-function scrollToSettled(el: HTMLElement) {
+export function scrollToSettled(el: HTMLElement) {
   let last = Number.NaN;
   let frames = 0;
   const step = () => {
