@@ -24,7 +24,8 @@ export function renderWhatsApp(body: string): ReactNode {
 /** Phone mockup with the café's WhatsApp messages for this order, oldest first. */
 export function WhatsAppPreview({ messages }: { messages: MessageLog[] }) {
   const scroller = useRef<HTMLDivElement>(null);
-  const ordered = [...messages].sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+  // The store returns newest first (ties newest-inserted first). Reverse, then a stable sort by time keeps ties in insertion order.
+  const ordered = [...messages].reverse().sort((a, b) => a.createdAt.localeCompare(b.createdAt));
   const count = ordered.length;
   useEffect(() => {
     const el = scroller.current;

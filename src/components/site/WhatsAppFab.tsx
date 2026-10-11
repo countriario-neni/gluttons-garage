@@ -5,12 +5,13 @@ import { MessageCircle } from "lucide-react";
 import { chatHref } from "./links";
 
 /**
- * Floating WhatsApp chat button, bottom-right. Hidden on staff screens.
+ * Floating WhatsApp chat button, bottom-right. Hidden on staff screens and /track/.
  * Pages with a bottom bar (e.g. the cart, `data-cart-bar`) lift it by setting --fab-offset.
  */
 export function WhatsAppFab() {
   const pathname = usePathname();
-  if (pathname?.startsWith("/staff")) return null;
+  // /track/ has its own "Send order on WhatsApp" and "Call café" buttons, and the FAB would cover the bill there.
+  if (pathname?.startsWith("/staff") || pathname?.startsWith("/track")) return null;
 
   return (
     <a

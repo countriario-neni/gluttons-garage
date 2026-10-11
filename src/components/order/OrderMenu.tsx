@@ -2,7 +2,7 @@
 
 import { Search, X } from "lucide-react";
 import { cn } from "cn";
-import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { startTransition, useCallback, useDeferredValue, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { scrollToSettled } from "@/components/site/MenuBrowser";
 import { Container } from "@/components/site/primitives/Container";
 import { Switch } from "@/components/ui/switch";
@@ -35,6 +35,12 @@ export function OrderMenu({
   const [vegOnly, setVegOnly] = useState(false);
   const [active, setActive] = useState<string>(categories[0]?.id ?? "");
   const deferredQuery = useDeferredValue(query);
+  // The ~270 dish cards are mounted in an interruptible transition after hydration, so the page, mode chip and
+  // mode sheet become interactive first (hydrating every card in one go dominated cold-start time).
+  const [cardsReady, setCardsReady] = useState(false);
+  useEffect(() => {
+    startTransition(() => setCardsReady(true));
+  }, []);
   const toolbarRef = useRef<HTMLDivElement>(null);
   const chipsRef = useRef<HTMLUListElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
@@ -216,7 +222,7 @@ export function OrderMenu({
                 <span className="text-sm text-muted-foreground">{c.items.length}</span>
               </div>
               <div className="grid gap-3 md:grid-cols-2 md:gap-4 xl:grid-cols-3">
-                {c.items.map((i) => (
+                {cardsReady && c.items.map((i) => (
                   <OrderItemCard
                     key={i.id}
                     item={i}

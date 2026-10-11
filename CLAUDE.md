@@ -7,6 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run dev` runs the dev server. `npm run build` produces the static export in `out/` (run it before e2e). `npm run lint` runs ESLint.
 - `npm test` runs Vitest (jsdom, tests in `tests/unit/**`, `@` aliases `src`). Single test: `npx vitest run tests/unit/path.test.ts -t "name"`.
 - `npm run e2e` runs Playwright; its webServer builds with `NEXT_PUBLIC_E2E=1` (exposes the test-only `window.__ggStore` bridge that the tracking spec's second "staff" page uses; absent from normal builds) and serves `out/` on :4173 (never reuses a running server). Single e2e: `npx playwright test tests/e2e/file.spec.ts -g "name"`.
+- `npm run check:no-bridge` (run after a plain `npm run build`, not after an e2e run) fails if the E2E-only `__ggStore` bridge leaked into `out/`.
 - `npm run check:contrast` verifies token contrast pairs in `src/app/globals.css`.
 - Pages build: set `NEXT_PUBLIC_BASE_PATH=/gluttons-garage`. Use `withBase()` (`src/lib/basePath.ts`) for raw `<img>` and `public/` URLs.
 - npm needs `--legacy-peer-deps` when adding packages (shadcn pins Babel 7, `@vitejs/plugin-react` peers Babel 8).

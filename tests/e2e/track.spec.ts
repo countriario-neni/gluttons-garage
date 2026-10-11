@@ -22,6 +22,9 @@ test.describe("order tracking", () => {
     await expect(status(page)).toHaveText("Ready", { timeout: 3000 });
     await expect(page.locator('[aria-current="step"]')).toContainText("Ready");
     await expect(preview(page).getByText(/is ready!/)).toBeVisible({ timeout: 3000 });
+    // chronological: the newest (ready) message is the last bubble, even though all share one fixed clock
+    await expect(preview(page).getByRole("log").locator("> div").last()).toContainText("is ready!");
+    await expect(page.getByTestId("whatsapp-fab")).toHaveCount(0); // the page has its own WhatsApp/call buttons
     // *bold* markup renders as <strong>, never as raw asterisks
     await expect(preview(page).locator("strong").filter({ hasText: /^GG-\d+$/ }).first()).toBeVisible();
     await expect(preview(page)).not.toContainText("*GG-");
@@ -35,6 +38,7 @@ test.describe("order tracking", () => {
     await expect(status(page)).toHaveText("Rejected", { timeout: 3000 });
     await expect(page.getByRole("link", { name: /call the café/i }).first()).toHaveAttribute("href", "tel:+917702368884");
     await expect(page.getByText(/couldn't take your order/i).first()).toBeVisible();
+    await expect(page.getByText(/paid online — refund initiated \(demo\)/)).toBeVisible();
   });
 
   test("missing or unknown order id shows a friendly not-found", async ({ page }) => {
