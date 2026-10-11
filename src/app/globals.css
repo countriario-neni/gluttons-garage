@@ -249,6 +249,19 @@
   animation: tick-draw 320ms var(--ease-reveal) 520ms forwards;
 }
 
+/* Print-only invoice on /track/: portalled to <body>; printing shows it and nothing else. */
+.invoice-print {
+  display: none;
+}
+@media print {
+  body > *:not(.invoice-print) {
+    display: none !important;
+  }
+  .invoice-print {
+    display: block;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

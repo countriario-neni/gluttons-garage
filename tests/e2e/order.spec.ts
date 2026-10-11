@@ -1,53 +1,8 @@
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 import { items } from "../../src/data/menu";
+import { addPlain, chooseTakeaway, fillContact, NOON_IST, ordersFor, plain, salad, search, sprouts } from "./helpers";
 
-/**
- * Ordering flow against the LocalStore build (no Supabase env).
- * The clock is pinned to Tuesday 12:00 IST so takeaway slots exist whatever time the suite runs;
- * timers keep running, so the simulated payment delays (1.2-2 s) are real.
- */
-const NOON_IST = new Date("2026-10-13T12:00:00+05:30");
-const DB_KEY = "gg-demo-v1";
-
-const salad = items.find((i) => i.name === "Fruit Salad")!;
-const sprouts = items.find((i) => i.id === "healthy-breakfast-sprouts-with-honey-spicy-sprouts")!;
-const plain = items.find((i) => i.options.length === 0 && i.available)!;
-
-async function ordersFor(page: Page, phone: string) {
-  return page.evaluate(
-    ([key, p]) => {
-      const db = JSON.parse(localStorage.getItem(key) ?? "{}") as { orders?: { phone: string; paymentStatus: string; id: string }[] };
-      return (db.orders ?? []).filter((o) => o.phone === p);
-    },
-    [DB_KEY, phone] as const,
-  );
-}
-
-async function search(page: Page, q: string) {
-  const box = page.getByRole("searchbox", { name: /search the menu/i });
-  await box.fill(q);
-}
-
-async function addPlain(page: Page, name: string) {
-  await search(page, name);
-  await page.getByRole("button", { name: `Add ${name}`, exact: true }).click();
-  // Items without options go straight to the cart.
-}
-
-async function fillContact(page: Page, phone: string) {
-  await page.getByLabel("Your name").fill("Asha Rao");
-  await page.getByLabel("Mobile number").fill(phone);
-}
-
-async function chooseTakeaway(page: Page) {
-  const sheet = page.getByRole("dialog", { name: /how are you eating/i });
-  await expect(sheet).toBeVisible();
-  await sheet.getByRole("button", { name: /takeaway/i }).click();
-  await sheet.getByRole("radio").first().click();
-  await sheet.getByRole("button", { name: /start ordering/i }).click();
-  await expect(sheet).toBeHidden();
-}
-
+/** Ordering flow against the LocalStore build (no Supabase env). */
 test.beforeEach(async ({ page }) => {
   await page.clock.setFixedTime(NOON_IST);
 });

@@ -2,7 +2,7 @@ import type { Bill } from "@/domain/types";
 import { formatINR } from "@/domain/money";
 
 /** Subtotal, discounts, CGST + SGST (2.5% each) and the total, as priced by priceOrder. */
-export function BillSummary({ bill, couponCode }: { bill: Bill; couponCode: string | null }) {
+export function BillSummary({ bill, couponCode, totalLabel = "To pay" }: { bill: Bill; couponCode: string | null; totalLabel?: string }) {
   const row = "flex items-baseline justify-between gap-4";
   return (
     <dl className="space-y-2 text-[0.95rem]">
@@ -31,7 +31,7 @@ export function BillSummary({ bill, couponCode }: { bill: Bill; couponCode: stri
         <dd className="tabular-nums">{formatINR(bill.sgst)}</dd>
       </div>
       <div className={`${row} mt-3 border-t-2 border-dashed border-line pt-3`}>
-        <dt className="text-lg font-bold">To pay</dt>
+        <dt className="text-lg font-bold">{totalLabel}</dt>
         <dd className="text-xl font-bold tabular-nums">{formatINR(bill.total)}</dd>
       </div>
     </dl>

@@ -29,10 +29,21 @@ export function createStore(): DataStore {
   });
 }
 
+declare global {
+  interface Window {
+    /** E2E-only handle on the live store; exists only in builds made with NEXT_PUBLIC_E2E=1. */
+    __ggStore?: DataStore;
+  }
+}
+
 const StoreContext = createContext<DataStore | null>(null);
 
 export function StoreProvider({ children, store }: { children: ReactNode; store?: DataStore }) {
   const [value] = useState<DataStore>(() => store ?? createStore());
+  useEffect(() => {
+    // Compiled out of production builds (the env var is inlined at build time). Lets Playwright's second page act as staff.
+    if (process.env.NEXT_PUBLIC_E2E === "1") window.__ggStore = value;
+  }, [value]);
   return createElement(StoreContext.Provider, { value }, children);
 }
 
