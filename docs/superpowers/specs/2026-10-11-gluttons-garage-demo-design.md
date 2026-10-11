@@ -95,7 +95,7 @@ Companion functions: `confirm_online_payment(order_id, ref, success)` (demo stan
 - Swiggy / Zomato "Order for delivery" buttons (links configurable; hidden if not set).
 
 ### Real content
-- Menu, prices, descriptions and veg/egg markers are transcribed from photos of the café's printed menu (magicpin listing); items not legible are omitted rather than guessed. Source notes in `research/`.
+- Menu, prices, descriptions and veg/egg markers are transcribed from photos of the café's printed menu (magicpin listing); items not legible are omitted rather than guessed. The printed pages carry sister-brand logos (Kaloreez, Junktion77); per user decision all items are presented under Gluttons Garage with no sub-brand labels. Source notes in `research/`.
 - Photos: real café, food and logo photos from public listings (magicpin / yappe) and, when the browser is available, Instagram screenshots. Used for the client pitch only; to be replaced or confirmed with the client's own assets before go-live.
 - Facts: address 7-5-182, Dr NTR Beach Rd, beside Aqua Sports Complex, Pandurangapuram, Visakhapatnam 530003; phone +91 77023 68884; hours 8:00 AM–10:00 PM (Mon until 8:30 PM); amenities: indoor & outdoor seating, kids' play area, book corner, party area. Ratings shown only as "4.1★ on Google" with a link, not fabricated review text.
 
