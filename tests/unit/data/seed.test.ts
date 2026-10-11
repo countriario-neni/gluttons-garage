@@ -54,6 +54,7 @@ describe("generateSeed", () => {
 
   it("completed orders are fully paid with consistent payments; rejected are a few percent", () => {
     for (const o of db.orders) {
+      if (["placed", "preparing", "ready"].includes(o.status)) continue; // live orders, tested separately
       if (o.status === "completed") {
         expect(o.paymentStatus).toBe("paid");
         expect(o.payments.every((p) => p.status === "success")).toBe(true);
@@ -79,6 +80,34 @@ describe("generateSeed", () => {
       expect(sum).toBeGreaterThanOrEqual(0);
     }
     expect(db.ledger.some((l) => l.reason === "redeem")).toBe(true);
+  });
+
+  it("has at least 5 inactive customers (only orders 35-60 days old)", () => {
+    const cutoff = NOW.getTime() - 30 * 86400000;
+    const inactive = db.customers.filter((c) => {
+      const mine = db.orders.filter((o) => o.customerId === c.id && o.status !== "rejected");
+      return mine.length > 0 && mine.every((o) => new Date(o.createdAt).getTime() < cutoff);
+    });
+    expect(inactive.length).toBeGreaterThanOrEqual(5);
+    const oldest = Math.min(...db.orders.map((o) => new Date(o.createdAt).getTime()));
+    expect(NOW.getTime() - oldest).toBeLessThanOrEqual(61 * 86400000);
+  });
+
+  it("seeds exactly 3 live orders for the kitchen board", () => {
+    const live = db.orders.filter((o) => !["completed", "rejected", "cancelled"].includes(o.status));
+    expect(live.map((o) => o.status).sort()).toEqual(["placed", "preparing", "ready"]);
+    const by = (s: string) => live.find((o) => o.status === s)!;
+    expect(by("placed")).toMatchObject({ mode: "dine_in", table: 3, paymentStatus: "paid" });
+    expect(by("placed").payments.every((p) => p.method === "online" && p.status === "success")).toBe(true);
+    expect(by("preparing")).toMatchObject({ mode: "takeaway", paymentStatus: "paid" });
+    const [h, m] = by("preparing").pickupTime!.split(":").map(Number);
+    const istNow = new Date(NOW.getTime() + 330 * 60000);
+    const diff = h * 60 + m - (istNow.getUTCHours() * 60 + istNow.getUTCMinutes());
+    expect(diff).toBeGreaterThanOrEqual(25);
+    expect(diff).toBeLessThanOrEqual(35);
+    const ready = by("ready");
+    expect(ready).toMatchObject({ mode: "dine_in", table: 6, paymentStatus: "partial" });
+    expect(ready.payments.map((p) => [p.method, p.status])).toEqual([["online", "success"], ["cash", "pending"]]);
   });
 
   it("has the three coupons, GG100 expired, usedCount matching orders", () => {

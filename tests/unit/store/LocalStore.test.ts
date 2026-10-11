@@ -205,6 +205,53 @@ describe("payments", () => {
     await expect(store.recordCashPayment(order.id, 1)).rejects.toThrow("BAD_AMOUNT");
   });
 
+  it("confirmOnlinePayment rejects a mismatched amount and counts a double confirm once", async () => {
+    const { order, onlineDue } = ok(await store.placeOrder(input()));
+    await expect(store.confirmOnlinePayment(order.id, { channel: "card", amount: 1, success: true, reference: "X" })).rejects.toThrow("BAD_AMOUNT");
+    await expect(store.confirmOnlinePayment(order.id, { channel: "card", amount: onlineDue + 5, success: true, reference: "X" })).rejects.toThrow("BAD_AMOUNT");
+    expect((await store.getOrder(order.id))!.paymentStatus).toBe("unpaid");
+    const first = await store.confirmOnlinePayment(order.id, { channel: "card", amount: onlineDue, success: true, reference: "A" });
+    let events = 0;
+    store.subscribe("orders", () => events++);
+    const msgs = (await store.listMessages({ orderId: order.id })).length;
+    const second = await store.confirmOnlinePayment(order.id, { channel: "upi_qr", amount: onlineDue, success: true, reference: "B" });
+    expect(second).toEqual(first);
+    expect(second.payments).toHaveLength(1);
+    expect(second.payments[0].reference).toBe("A");
+    expect(events).toBe(0);
+    expect((await store.listMessages({ orderId: order.id })).length).toBe(msgs);
+  });
+
+  it("retry after a failed payment uses the server amount and succeeds once", async () => {
+    const { order, onlineDue } = ok(await store.placeOrder(input()));
+    await store.confirmOnlinePayment(order.id, { channel: "card", amount: onlineDue, success: false, reference: "F1" });
+    await store.confirmOnlinePayment(order.id, { channel: "card", amount: onlineDue, success: false, reference: "F2" });
+    await expect(store.confirmOnlinePayment(order.id, { channel: "card", amount: 1, success: true, reference: "S" })).rejects.toThrow("BAD_AMOUNT");
+    const done = await store.confirmOnlinePayment(order.id, { channel: "upi_id", amount: onlineDue, success: true, reference: "S" });
+    expect(done.paymentStatus).toBe("paid");
+    expect(done.payments.filter((p) => p.status === "success")).toHaveLength(1);
+    expect(done.payments.find((p) => p.status === "success")!.amount).toBe(onlineDue);
+  });
+
+  it("closed orders refuse payments", async () => {
+    await owner(store);
+    const { order, onlineDue } = ok(await store.placeOrder(input({ plan: { kind: "split", onlineAmount: 100 } })));
+    await store.updateOrderStatus(order.id, "rejected");
+    await expect(store.confirmOnlinePayment(order.id, { channel: "card", amount: 100, success: true, reference: "Z" })).rejects.toThrow("ORDER_CLOSED");
+    await expect(store.recordCashPayment(order.id, 10)).rejects.toThrow("ORDER_CLOSED");
+    expect(onlineDue).toBe(100);
+  });
+
+  it("cash cannot cover the still-pending online part of a split", async () => {
+    await owner(store);
+    const { order } = ok(await store.placeOrder(input({ plan: { kind: "split", onlineAmount: 100 } })));
+    const cashDue = order.bill.total - 100;
+    await expect(store.recordCashPayment(order.id, order.bill.total)).rejects.toThrow("BAD_AMOUNT");
+    await expect(store.recordCashPayment(order.id, cashDue + 1)).rejects.toThrow("BAD_AMOUNT");
+    const o = await store.recordCashPayment(order.id, cashDue);
+    expect(o.paymentStatus).toBe("partial");
+  });
+
   it("recordCashPayment requires a staff session", async () => {
     const { order } = ok(await store.placeOrder(input({ plan: { kind: "cash" } })));
     await expect(store.recordCashPayment(order.id, 10)).rejects.toThrow("UNAUTHENTICATED");
@@ -277,6 +324,19 @@ describe("staff auth and roles", () => {
   it("anonymous calling owner-only throws UNAUTHENTICATED", async () => {
     await expect(store.updateSettings({ tables: 5 })).rejects.toThrow("UNAUTHENTICATED");
   });
+
+  it("menu and notes writes are staff-only; upsertItem is owner-only", async () => {
+    const item = (await store.getMenu()).items[0];
+    const cust = (await store.listCustomers())[0];
+    await expect(store.setItemAvailability(item.id, false)).rejects.toThrow("UNAUTHENTICATED");
+    await expect(store.upsertItem(item)).rejects.toThrow("UNAUTHENTICATED");
+    await expect(store.updateCustomerNotes(cust.id, "x")).rejects.toThrow("UNAUTHENTICATED");
+    await store.staffSignIn("kitchen@gluttonsgarage.demo", "garage123");
+    await store.setItemAvailability(item.id, false);
+    await store.updateCustomerNotes(cust.id, "kitchen note");
+    await expect(store.upsertItem(item)).rejects.toThrow("FORBIDDEN");
+    expect((await store.getMenu()).items[0].available).toBe(false);
+  });
 });
 
 describe("owner features", () => {
@@ -310,6 +370,7 @@ describe("owner features", () => {
     expect(c.orders).toBeGreaterThan(0);
     expect(c.favourites.length).toBeLessThanOrEqual(3);
     expect(c.avgBill).toBe(Math.round(c.totalSpend / c.orders));
+    await owner(store);
     await store.updateCustomerNotes(c.id, "likes window seat");
     expect((await store.getCustomer(c.id))!.stats.notes).toBe("likes window seat");
     const r = ok(await store.placeOrder(input({ phone: "9555500001", name: "Fresh Face" })));

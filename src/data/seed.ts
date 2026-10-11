@@ -90,6 +90,8 @@ export function generateSeed(now: Date, rng: () => number = mulberry32(42)): See
   });
   const weight = customers.map(() => 0.3 + rng() * 2.5);
   // The last 8 customers joined recently, so the "new" segment is populated.
+  // Six customers only have old orders (35-60 days ago) so the "inactive" segment is populated.
+  const lapsed = new Set([8, 9, 10, 11, 12, 13]);
   const startDay = customers.map((_, i) => (i >= customers.length - 8 ? int(0, 6) : 21));
 
   // Bestsellers and items with photos are ordered far more often.
@@ -121,33 +123,13 @@ export function generateSeed(now: Date, rng: () => number = mulberry32(42)): See
   const istToday = new Date(nowMs + IST_MS);
   const todayStart = Date.UTC(istToday.getUTCFullYear(), istToday.getUTCMonth(), istToday.getUTCDate()) - IST_MS;
 
-  for (let d = 21; d >= 0; d--) {
-    const dayStart = todayStart - d * DAY_MS;
-    const closeMin = new Date(dayStart + IST_MS).getUTCDay() === 1 ? 20 * 60 + 30 : 22 * 60;
-    const minutes = Array.from({ length: int(12, 30) }, () => {
-      const r = rng();
-      const m = r < 0.35 ? int(11 * 60, 13 * 60 - 1) : r < 0.8 ? int(17 * 60, 21 * 60 - 1) : int(8 * 60, 21 * 60 + 59);
-      return Math.min(m, closeMin - 1);
-    }).sort((a, b) => a - b);
-    const active = customers.map((_, i) => i).filter((i) => startDay[i] >= d);
-    const activeTotal = active.reduce((s, i) => s + weight[i], 0);
-
-    for (const minute of minutes) {
-      const createdMs = dayStart + minute * 60000;
-      if (createdMs > nowMs) continue;
-      let r = rng() * activeTotal;
-      let ci = active[active.length - 1];
-      for (const i of active) {
-        if ((r -= weight[i]) < 0) {
-          ci = i;
-          break;
-        }
-      }
+  type Live = { status: Order["status"]; mode: Order["mode"]; table: number | null; kind: "online" | "split"; agoMin: number; pickupAfterMin: number };
+  const emit = (ci: number, createdMs: number, live?: Live) => {
       const cust = customers[ci];
       const st = state[ci];
       const isFirstOrder = st.orders === 0;
-      const rejected = rng() < 0.03;
-      const mode = rng() < 0.7 ? "dine_in" : "takeaway";
+      const rejected = !live && rng() < 0.03;
+      const mode = live ? live.mode : rng() < 0.7 ? "dine_in" : "takeaway";
 
       const lines: CartLine[] = [];
       const seen = new Set<string>();
@@ -180,7 +162,7 @@ export function generateSeed(now: Date, rng: () => number = mulberry32(42)): See
       if (!rejected) {
         // Cash and split are dine-in only; takeaway is always online.
         const pay = rng();
-        const kind = mode === "takeaway" || bill.total < 2 || pay < 0.55 ? "online" : pay < 0.85 ? "cash" : "split";
+        const kind = live ? live.kind : mode === "takeaway" || bill.total < 2 || pay < 0.55 ? "online" : pay < 0.85 ? "cash" : "split";
         const row = (method: "online" | "cash", amount: number): Payment => ({
           id: `seed-p-${pid++}`,
           method,
@@ -198,7 +180,8 @@ export function generateSeed(now: Date, rng: () => number = mulberry32(42)): See
         }
       }
 
-      const pickup = new Date(createdMs + 25 * 60000 + IST_MS);
+      if (live?.kind === "split") Object.assign(payments[1], { status: "pending" }); // cash still due
+      const pickup = new Date(createdMs + (live?.pickupAfterMin ?? 25) * 60000 + IST_MS);
       orders.push({
         id: orderId,
         code: `GG-${code}`,
@@ -206,15 +189,15 @@ export function generateSeed(now: Date, rng: () => number = mulberry32(42)): See
         customerName: cust.name,
         phone: cust.phone,
         mode,
-        table: mode === "dine_in" ? int(1, 10) : null,
+        table: live ? live.table : mode === "dine_in" ? int(1, 10) : null,
         pickupTime: mode === "takeaway" ? `${pad(pickup.getUTCHours())}:${pad(pickup.getUTCMinutes())}` : null,
-        status: rejected ? "rejected" : "completed",
+        status: rejected ? "rejected" : (live?.status ?? "completed"),
         bill,
         couponCode: coupon ? coupon.code : null,
-        paymentStatus: rejected ? "unpaid" : "paid",
+        paymentStatus: rejected ? "unpaid" : live?.kind === "split" ? "partial" : "paid",
         payments,
         createdAt,
-        updatedAt: iso(createdMs + 20 * 60000),
+        updatedAt: iso(live ? createdMs : createdMs + 20 * 60000),
       });
       code++;
       if (!rejected) {
@@ -225,13 +208,49 @@ export function generateSeed(now: Date, rng: () => number = mulberry32(42)): See
         ledger.push({ id: `seed-l-${lid++}`, customerId: cust.id, orderId, points: -bill.pointsRedeemed, reason: "redeem", createdAt });
         st.points -= bill.pointsRedeemed;
       }
-      if (!rejected) {
+      if (!rejected && !live) {
         const earned = pointsEarned(bill.total);
         ledger.push({ id: `seed-l-${lid++}`, customerId: cust.id, orderId, points: earned, reason: "earn", createdAt: iso(createdMs + 20 * 60000) });
         st.points += earned;
       }
+  };
+
+  for (let d = 60; d >= 0; d--) {
+    const dayStart = todayStart - d * DAY_MS;
+    const closeMin = new Date(dayStart + IST_MS).getUTCDay() === 1 ? 20 * 60 + 30 : 22 * 60;
+    const count = d > 34 ? 1 : d > 21 ? 0 : int(12, 30);
+    const minutes = Array.from({ length: count }, () => {
+      const r = rng();
+      const m = r < 0.35 ? int(11 * 60, 13 * 60 - 1) : r < 0.8 ? int(17 * 60, 21 * 60 - 1) : int(8 * 60, 21 * 60 + 59);
+      return Math.min(m, closeMin - 1);
+    }).sort((a, b) => a - b);
+    const active = customers.map((_, i) => i).filter((i) => (d > 21 ? lapsed.has(i) : !lapsed.has(i) && startDay[i] >= d));
+    const activeTotal = active.reduce((s, i) => s + weight[i], 0);
+    for (const minute of minutes) {
+      const createdMs = dayStart + minute * 60000;
+      // The last 25 minutes are left free for the live orders below, so codes stay chronological.
+      if (createdMs > nowMs - 25 * 60000) continue;
+      let r = rng() * activeTotal;
+      let ci = active[active.length - 1];
+      for (const i of active) {
+        if ((r -= weight[i]) < 0) {
+          ci = i;
+          break;
+        }
+      }
+      emit(ci, createdMs);
     }
   }
+
+  // Three in-flight orders so the kitchen board is not empty at demo start.
+  const regulars = customers.map((_, i) => i).filter((i) => !lapsed.has(i));
+  const liveOrders: Live[] = [
+    { status: "ready", mode: "dine_in", table: 6, kind: "split", agoMin: 24, pickupAfterMin: 25 },
+    { status: "preparing", mode: "takeaway", table: null, kind: "online", agoMin: 10, pickupAfterMin: 40 },
+    { status: "placed", mode: "dine_in", table: 3, kind: "online", agoMin: 3, pickupAfterMin: 25 },
+  ];
+  for (const l of liveOrders) emit(pick(regulars), nowMs - l.agoMin * 60000, l);
+
   customers.forEach((c, i) => {
     const t = firstOrderAt[i];
     if (t) c.createdAt = t;

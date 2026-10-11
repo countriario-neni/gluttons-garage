@@ -38,6 +38,7 @@ export type LocalStoreOptions = {
   session?: KV;
 };
 
+const CLOSED = new Set<OrderStatus>(["rejected", "cancelled"]);
 const TOPICS: Topic[] = ["orders", "menu", "messages"];
 const TRANSITIONS: Partial<Record<OrderStatus, OrderStatus[]>> = {
   placed: ["accepted", "rejected"],
@@ -154,12 +155,14 @@ export class LocalStore implements DataStore {
     return { categories: db.categories, items: db.items };
   }
   async setItemAvailability(id: string, available: boolean) {
+    this.requireStaff();
     this.tx(["menu"], (db) => {
       const it = db.items.find((i) => i.id === id);
       if (it) it.available = available;
     });
   }
   async upsertItem(i: MenuItem) {
+    this.requireOwner();
     this.tx(["menu"], (db) => {
       const idx = db.items.findIndex((x) => x.id === i.id);
       if (idx >= 0) db.items[idx] = i;
@@ -312,27 +315,39 @@ export class LocalStore implements DataStore {
     return o;
   }
 
+  /** The amount is always the server-computed online part of the order; the client amount is only checked against it. */
   async confirmOnlinePayment(orderId: string, p: { channel: string; amount: number; success: boolean; reference: string }) {
-    return this.tx(["orders"], (db) => {
-      const o = this.orderIn(db, orderId);
-      let row = o.payments.find((x) => x.method === "online" && x.status === "pending");
-      if (!row) {
-        row = { id: this.newId(), method: "online", channel: p.channel, amount: p.amount, status: "pending", reference: null, createdAt: this.now().toISOString() };
-        o.payments.push(row);
-      }
-      Object.assign(row, { channel: p.channel, amount: p.amount, reference: p.reference, status: p.success ? "success" : "failed" });
-      o.paymentStatus = paymentStatusOf(o);
-      o.updatedAt = this.now().toISOString();
-      return o;
-    });
+    let changed = false;
+    return this.tx(
+      ["orders"],
+      (db) => {
+        const o = this.orderIn(db, orderId);
+        if (CLOSED.has(o.status)) throw new Error("ORDER_CLOSED");
+        const online = o.payments.filter((x) => x.method === "online");
+        if (online.some((x) => x.status === "success")) return o; // already paid: idempotent
+        const row = online.findLast((x) => x.status === "pending") ?? online.findLast((x) => x.status === "failed");
+        if (!row || p.amount !== row.amount) throw new Error("BAD_AMOUNT");
+        const at = this.now().toISOString();
+        const target =
+          row.status === "pending" ? row : o.payments[o.payments.push({ id: this.newId(), method: "online", channel: "pending", amount: row.amount, status: "pending", reference: null, createdAt: at }) - 1];
+        Object.assign(target, { channel: p.channel, reference: p.reference, status: p.success ? "success" : "failed" });
+        o.paymentStatus = paymentStatusOf(o);
+        o.updatedAt = at;
+        changed = true;
+        return o;
+      },
+      () => changed,
+    );
   }
 
   async recordCashPayment(orderId: string, amount: number) {
     this.requireStaff();
     return this.tx(["orders"], (db) => {
       const o = this.orderIn(db, orderId);
-      const paid = o.payments.reduce((s, x) => (x.status === "success" ? s + x.amount : s), 0);
-      if (!Number.isInteger(amount) || amount <= 0 || amount > o.bill.total - paid) throw new Error("BAD_AMOUNT");
+      if (CLOSED.has(o.status)) throw new Error("ORDER_CLOSED");
+      // Cash due excludes what is paid and the online part that is still pending.
+      const covered = o.payments.reduce((s, x) => (x.status === "success" || (x.status === "pending" && x.method === "online") ? s + x.amount : s), 0);
+      if (!Number.isInteger(amount) || amount <= 0 || amount > o.bill.total - covered) throw new Error("BAD_AMOUNT");
       const row = o.payments.find((x) => x.method === "cash" && x.status === "pending");
       if (row) Object.assign(row, { amount, status: "success" });
       else o.payments.push({ id: this.newId(), method: "cash", channel: "cash", amount, status: "success", reference: null, createdAt: this.now().toISOString() });
@@ -388,6 +403,7 @@ export class LocalStore implements DataStore {
     };
   }
   async updateCustomerNotes(id: string, notes: string) {
+    this.requireStaff();
     this.tx(["orders"], (db) => {
       const c = db.customers.find((x) => x.id === id);
       if (c) c.notes = notes;

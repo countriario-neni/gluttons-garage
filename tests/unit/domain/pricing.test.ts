@@ -27,7 +27,7 @@ const coupon = (o: Partial<Coupon> = {}): Coupon => ({ code: "X", type: "flat", 
 
 describe("priceOrder", () => {
   it("recomputes from menu, ignoring client price", () => {
-    const tampered = { ...line("a", 2), price: 1, unitPrice: 1, lineTotal: 2 } as any;
+    const tampered = { ...line("a", 2), price: 1, unitPrice: 1, lineTotal: 2 } as unknown as CartLine;
     const b = bill(priceOrder({ ...base, lines: [tampered] }));
     expect(b.lines[0].unitPrice).toBe(100);
     expect(b.lines[0].lineTotal).toBe(200);
