@@ -1,0 +1,330 @@
+{
+  "file": "menu-07.jpg",
+  "kind": "menu_page",
+  "notes": "Page title: 'The Energetic Sandwiches', plus 'GG Specials' section. Branded with 'kaloreez' logo top-right (green circular leaf/food logo; tagline too small to read). Light sage-green background with faint gear pattern; heading in dark brown decorative calligraphic serif; item names bold dark maroon serif; descriptions small dark sans-serif; prices maroon with '/-'. Each item has a nutrition table (kCal, Fat (g), Carb(g), Protein(g)) in white boxes with maroon borders - captured in 'nutrition' field. Green/red circular veg/non-veg markers to the left of items; Protein Sandwich, Double Decker and GG Specials have no marker. Intro: 'Life is like sandwich, we fill your sandwiches with fresh n Healthy ingredients (All the sandwiches are smeared with low fat mayo and nutralite butter)'. Double Decker description continues in bold maroon: 'Choose 2 Fillings from the below Mexican/ Spinach & Corn / Rajma / Legume / Egg / Chicken)'. Bottom photo: grilled brown-bread sandwich with chips and green capsicums. No tax/charges text. Fully legible.",
+  "sections": [
+    {
+      "section": "The Energetic Sandwiches",
+      "items": [
+        {
+          "name": "Fruit & Nut Sandwich",
+          "price": 170,
+          "price_text": "170/-",
+          "description": "A classic American sandwich stuffed with butter roasted fruits and nuts cooked in milk and honey",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 210,
+            "fat_g": 16,
+            "carb_g": 52,
+            "protein_g": 10
+          }
+        },
+        {
+          "name": "Mexican Sandwich",
+          "price": 140,
+          "price_text": "140/-",
+          "description": "A Refreshing sandwich with layers of fresh veggies and low-fat mayo",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 180,
+            "fat_g": 12,
+            "carb_g": 41,
+            "protein_g": 7
+          }
+        },
+        {
+          "name": "Rajma Sandwich",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "A traditional Andhra sandwich with Mashed kidney beans and healthy ulavacharu spread",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 195,
+            "fat_g": 13,
+            "carb_g": 58,
+            "protein_g": 8
+          }
+        },
+        {
+          "name": "Spinach Corn Sandwich",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "A unique combo to feast on",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 220,
+            "fat_g": 20,
+            "carb_g": 48,
+            "protein_g": 11
+          }
+        },
+        {
+          "name": "Paneer Herb Sandwich",
+          "price": 165,
+          "price_text": "165/-",
+          "description": "Herb grilled paneer sandwiched with caramelised onions and mayo",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 220,
+            "fat_g": 14,
+            "carb_g": 52,
+            "protein_g": 10
+          }
+        },
+        {
+          "name": "Broccoli & Peppers Sandwich",
+          "price": 165,
+          "price_text": "165/-",
+          "description": "Grilled broccoli sandwiched with mayo and grilled veggies",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 205,
+            "fat_g": 11,
+            "carb_g": 48,
+            "protein_g": 12
+          }
+        },
+        {
+          "name": "Tangy Paneer Sandwich",
+          "price": 170,
+          "price_text": "170/-",
+          "description": "Paneer cooked with tangy tomato sauce and sandwiched with veggies",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 230,
+            "fat_g": 13,
+            "carb_g": 61,
+            "protein_g": 12
+          }
+        },
+        {
+          "name": "Egg Layered Sandwich",
+          "price": 140,
+          "price_text": "140/-",
+          "description": "boiled eggs grated, topped with mayo and mild spices",
+          "veg": false,
+          "egg": true,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 210,
+            "fat_g": 13,
+            "carb_g": 48,
+            "protein_g": 14
+          }
+        },
+        {
+          "name": "Herbed Chicken Sandwich with Peppers",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "Herb grilled chicken topped with caramelised onions & grilled peppers",
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 260,
+            "fat_g": 12,
+            "carb_g": 54,
+            "protein_g": 14
+          }
+        },
+        {
+          "name": "Spicy Chicken Ranch Sandwich",
+          "price": 165,
+          "price_text": "165/-",
+          "description": "Tender minced chicken with Spicy ranch dressing topped with crispy onions and capsicum",
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 250,
+            "fat_g": 10,
+            "carb_g": 58,
+            "protein_g": 13
+          }
+        },
+        {
+          "name": "Tuna Sandwich",
+          "price": 170,
+          "price_text": "170/-",
+          "description": "Mashed tuna with mayo, fresh cut veggies, lemon sandwiched",
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 210,
+            "fat_g": 14,
+            "carb_g": 45,
+            "protein_g": 9
+          }
+        },
+        {
+          "name": "Protein Sandwich Veg / Protein Sandwich Non Veg",
+          "price": 180,
+          "price_text": "180/-",
+          "description": "Protein rich veggies/meat, onions, tomatoes with white sauce (Why work out for ABS when you can have ABS'olutely all the protein required for them)",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 260,
+            "fat_g": 10,
+            "carb_g": 50,
+            "protein_g": 16
+          }
+        },
+        {
+          "name": "Double Decker Sandwich",
+          "price": 220,
+          "price_text": "220/-",
+          "description": "Customize your sandwich Choose 2 Fillings from the below Mexican/ Spinach & Corn / Rajma / Legume / Egg / Chicken)",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 260,
+            "fat_g": 10,
+            "carb_g": 50,
+            "protein_g": 16
+          }
+        }
+      ]
+    },
+    {
+      "section": "GG Specials",
+      "items": [
+        {
+          "name": "Cucumber Wiches Veg / Non Veg 5 nos",
+          "price": 150,
+          "price_text": "150/-  / 180/-",
+          "description": "Cucumber slices smeared with hummus and filled with assorted veggies / chicken",
+          "veg": null,
+          "egg": null,
+          "variants": [
+            {
+              "label": "Veg",
+              "price": 150
+            },
+            {
+              "label": "Non Veg",
+              "price": 180
+            }
+          ],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 170,
+            "fat_g": 8,
+            "carb_g": 40,
+            "protein_g": 10
+          }
+        },
+        {
+          "name": "Tomato Wiches Veg / Non Veg 5 nos",
+          "price": 150,
+          "price_text": "150/-  / 180/-",
+          "description": "Tomato slices smeared with crunchy peanut dressing and filled with fried peanuts and salsa / chicken with jalapenos",
+          "veg": null,
+          "egg": null,
+          "variants": [
+            {
+              "label": "Veg",
+              "price": 150
+            },
+            {
+              "label": "Non Veg",
+              "price": 180
+            }
+          ],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 180,
+            "fat_g": 11,
+            "carb_g": 40,
+            "protein_g": 10
+          }
+        }
+      ]
+    },
+    {
+      "section": "Toppings",
+      "items": [
+        {
+          "name": "Mayo / Cheese",
+          "price": 40,
+          "price_text": "40 /-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Olives / Jalapenos",
+          "price": 40,
+          "price_text": "40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Veggie Toppings",
+          "price": 60,
+          "price_text": "60 /-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Non Veg Toppings",
+          "price": 80,
+          "price_text": "80/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Hummus Dip",
+          "price": 50,
+          "price_text": "50/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    }
+  ]
+}

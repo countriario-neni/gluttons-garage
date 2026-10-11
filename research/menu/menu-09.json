@@ -1,0 +1,363 @@
+{
+  "file": "menu-09.jpg",
+  "kind": "menu_page",
+  "notes": "Page title: 'Healthy Salads', plus 'Cooked Salads'. Branded with 'kaloreez' logo top-right. Peach/salmon-pink background with gear pattern; headings in white decorative calligraphic serif; item names bold crimson/raspberry serif; descriptions small dark sans-serif; prices crimson with '/-'. Nutrition table per item (kCal, Fat (g), Carb(g), Protein(g)) in boxes with red borders - captured in 'nutrition'. Green/red veg/non-veg markers on Healthy Salads; Cooked Salads have no markers. Intro: 'Staple food for all the diet lovers'. 'Choose Your Dressing' line printed as 'Mayo / Yogurt / Lemon / Flavoured Mayo / Spicy Ranch Dressing' (in dark green bold) - captured as a no-price section. Cooked Salads: each is one price 240/- for Veg or Non Veg (no separate prices). Baked Salad's price/nutrition row sits on the 'Cooked Salads' heading line, just above the item name - assigned to Baked Salad. Bottom photo: lettuce salad with walnuts, apple slices and red pepper. No tax/charges text. Fully legible.",
+  "sections": [
+    {
+      "section": "Healthy Salads",
+      "items": [
+        {
+          "name": "Fruit Salad",
+          "price": 140,
+          "price_text": "140/-",
+          "description": "Assorted freshcut fruits topped with cream and honey",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 110,
+            "fat_g": 1.3,
+            "carb_g": 21.67,
+            "protein_g": 4.12
+          }
+        },
+        {
+          "name": "The Rajma Salad",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "Makes you bright-eyed, steamed rajma with fresh veggies and crispy lettuce topped with ulavacharu and cream",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 120,
+            "fat_g": 6.1,
+            "carb_g": 23,
+            "protein_g": 12.37
+          }
+        },
+        {
+          "name": "Fresh Garden Salad",
+          "price": 175,
+          "price_text": "175/-",
+          "description": "Broccoli, fresh veggies, crispy lettuce topped with dressing of your choice",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 150,
+            "fat_g": 4.2,
+            "carb_g": 23,
+            "protein_g": 12.37
+          }
+        },
+        {
+          "name": "Quinoa Veg Salad",
+          "price": 180,
+          "price_text": "180/-",
+          "description": "Assorted vegetables with cooked quinoa in lemon dressing",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 155,
+            "fat_g": 3.8,
+            "carb_g": 17.4,
+            "protein_g": 5.47
+          }
+        },
+        {
+          "name": "Broccoli Walnut and Apple Salad",
+          "price": 180,
+          "price_text": "180/-",
+          "description": "Broccoli, fresh veggies, roasted walnuts, crispy lettuce and apple with in-house dressing",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 155,
+            "fat_g": 5,
+            "carb_g": 13,
+            "protein_g": 13
+          }
+        },
+        {
+          "name": "Waldrof Salad",
+          "price": 190,
+          "price_text": "190/-",
+          "description": "Crispy apples, walnuts, lettuce, celery, raisins dressed in cream, mayo and honey",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 150,
+            "fat_g": 4,
+            "carb_g": 13.38,
+            "protein_g": 10
+          }
+        },
+        {
+          "name": "Dieters Special Salad",
+          "price": 190,
+          "price_text": "190/-",
+          "description": "Combination of fruits and assorted vegetables with our in-house crunchy almond dresing",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 160,
+            "fat_g": 4,
+            "carb_g": 14,
+            "protein_g": 12.37
+          }
+        },
+        {
+          "name": "Plain Egg Salad",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "Assorted veggies topped with 2 boiled eggs in jalapeno dressing",
+          "veg": false,
+          "egg": true,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 162,
+            "fat_g": 6,
+            "carb_g": 18,
+            "protein_g": 6
+          }
+        },
+        {
+          "name": "Grilled Chicken Salad",
+          "price": 190,
+          "price_text": "190/-",
+          "description": "Grilled chicken, fresh veggies topped with Italian seasonings and dressing of your choice",
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 160,
+            "fat_g": 1.74,
+            "carb_g": 7.62,
+            "protein_g": 17
+          }
+        },
+        {
+          "name": "Chicken Ceasar Salad",
+          "price": 200,
+          "price_text": "200/-",
+          "description": "Chicken cubes, crispy apples, garlic tossed bread croutons, crispy veggies with exotic ceasar dressing",
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 172,
+            "fat_g": 3.8,
+            "carb_g": 17.07,
+            "protein_g": 14
+          }
+        },
+        {
+          "name": "Honey Glazed Chicken Salad",
+          "price": 200,
+          "price_text": "200/-",
+          "description": "Honey tossed chicken, crispy apples, raisins with fresh veggies for a tasty tangy combo",
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 181,
+            "fat_g": 2.8,
+            "carb_g": 18.7,
+            "protein_g": 16
+          }
+        },
+        {
+          "name": "Grilled Fish Salad",
+          "price": 210,
+          "price_text": "210/-",
+          "description": "Grilled fish, crispy lettuce and veggies dressed in crunchy ranch dressing",
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 160,
+            "fat_g": 1.7,
+            "carb_g": 7.62,
+            "protein_g": 17
+          }
+        },
+        {
+          "name": "Tuna Fish Salad",
+          "price": 220,
+          "price_text": "220/-",
+          "description": "Mashed tuna with freshly cut vegetables, lettuce with herb mayo",
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 158,
+            "fat_g": 1.8,
+            "carb_g": 32,
+            "protein_g": 19
+          }
+        }
+      ]
+    },
+    {
+      "section": "Choose Your Dressing",
+      "items": [
+        {
+          "name": "Mayo",
+          "price": null,
+          "price_text": null,
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Yogurt",
+          "price": null,
+          "price_text": null,
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Lemon",
+          "price": null,
+          "price_text": null,
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Flavoured Mayo",
+          "price": null,
+          "price_text": null,
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Spicy Ranch Dressing",
+          "price": null,
+          "price_text": null,
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    },
+    {
+      "section": "Cooked Salads",
+      "items": [
+        {
+          "name": "Baked Salad ( Veg / Non Veg )",
+          "price": 240,
+          "price_text": "240/-",
+          "description": "Baked chicken / fresh veggies baked in olive oil and topped with egg white / spinach-corn dressing",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 180,
+            "fat_g": 2.5,
+            "carb_g": 15.62,
+            "protein_g": 16.12
+          }
+        },
+        {
+          "name": "Protein Salad ( Veg / Non Veg )",
+          "price": 240,
+          "price_text": "240/-",
+          "description": "Broccoli, tofu / chicken, egg whites with protein veggies tossed in olive oil & herbs",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 185,
+            "fat_g": 4.5,
+            "carb_g": 27,
+            "protein_g": 21
+          }
+        },
+        {
+          "name": "Wheat Pasta Salad ( Veg / Non Veg )",
+          "price": 240,
+          "price_text": "240/-",
+          "description": "Cooked wheat pasta with veggies / chicken dressed in Italian seasonings with choice of your dressing",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 197.61,
+            "fat_g": 2.53,
+            "carb_g": 30.81,
+            "protein_g": 14.07
+          }
+        }
+      ]
+    },
+    {
+      "section": "Toppings",
+      "items": [
+        {
+          "name": "Olives / Jalapenos",
+          "price": 30,
+          "price_text": ": 30/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Veggie Toppings",
+          "price": 60,
+          "price_text": ": 60 /-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Non Veg Toppings",
+          "price": 80,
+          "price_text": ": 80/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    }
+  ]
+}

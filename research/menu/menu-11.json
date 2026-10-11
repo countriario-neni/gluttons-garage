@@ -1,0 +1,231 @@
+{
+  "file": "menu-11.jpg",
+  "kind": "menu_page",
+  "notes": "Page title 'Fries & Maagi', tagline 'Every kids favorite snack served with a twist'. Dark grey background with subtle gear/cog pattern; headings in yellow/gold decorative serif (Arabian-style display font), item names in bold yellow slab serif, descriptions in small white sans-serif, prices right-aligned in yellow with '/-' suffix. Green (veg) and red (non-veg) circle markers. 'Junktion77 - The Foodies' Crossroads' logo top right. Bottom: photo of cheesy loaded fries with bacon in a black bowl. No tax/charges note. Fully legible. 'French Fries with Tomato Salsa' price printed as '120-/-' (typo). Spellings as printed: 'Maagi', 'Noddles', 'Maggie', 'Arabita', 'tandgy', 'toped'. Toppings have no veg markers.",
+  "sections": [
+    {
+      "section": "French Fries",
+      "items": [
+        {
+          "name": "French Fries",
+          "price": 80,
+          "price_text": "80/-",
+          "description": "Classic French Fries",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Flavoured Fries (Peri Peri Fries / Barbeque / Tandoori)",
+          "price": 90,
+          "price_text": "90/-",
+          "description": "Frenchfries with choice of your flavour",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cheesy French Fries",
+          "price": 120,
+          "price_text": "120/-",
+          "description": "French fries topped with grated cheese and cheesy sauce",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "French Fries with Tomato Salsa",
+          "price": 120,
+          "price_text": "120-/-",
+          "description": "French fries topped with fresh tomato salsa",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "French Fries Loaded with Chicken and Cheese",
+          "price": 140,
+          "price_text": "140/-",
+          "description": "French fries loaded with minced chicken and cheese",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Sea Food Loaded French Fries",
+          "price": 140,
+          "price_text": "140/-",
+          "description": "French fries loaded with seafood cooked in spicy tandgy red sauce",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    },
+    {
+      "section": "GG Specials",
+      "items": [
+        {
+          "name": "All meat Fries",
+          "price": 180,
+          "price_text": "180/-",
+          "description": "French Fries loaded with Chettinad chicken , Curried lamb, Bacon, & loads of cheese",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    },
+    {
+      "section": "Noodles",
+      "items": [
+        {
+          "name": "Maagi Noodles",
+          "price": 80,
+          "price_text": "80/-",
+          "description": "Classic maagi noodles",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cheesy Maagi Noddles",
+          "price": 100,
+          "price_text": "100/-",
+          "description": "Maagi noodles with cheesy sauce and topped with cheese",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cheesy Noodles with Peri Peri Fries",
+          "price": 120,
+          "price_text": "120/-",
+          "description": "Noodles with cheesy sauce topped with peri peri flavoured french fries",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Maagi Noodles with Choice of your Egg",
+          "price": 140,
+          "price_text": "140/-",
+          "description": "Maagi noodles with egg (scrambled egg/ grated egg/poached egg)",
+          "veg": false,
+          "egg": true,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Classic Maagi Noodles with Crispy Chicken",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "Classic maagi noodles toped with crispy chicken",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Crispy Noodles Loaded with Arabita Sauce (Veg / Non Veg )",
+          "price": 140,
+          "price_text": "140/-  /  160/-",
+          "description": "Deep fried noodles topped with red sauce and choice of your toppings",
+          "veg": false,
+          "egg": null,
+          "variants": [
+            {
+              "label": "Veg",
+              "price": 140
+            },
+            {
+              "label": "Non Veg",
+              "price": 160
+            }
+          ],
+          "uncertain": false
+        },
+        {
+          "name": "Maggie Noodle Pakoda",
+          "price": 140,
+          "price_text": "140/-",
+          "description": "A desi twist to our classic maagi",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    },
+    {
+      "section": "GG Specials",
+      "items": [
+        {
+          "name": "All Meat Maggi Noodle",
+          "price": 180,
+          "price_text": "180/-",
+          "description": "Classic noodles with chettinad chicken, curried lamb, bacon, & loads of cheese",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    },
+    {
+      "section": "Toppings",
+      "items": [
+        {
+          "name": "Olives / Jalapenos",
+          "price": 40,
+          "price_text": "40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Veggie Toppings",
+          "price": 60,
+          "price_text": "60/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Non Veg Toppings",
+          "price": 80,
+          "price_text": "80/-",
+          "description": null,
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cheese",
+          "price": 40,
+          "price_text": "40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,222 @@
+{
+  "file": "menu-06.jpg",
+  "kind": "menu_page",
+  "notes": "Page titles: 'Smoothering Pancakes' and 'Heavenly Crepes'. Branded with 'Junktion77 - The Foodies' Crossroads' logo top-right (not Gluttons Garage branding). Olive/khaki-brown background with faint gear/cog pattern; headings in cream decorative calligraphic/ornamental serif; item names in bold tan/gold serif; descriptions in small white sans-serif; prices right-aligned in tan with '/-' suffix. Section intros: Pancakes - 'There is hardship in everything except having a sumptous pancake. 2 nos served with one shot of whipped cream.' Crepes - 'Happiness is.... tasting loads of crepes'. No veg/non-veg dot markers on this page (veg flags inferred only from meat names). Toppings heading in orange/gold. Bottom: circular photos of chocolate pancake stack and a cheese-topped crepe. No tax/charges text. Fully legible.",
+  "sections": [
+    {
+      "section": "Smoothering Pancakes",
+      "items": [
+        {
+          "name": "Nutella Pancakes",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "Home made pancakes topped with nuttella and love",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Blue Berry Pancakes / Strawberry Pancakes",
+          "price": 140,
+          "price_text": "140/-",
+          "description": "Home made pancakes topped with blueberry/strawberry compote",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cinnamon Swirl Pancakes",
+          "price": 135,
+          "price_text": "135/-",
+          "description": "Home made pancakes coated with our special cinnamon sauce",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Mocha & Chocolate Chip Pancakes",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "Coffee flavoured pan cakes topped with chocolate chips and chocolate sauce",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Sticky Toffee Pancakes",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "Dates pancake served with toffee sauce",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Red Velvet Pancakes",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "Pancake that cherish your taste buds",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Bacon Stuffed Pancakes",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "Roasted bacon stuffed in a homemade pancake",
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    },
+    {
+      "section": "Heavenly Crepes",
+      "items": [
+        {
+          "name": "Chocolate Crepe",
+          "price": 100,
+          "price_text": "100/-",
+          "description": "Home made chocolate flavoured crepe topped with chocolate sauce.",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Lemon and Sugar Crepe",
+          "price": 100,
+          "price_text": "100/-",
+          "description": "Home made crepe smeared with lemon and sugar to make it a gentle crepe",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Nutella Crepe",
+          "price": 130,
+          "price_text": "130/-",
+          "description": "Home made crepe smeared with nutella",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Gongura Chicken Crepe",
+          "price": 130,
+          "price_text": "130/-",
+          "description": "Home made indian flavoured crepe stuffed with gongura chicken.",
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Thai Chicken & Cheese Crepe",
+          "price": 140,
+          "price_text": "140/-",
+          "description": "Thai spiced crepe stuffed with minced chicken and grated cheese.",
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Curried Lamb Crepe",
+          "price": 145,
+          "price_text": "145/-",
+          "description": "Home made crepe stuffed with indian spiced curried lamb.",
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Chicken Chilli Suasage Crepe",
+          "price": 145,
+          "price_text": "145/-",
+          "description": "Home made crepe stuffed with Chilli chicken suasage",
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    },
+    {
+      "section": "Toppings",
+      "items": [
+        {
+          "name": "Fresh Fruits / Dry Fruits",
+          "price": 40,
+          "price_text": "40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Fresh Cream / Cheese",
+          "price": 40,
+          "price_text": "40",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Fruit Crushes",
+          "price": 40,
+          "price_text": "40",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Veggie Toppings",
+          "price": 60,
+          "price_text": "60 /-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Non Veg Toppings",
+          "price": 80,
+          "price_text": "80/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Whipped Cream / Ice Cream",
+          "price": 40,
+          "price_text": "40",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    }
+  ]
+}

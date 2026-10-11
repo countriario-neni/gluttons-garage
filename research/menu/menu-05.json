@@ -1,0 +1,323 @@
+{
+  "file": "menu-05.jpg",
+  "kind": "menu_page",
+  "notes": "Page title 'Pancake Therapy' (second section 'The wheat Crepes'). Branded 'kaloreez' (green circular logo) top-right, NOT 'Gluttons Garage'. Design: warm beige/khaki background with faint gear/cog pattern; section headings in brown calligraphic display font; item names bold deep maroon serif, descriptions dark brown condensed sans; prices maroon 'NN/-'; nutrition boxes outlined brown. No veg/non-veg markers printed. Items carry a printed nutrition table (columns: kCal | Fat (g) | Carb(g) | Protein(g)); captured per item in an extra 'nutrition' field. Bottom third: two circular-cropped food photos (stacked pancakes with nuts and syrup drizzle; crepe with diced apple, raisins and honey drizzle). No tax/service-charge text. Legibility good.",
+  "sections": [
+    {
+      "section": "Pancake Therapy",
+      "subtitle": "Pancakes make people happy (All the pancakes are made with wheat to turn them healthy) Serving  2 nos",
+      "items": [
+        {
+          "name": "Classic Pancakes",
+          "price": 120,
+          "price_text": "120/-",
+          "description": "Classic pancakes made with wheat and served with maple syrup",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 150,
+            "fat_g": 8.7,
+            "carb_g": 44,
+            "protein_g": 4
+          }
+        },
+        {
+          "name": "The Banana Delight Pancakes",
+          "price": 135,
+          "price_text": "135/-",
+          "description": "Pancake with banana, chocolate Sauce and choco chips.",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 165,
+            "fat_g": 11.87,
+            "carb_g": 52,
+            "protein_g": 6.2
+          }
+        },
+        {
+          "name": "Honey Almond Pancakes",
+          "price": 135,
+          "price_text": "135/-",
+          "description": "Homemade Wheat pancakes with roasted almonds topped with honey",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 165,
+            "fat_g": 12,
+            "carb_g": 42,
+            "protein_g": 5
+          }
+        },
+        {
+          "name": "Dark Chocolate Pancakes",
+          "price": 140,
+          "price_text": "140/-",
+          "description": "Home made chocolate pancakes topped with grated chocolate and love",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 170,
+            "fat_g": 13,
+            "carb_g": 36,
+            "protein_g": 5
+          }
+        },
+        {
+          "name": "Gluten Free Pancakes",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "Homemade pancakes made with raagi flour, honey and dry fruits",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 160,
+            "fat_g": 13,
+            "carb_g": 38,
+            "protein_g": 7
+          }
+        },
+        {
+          "name": "Fresh Fruit Pancakes",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "Homemade pancakes  with fresh fruits like apple, pineapple and orange topped with honey / Maple syrup",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 165,
+            "fat_g": 10,
+            "carb_g": 32,
+            "protein_g": 6
+          }
+        },
+        {
+          "name": "Chicken Stuffed Pancakes",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "Tasty tender minced chicken stuffed in a homemade wheat pancake",
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 160,
+            "fat_g": 8,
+            "carb_g": 35,
+            "protein_g": 8
+          }
+        },
+        {
+          "name": "Oats Banana Pancakes",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "Roasted oats and fresh banana blend together to a fat free pancakes",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 140,
+            "fat_g": 4.2,
+            "carb_g": 30,
+            "protein_g": 6
+          }
+        }
+      ]
+    },
+    {
+      "section": "The wheat Crepes",
+      "items": [
+        {
+          "name": "Strawberry Flavoured Wheat Crepe",
+          "price": 100,
+          "price_text": "100/-",
+          "description": "Homemade colourful crepe topped with strawberry compote",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 150,
+            "fat_g": 12,
+            "carb_g": 38,
+            "protein_g": 3.4
+          }
+        },
+        {
+          "name": "Broccoli & Tofu Stuffed Crepe",
+          "price": 120,
+          "price_text": "120/-",
+          "description": "Homemade crepe stuffed with creamy broccoli and tofu",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 135,
+            "fat_g": 12,
+            "carb_g": 35,
+            "protein_g": 5
+          }
+        },
+        {
+          "name": "Baked Egg Crepe",
+          "price": 120,
+          "price_text": "120/-",
+          "description": "Tender homemade crepe stuffed with the best form of protein",
+          "veg": null,
+          "egg": true,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 139,
+            "fat_g": 9,
+            "carb_g": 31,
+            "protein_g": 8
+          }
+        },
+        {
+          "name": "Blue Berry Banana Crepe",
+          "price": 120,
+          "price_text": "120/-",
+          "description": "Fresh! Fresh! Its filled with bananas and berry compote",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 155,
+            "fat_g": 10,
+            "carb_g": 40,
+            "protein_g": 5
+          }
+        },
+        {
+          "name": "Apple and Raisins Crepe",
+          "price": 125,
+          "price_text": "125/-",
+          "description": "Homemade crepes with slices of apple and raisins - Today's dose of apple goodness",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 150,
+            "fat_g": 12,
+            "carb_g": 42,
+            "protein_g": 6
+          }
+        },
+        {
+          "name": "Gluten Free Crepe",
+          "price": 130,
+          "price_text": "130/-",
+          "description": "A homemade crepe with ragi flour topped with nutella and assorted nuts",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 145,
+            "fat_g": 9,
+            "carb_g": 39,
+            "protein_g": 7
+          }
+        },
+        {
+          "name": "Ragi Chocolate Brownie Crepe",
+          "price": 140,
+          "price_text": "140/-",
+          "description": "A homemade crepe stuffed with crushed ragi brownie topped with chocolate sauce",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 170,
+            "fat_g": 14,
+            "carb_g": 51,
+            "protein_g": 6
+          }
+        }
+      ]
+    },
+    {
+      "section": "Toppings",
+      "items": [
+        {
+          "name": "Fresh Fruits / Dry Fruits",
+          "price": 40,
+          "price_text": ": 40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Fruit Crushes",
+          "price": 40,
+          "price_text": ": 40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Veggie Toppings",
+          "price": 60,
+          "price_text": ": 60 /-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Non Veg Toppings",
+          "price": 80,
+          "price_text": ": 80/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Fresh Cream / Cheese",
+          "price": 40,
+          "price_text": ": 40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Whipped cream/icecream",
+          "price": 40,
+          "price_text": ": 40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    }
+  ]
+}

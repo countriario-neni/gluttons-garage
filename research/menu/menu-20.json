@@ -1,0 +1,290 @@
+{
+  "file": "menu-20.jpg",
+  "kind": "menu_page",
+  "notes": "Page title 'Pizza Amore', subtitle 'A new healthy dimension to the regular pizzas ( All the pizza bases are made of wheat and a slight drizzle of cheese is used, not to miss the charm of the pizza)'. Kaloreez logo top right. Pale sage/light green background with gear pattern; dark green decorative serif headings, orange-red bold serif item names, brown descriptions; green dot = veg, red dot = non-veg. Nutrition table (kCal, Fat (g), Carb(g), Protein(g)) per item captured in 'nutrition'; Quatro Pizza has none and no veg dot. Bottom: photo of spinach/broccoli/cottage-cheese pizza. No tax info. Fully legible; descriptions small but readable. Spellings kept as printed ('Panner', 'POPEYYE', 'Quatro'). Quatro Pizza description: parenthetical part printed in bold orange, last sentence in regular brown.",
+  "sections": [
+    {
+      "section": "Pizza Amore",
+      "items": [
+        {
+          "name": "Lebanese Pizza",
+          "price": 210,
+          "price_text": "210/-",
+          "description": "Hummus spread topped with olive oil and mashed chickpeas, eggplant and jalapenos with a drizzle of cheese",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 270,
+            "fat_g": 16,
+            "carb_g": 70,
+            "protein_g": 5
+          }
+        },
+        {
+          "name": "Roasted Peppers & Olive Pizza",
+          "price": 220,
+          "price_text": "220/-",
+          "description": "Home made wheat crust smeared with house special tomato sauce and topped with tri-coloured grilled peppers and olives",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 260,
+            "fat_g": 17,
+            "carb_g": 58,
+            "protein_g": 5
+          }
+        },
+        {
+          "name": "Spinach and Cream Cheese Pizza",
+          "price": 240,
+          "price_text": "240/-",
+          "description": "Leafy spinach and cream cheese which strengthens you just like POPEYYE",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 260,
+            "fat_g": 14,
+            "carb_g": 52,
+            "protein_g": 7
+          }
+        },
+        {
+          "name": "Creamy Broccoli Pizza",
+          "price": 240,
+          "price_text": "240/-",
+          "description": "Home made wheat crust smeared with in-house special creamy base topped with broccoli, olives, onions, tomatoes",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 280,
+            "fat_g": 18,
+            "carb_g": 75,
+            "protein_g": 10
+          }
+        },
+        {
+          "name": "Eggplant and Mushroom Pizza",
+          "price": 240,
+          "price_text": "240/-",
+          "description": "Home made wheat crust smeared with in-house tomato sauce topped with eggplant and mushroom",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 260,
+            "fat_g": 16,
+            "carb_g": 68,
+            "protein_g": 8
+          }
+        },
+        {
+          "name": "BBQ Panner Pizza",
+          "price": 250,
+          "price_text": "250/-",
+          "description": "Panner cubes tossed in barbeque sauce along with fresh veggies",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 270,
+            "fat_g": 16,
+            "carb_g": 65,
+            "protein_g": 8
+          }
+        },
+        {
+          "name": "The BBQ Grill Chicken Pizza",
+          "price": 250,
+          "price_text": "250/-",
+          "description": "Home made wheat crust coated with tomato puree and barbeque sauce topped with grilled chicken slices, onions, tomatoes, olives",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 280,
+            "fat_g": 16,
+            "carb_g": 71,
+            "protein_g": 8
+          }
+        },
+        {
+          "name": "Grilled Fish Pizza",
+          "price": 250,
+          "price_text": "250/-",
+          "description": "Home made wheat crust coated with tomato puree and topped with grilled fish slices, olives, Jalapenos",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 270,
+            "fat_g": 15,
+            "carb_g": 62,
+            "protein_g": 8
+          }
+        },
+        {
+          "name": "Chicken Chilli Sausage Pizza",
+          "price": 260,
+          "price_text": "260/-",
+          "description": "Chilli chicken sausages, fresh veggies, olives with slight grated cheese",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 270,
+            "fat_g": 16,
+            "carb_g": 72,
+            "protein_g": 9
+          }
+        },
+        {
+          "name": "Basil Pesto Chicken Pizza",
+          "price": 260,
+          "price_text": "260/-",
+          "description": "Pesto cooked chicken, fresh veggies with grated cheese",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 280,
+            "fat_g": 18,
+            "carb_g": 75,
+            "protein_g": 11
+          }
+        },
+        {
+          "name": "Fruit and Nut Pizza",
+          "price": 310,
+          "price_text": "310/-",
+          "description": "Fresh fruits and assorted dry fruits cooked in milk, fresh cream and honey and smeared on the wheat pizza base and baked",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 340,
+            "fat_g": 21,
+            "carb_g": 78,
+            "protein_g": 12
+          }
+        },
+        {
+          "name": "Quatro Pizza",
+          "price": 320,
+          "price_text": "320/-",
+          "description": "(Choose 4 Flavours from Lebanese, Roasted Peppers and Olives, Creamy Broccoli, BBQ Paneer, BBQ Chicken, Grilled Fish, Chicken Chilli Sausage) Your calorie count just depends upon the flavours u choose",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    },
+    {
+      "section": "GG Specials",
+      "items": [
+        {
+          "name": "Salad Pizza",
+          "price": 280,
+          "price_text": "280/-",
+          "description": "Assorted vegetable salad on a pizza base",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 220,
+            "fat_g": 14,
+            "carb_g": 61,
+            "protein_g": 9
+          }
+        },
+        {
+          "name": "Melon Pizza",
+          "price": 250,
+          "price_text": "250/-",
+          "description": "Water melon slices topped with assorted fruits and butter tossed nuts topped with fresh cream",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 180,
+            "fat_g": 8,
+            "carb_g": 38,
+            "protein_g": 6
+          }
+        }
+      ]
+    },
+    {
+      "section": "Toppings",
+      "items": [
+        {
+          "name": "Olives / Jalapenos",
+          "price": 40,
+          "price_text": ": 40",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Veggie Toppings",
+          "price": 60,
+          "price_text": ": 60",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Non Veg Toppings",
+          "price": 80,
+          "price_text": ": 80/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cheese",
+          "price": 40,
+          "price_text": ": 40",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cheese Burst",
+          "price": 100,
+          "price_text": ": 100/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    }
+  ]
+}

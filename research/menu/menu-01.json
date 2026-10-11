@@ -1,0 +1,252 @@
+{
+  "file": "menu-01.jpg",
+  "kind": "menu_page",
+  "notes": "Page title 'Healthy Breakfast'. Branded 'kaloreez' (green circular logo with veg/fruit icons, tagline 'A blend of taste, health and hygiene' - tagline tiny, uncertain) top-right, NOT 'Gluttons Garage' - likely a sister/partner brand menu. Design: cream/beige parchment background with faint gear/cog pattern; headings in dark brown decorative calligraphic display font (Aniron/medieval-style); item names bold dark brown serif, descriptions brown condensed sans; prices format 'NN/-' (no rupee symbol). Green circular markers before each item (veg). Items carry a printed nutrition table (columns: kCal | Fat (g) | Carb(g) | Protein(g)); captured per item in an extra 'nutrition' field. Bottom third is a food photo (ragi malt/chocolate porridge swirl in white bowl, milk jug, checked cloth). No tax/service-charge text visible. Legibility good.",
+  "sections": [
+    {
+      "section": "Healthy Breakfast",
+      "subtitle": "A good breakfast fuels you up and gets you ready for the day",
+      "items": [
+        {
+          "name": "Sprouts with honey / Spicy Sprouts",
+          "price": 45,
+          "price_text": "45/-",
+          "description": "Assorted sprouts topped with honey / fresh cut veggies and mild spices",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 31.6,
+            "fat_g": 0.3,
+            "carb_g": 13,
+            "protein_g": 8.47
+          }
+        },
+        {
+          "name": "Corn Flakes (Cold / Hot)",
+          "price": 60,
+          "price_text": "60/-",
+          "description": "Crispy cornflakes served with milk, honey / sugar",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 144.32,
+            "fat_g": 0.5,
+            "carb_g": 24.15,
+            "protein_g": 8.4
+          }
+        },
+        {
+          "name": "Muesli (Cold / Hot)",
+          "price": 60,
+          "price_text": "60/-",
+          "description": "Crunchy muesli served with  milk, honey/sugar",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 226,
+            "fat_g": 1.96,
+            "carb_g": 43.42,
+            "protein_g": 11.2
+          }
+        },
+        {
+          "name": "Oats Porridge / Quinoa Porridge",
+          "price": 70,
+          "price_text": "70/- / 110/-",
+          "description": "Oats/Quinoa cooked in milk served with honey / sugar",
+          "veg": true,
+          "egg": null,
+          "variants": [
+            {
+              "label": "Oats Porridge",
+              "price": 70
+            },
+            {
+              "label": "Quinoa Porridge",
+              "price": 110
+            }
+          ],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 239.5,
+            "fat_g": 3.5,
+            "carb_g": 39.15,
+            "protein_g": 12.85
+          }
+        },
+        {
+          "name": "Masala Oats",
+          "price": 80,
+          "price_text": "80/-",
+          "description": "Oats cooked with fresh veggies and indian spices",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 247.02,
+            "fat_g": 5.46,
+            "carb_g": 40.49,
+            "protein_g": 11.21
+          }
+        },
+        {
+          "name": "Ragi Malt (Salt / Sweet )",
+          "price": 60,
+          "price_text": "60/-",
+          "description": "Fine ground ragi cooked in water/milk served with curd / honey",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 151.25,
+            "fat_g": 1.2,
+            "carb_g": 34.25,
+            "protein_g": 3.95
+          }
+        },
+        {
+          "name": "Baked Poha (Regular / Quinoa)",
+          "price": 70,
+          "price_text": "70/-  / 110/-",
+          "description": "A protein filled north Indian breakfast Served with curd and pickle.",
+          "veg": true,
+          "egg": null,
+          "variants": [
+            {
+              "label": "Regular",
+              "price": 70
+            },
+            {
+              "label": "Quinoa",
+              "price": 110
+            }
+          ],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 160,
+            "fat_g": 3.4,
+            "carb_g": 45,
+            "protein_g": 3.5
+          }
+        }
+      ]
+    },
+    {
+      "section": "Breads",
+      "items": [
+        {
+          "name": "Bread Toast",
+          "price": 45,
+          "price_text": "45/-",
+          "description": "Two slices of Brown bread toasted with butter / jam.",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 109.6,
+            "fat_g": 4.84,
+            "carb_g": 14.88,
+            "protein_g": 1.2
+          }
+        },
+        {
+          "name": "French Toast",
+          "price": 85,
+          "price_text": "85/-",
+          "description": "The classic french toast with 2 slices of bread",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 230.16,
+            "fat_g": 9.85,
+            "carb_g": 25.09,
+            "protein_g": 8.3
+          }
+        },
+        {
+          "name": "Exotic French Toast",
+          "price": 110,
+          "price_text": "110/-",
+          "description": "Fresh cut fruits sandwiched with French toast topped with honey",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 290.88,
+            "fat_g": 9.89,
+            "carb_g": 40.84,
+            "protein_g": 12.7
+          }
+        },
+        {
+          "name": "Healthy Breakfast Combo",
+          "price": 170,
+          "price_text": "170/-",
+          "description": "1 cereal / option of bread, baked poha / masala oats , veggies / egg, with choice of your beverage (coffee / green tea / flavoured yogurt)",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "note": "(10 AM TO 11: 45 AM ) - availability window printed under name; no veg marker printed"
+        }
+      ]
+    },
+    {
+      "section": "Toppings",
+      "items": [
+        {
+          "name": "Fresh Fruits/Dry fruits",
+          "price": 40,
+          "price_text": ": 40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Fresh cream /Cheese",
+          "price": 40,
+          "price_text": ": 40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Honey / Maple Syrup",
+          "price": 25,
+          "price_text": ": 25 /-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "whipped cream/icecream",
+          "price": 40,
+          "price_text": ": 40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    }
+  ]
+}

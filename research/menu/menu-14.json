@@ -1,0 +1,312 @@
+{
+  "file": "menu-14.jpg",
+  "kind": "menu_page",
+  "notes": "Page title 'Diet Starters', tagline 'Why should the Binge eaters have all the fun !!!'. Light cream/pale-yellow background with gear pattern; headings maroon decorative serif, item names bold brown serif, descriptions small grey-brown sans, prices bold brown with '/-'. Green/red dot markers. 'kaloreez - A blend of taste, health and hygiene' logo top right with per-item nutrition table kCal | Fat (g) | Carb(g) | Protein(g), stored per item in 'nutrition'. Bottom photo: grilled/charred chicken pieces with dipping sauce on paper. No tax note. Fully legible. Toppings line lists 'Barbeque Sauce' twice (with Napolean/Mayo at 40/- and with Cheesy Dip at 40/-), as printed. Spellings as printed: 'Napolean', 'pine apple'.",
+  "sections": [
+    {
+      "section": "Diet Starters",
+      "items": [
+        {
+          "name": "Spiced Pineapple",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "Pan grilled pine apple tossed in honey and seasonings.",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 220,
+            "fat_g": 4.2,
+            "carb_g": 37,
+            "protein_g": 5
+          }
+        },
+        {
+          "name": "Grilled Veggies",
+          "price": 170,
+          "price_text": "170/-",
+          "description": "Garden harvested vegetables grilled to your liking with mild spices and herbs",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 170,
+            "fat_g": 3.6,
+            "carb_g": 28,
+            "protein_g": 4
+          }
+        },
+        {
+          "name": "Broccoli Rush",
+          "price": 180,
+          "price_text": "180/-",
+          "description": "Obsessed with broccoli? here's the cure for it, broccoli pan grilled to perfection served with herb mayo",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 175,
+            "fat_g": 3.2,
+            "carb_g": 35,
+            "protein_g": 9
+          }
+        },
+        {
+          "name": "Grilled Paneer and Tofu",
+          "price": 180,
+          "price_text": "180/-",
+          "description": "Paneer and tofu marinated in jamaican spices and grilled",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 230,
+            "fat_g": 4.2,
+            "carb_g": 42,
+            "protein_g": 8
+          }
+        },
+        {
+          "name": "Grilled Chicken Strips",
+          "price": 180,
+          "price_text": "180/-",
+          "description": "Herb marinated chicken strips pan grilled",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 220,
+            "fat_g": 2.8,
+            "carb_g": 35,
+            "protein_g": 14
+          }
+        },
+        {
+          "name": "Orange and Honey Roasted Chicken",
+          "price": 200,
+          "price_text": "200/-",
+          "description": "Chicken breasts marinated in orange juice and grilled with honey",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 220,
+            "fat_g": 4.4,
+            "carb_g": 42,
+            "protein_g": 15.1
+          }
+        },
+        {
+          "name": "Buttermilk Soaked Chicken Strips",
+          "price": 220,
+          "price_text": "220/-",
+          "description": "Chicken strips soaked in buttermilk and Indian flavours, pan grilled and served with in house special dip",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 230,
+            "fat_g": 3.2,
+            "carb_g": 44,
+            "protein_g": 14.4
+          }
+        },
+        {
+          "name": "Chicken Satay",
+          "price": 170,
+          "price_text": "170/-",
+          "description": "Grilled chicken satay served with our in house peanut sauce.",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 140,
+            "fat_g": 3.4,
+            "carb_g": 35,
+            "protein_g": 14
+          }
+        },
+        {
+          "name": "Grilled Fish",
+          "price": 200,
+          "price_text": "200/-",
+          "description": "Fish marinated in herbs and olive oil, pan grilled to perfection and served with in house dip",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 220,
+            "fat_g": 3.8,
+            "carb_g": 42,
+            "protein_g": 14.4
+          }
+        },
+        {
+          "name": "Green Grilled Fish",
+          "price": 200,
+          "price_text": "200/-",
+          "description": "Fish marinated in Indian herbs and spices, pan grilled to perfection and served with in-house special dip",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 230,
+            "fat_g": 3.4,
+            "carb_g": 41,
+            "protein_g": 13
+          }
+        },
+        {
+          "name": "Baked Chicken / Fish",
+          "price": 190,
+          "price_text": "190/-",
+          "description": "Chicken / fish oven baked to perfection",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 210,
+            "fat_g": 4.2,
+            "carb_g": 30,
+            "protein_g": 14.8
+          }
+        },
+        {
+          "name": "Pesto Baked Chicken / Fish",
+          "price": 220,
+          "price_text": "220/-",
+          "description": "Pesto smeared baked chicken / fish",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 230,
+            "fat_g": 5.8,
+            "carb_g": 48,
+            "protein_g": 17.1
+          }
+        },
+        {
+          "name": "Grilled Shrimp",
+          "price": 220,
+          "price_text": "220/-",
+          "description": "Cajun spiced grilled prawns served with salad and chips",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 260,
+            "fat_g": 8.2,
+            "carb_g": 59,
+            "protein_g": 14
+          }
+        }
+      ]
+    },
+    {
+      "section": "GG Specials",
+      "items": [
+        {
+          "name": "Carrot Fries",
+          "price": 180,
+          "price_text": "180/-",
+          "description": "Oven fried carrot slices just to fill your cravings of french fries",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 210,
+            "fat_g": 7,
+            "carb_g": 42,
+            "protein_g": 6
+          }
+        },
+        {
+          "name": "Cucumber Tuna Rolls",
+          "price": 190,
+          "price_text": "190/-",
+          "description": "Mashed tuna stuffed in cucumber",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 210,
+            "fat_g": 6,
+            "carb_g": 38,
+            "protein_g": 12
+          }
+        }
+      ]
+    },
+    {
+      "section": "Toppings",
+      "items": [
+        {
+          "name": "Napolean Sauce / Barbeque Sauce / Any in House Mayo",
+          "price": 40,
+          "price_text": "40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cheesy Dip / Barbeque Sauce",
+          "price": 40,
+          "price_text": "40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Veggie Toppings",
+          "price": 60,
+          "price_text": "60/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Non Veg Toppings",
+          "price": 80,
+          "price_text": "80/-",
+          "description": null,
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Hummus Dip",
+          "price": 50,
+          "price_text": "50/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    }
+  ]
+}

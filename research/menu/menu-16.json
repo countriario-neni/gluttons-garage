@@ -1,0 +1,222 @@
+{
+  "file": "menu-16.jpg",
+  "kind": "menu_page",
+  "notes": "Page title 'Healthy Wheat Wraps' with subtitle 'Kaloreez wraps you with the warmth of health and hygiene'. Kaloreez brand logo (green circular logo, tagline 'A blend of taste, health and hygiene') top right. Grey background with faint gear/cog pattern; white decorative medieval-style serif headings, black bold serif item names, dark maroon descriptions. Green dot = veg, red dot = non-veg markers. Each item has a nutrition table (kCal, Fat (g), Carb(g), Protein(g)) in maroon-outlined boxes, captured in extra 'nutrition' field. Bottom: food photo of grilled wheat wrap with chips, dip and corn. Prices formatted 'NNN/-'. No tax/charges info. Fully legible. Note: Lettuce Wraps nutrition is identical to Protein Wrap (as printed). Protein Wrap and Lettuce Wraps have no veg/non-veg dot.",
+  "sections": [
+    {
+      "section": "Healthy Wheat Wraps",
+      "items": [
+        {
+          "name": "Assorted Sprouts Wrap",
+          "price": 120,
+          "price_text": "120/-",
+          "description": "Assorted Sprouts tossed in our in-house special sauce",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 175,
+            "fat_g": 9,
+            "carb_g": 32,
+            "protein_g": 8
+          }
+        },
+        {
+          "name": "Spinach Corn Wrap",
+          "price": 140,
+          "price_text": "140/-",
+          "description": "Freshly made wheat flat bread, smeared with unsalted butter and filled with creamy spinach and corn",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 220,
+            "fat_g": 18,
+            "carb_g": 43,
+            "protein_g": 8
+          }
+        },
+        {
+          "name": "Mushroom & Corn Wrap",
+          "price": 140,
+          "price_text": "140/-",
+          "description": "Freshly made wheat bread smeared with mushroom spread, stuffed with grilled mushrooms and butter tossed corn and iceberg lettuce",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 220,
+            "fat_g": 16,
+            "carb_g": 45,
+            "protein_g": 7
+          }
+        },
+        {
+          "name": "Herbed Paneer Wrap",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "Freshly made wheat flat bread, coated with Jalapeno mayo, stuffed with herbed paneer and a fresh mix of iceberg lettuce and caramelised onions",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 220,
+            "fat_g": 12,
+            "carb_g": 46,
+            "protein_g": 8
+          }
+        },
+        {
+          "name": "Baked Egg Wrap",
+          "price": 130,
+          "price_text": "130/-",
+          "description": "Freshly made wheat flat bread smeared with jalapeno mayo, filled with finely baked egg slices, a fresh mix of iceberg lettuce and chopped onions",
+          "veg": false,
+          "egg": true,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 210,
+            "fat_g": 13,
+            "carb_g": 38,
+            "protein_g": 12
+          }
+        },
+        {
+          "name": "Grilled Chicken Wrap",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "Minced chicken, a fresh mix of iceberg lettuce and spicy ranch dressing, tightly rolled in a freshly made wheat flat bread",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 205,
+            "fat_g": 13,
+            "carb_g": 48,
+            "protein_g": 12
+          }
+        },
+        {
+          "name": "Grilled Chicken Sausage Wrap",
+          "price": 170,
+          "price_text": "170/-",
+          "description": "Grilled chicken sausages wrapped with lettuce and crispy onions and peppers",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 210,
+            "fat_g": 10,
+            "carb_g": 42,
+            "protein_g": 10
+          }
+        },
+        {
+          "name": "Tuna Wrap",
+          "price": 170,
+          "price_text": "170/-",
+          "description": "Mashed tuna, a mix of freshly chopped veggies, jalapeno mayo and iceberg lettuce tightly rolled in a freshly made wheat flat bread",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 230,
+            "fat_g": 16,
+            "carb_g": 54,
+            "protein_g": 13
+          }
+        },
+        {
+          "name": "Protein Wrap Veg / Non Veg",
+          "price": 170,
+          "price_text": "170/-",
+          "description": "Assorted high protein veggies cooked in in-house special white sauce rolled in wheat flat bread",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 220,
+            "fat_g": 14,
+            "carb_g": 61,
+            "protein_g": 17
+          }
+        }
+      ]
+    },
+    {
+      "section": "GG Specials",
+      "items": [
+        {
+          "name": "Lettuce Wraps Veg / Non Veg",
+          "price": 180,
+          "price_text": "180/-",
+          "description": "Assorted vegetable kheema / minced chicken with ranch dressing, crispy onion and pepper wrapped in lettuce",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 220,
+            "fat_g": 14,
+            "carb_g": 61,
+            "protein_g": 17
+          }
+        }
+      ]
+    },
+    {
+      "section": "Toppings",
+      "items": [
+        {
+          "name": "Napolean Sauce / Barbeque Sauce / Any in-house Mayo",
+          "price": 40,
+          "price_text": ": 40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cheesy Dip / Barbeque Sauce",
+          "price": 40,
+          "price_text": ": 40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Veggie Toppings",
+          "price": 60,
+          "price_text": ": 60/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Non Veg Toppings",
+          "price": 80,
+          "price_text": ": 80/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    }
+  ]
+}

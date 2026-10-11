@@ -1,0 +1,202 @@
+{
+  "file": "menu-17.jpg",
+  "kind": "menu_page",
+  "notes": "Page title 'Cheesy Deep Fried Pockets', subtitle 'Deep fried home made pockets'. Junktion77 brand logo (multicolour diamond logo, tagline 'The Foodies Crossroads') top right. Dark mustard/olive-brown background with faint gear pattern; yellow/gold decorative serif headings and item names, white descriptions. Green dot = veg, red dot = non-veg. Bottom: photo of two deep-fried pockets with chips, dip and sliced potatoes on burlap. No nutrition table, no tax info. Fully legible. Toppings price for Cheesy Dip / Barbeque Sauce is 50/- here (40/- on the wraps page); 'Veggie Toppings : 60' printed without '/-'. Spellings kept as printed ('home mode tortilla', 'tortila').",
+  "sections": [
+    {
+      "section": "Cheesy Deep Fried Pockets",
+      "items": [
+        {
+          "name": "Mac N Cheese Pocket",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "Classic Mac N Cheese stuffed in home mode tortilla and deep fried",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cheesy Potato Pocket",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "Mashed potato, french fries, Cheesy potato balls stuffed in home made tortilla and deep fried",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Italian Penne Pocket",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "Penne cooked in red sauce with italian seasonings stuffed in homemade tortilla and deep fried",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cajun Spice Veg Pocket",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "Assorted veggies tossed in butter and cheesy sauce in cajun spice and stuffed in homemade tortilla and deep fried",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cheesy Egg Pocket",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "Grated eggs with mayo and cheese stuffed in home made tortilla and deep fried",
+          "veg": false,
+          "egg": true,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Barbeque Chicken Pocket",
+          "price": 170,
+          "price_text": "170/-",
+          "description": "Chicken slices grilled in Barbeque sauce stuffed in our home made tortilla and deep fried",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Chettinad Cheese Pocket",
+          "price": 180,
+          "price_text": "180/-",
+          "description": "Chicken cooked in Authentic chettinad spices and stuffed in our home made tortilla and deep fried",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Curried Lamb Pocket",
+          "price": 190,
+          "price_text": "190/-",
+          "description": "Lamb cooked in indian spices and stuffed in our home made tortilla and deep fried",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Crispy Fish Pocket",
+          "price": 180,
+          "price_text": "180/-",
+          "description": "Fish slices batter fried, fresh veggies and onions wrapped",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Crispy Shrimp Pocket",
+          "price": 190,
+          "price_text": "190/-",
+          "description": "Deep Fried shrimp, onions and grilled peppers stuffed in home made tortilla and deep fried",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Bacon Potato Pocket",
+          "price": 190,
+          "price_text": "190/-",
+          "description": "Grilled bacon and mashed potato stuffed in home made tortila and deep fried",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    },
+    {
+      "section": "GG Specials",
+      "items": [
+        {
+          "name": "Gongura Chicken & Cheese Pocket",
+          "price": 180,
+          "price_text": "180/-",
+          "description": "Gongura chicken and cheese stuffed in home made tortilla and deep fried",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    },
+    {
+      "section": "Toppings",
+      "items": [
+        {
+          "name": "Napolean Sauce / Barbeque Sauce / Any in-House Mayo",
+          "price": 40,
+          "price_text": ": 40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cheesy Dip / Barbeque Sauce",
+          "price": 50,
+          "price_text": ": 50/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Veggie Toppings",
+          "price": 60,
+          "price_text": ": 60",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Non Veg Toppings",
+          "price": 80,
+          "price_text": ": 80/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cheese",
+          "price": 40,
+          "price_text": ": 40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Hummus Dip",
+          "price": 50,
+          "price_text": ": 50/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    }
+  ]
+}

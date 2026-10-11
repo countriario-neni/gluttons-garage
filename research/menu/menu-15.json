@@ -1,0 +1,200 @@
+{
+  "file": "menu-15.jpg",
+  "kind": "menu_page",
+  "notes": "Page title 'Cheesy Entrée', tagline 'We at Gluttons Garage would love to kickstart your engines with our wide variety of starters'. Deep reddish-brown/maroon background with gear pattern; title and 'Toppings' heading in lime/yellow-green decorative serif, item names bold yellow serif (smaller bold qualifiers like '(4 nos)'), descriptions small white sans, prices right-aligned yellow with '/-'. Green/red dot markers. 'Junktion77 - The Foodies' Crossroads' logo top right. Bottom photo: glossy BBQ-glazed chicken/meat pieces with spring onion. No tax note. Fully legible. Crispy Fried Veggies / Baby Corn / Paneer item lists 3 prices in printed order (mapping to sub-items assumed by order); Hot wings single price 210/- for all flavours. Spellings as printed: 'Bytes', 'Croqouttes', 'brocccoli', 'nugettes', 'chilly', 'satisifies', 'Napolean'.",
+  "sections": [
+    {
+      "section": "Cheesy Entrée",
+      "items": [
+        {
+          "name": "Potato Jalapeno Cheese Balls",
+          "price": 130,
+          "price_text": "130/-",
+          "description": "Potato cheese balls with Jalapeno mayo",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Crispy Fried Veggies / Crispy Baby Corn Fingers / Crispy Paneer Bytes",
+          "price": 150,
+          "price_text": "150/- 170/- 180/-",
+          "description": "Baby corn marinated in indian flavours batter fried served with sweet chilli sauce",
+          "veg": true,
+          "egg": false,
+          "variants": [
+            {
+              "label": "Crispy Fried Veggies",
+              "price": 150
+            },
+            {
+              "label": "Crispy Baby Corn Fingers",
+              "price": 170
+            },
+            {
+              "label": "Crispy Paneer Bytes",
+              "price": 180
+            }
+          ],
+          "uncertain": false
+        },
+        {
+          "name": "BBQ Potato Wedges",
+          "price": 170,
+          "price_text": "170/-",
+          "description": "Crispy potato wedges tossed in barbeque sauce",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Spinach and Corn Cheese Balls (4 nos)",
+          "price": 180,
+          "price_text": "180/-",
+          "description": "Spinach cheese balls with Jalapeno mayo (Good food is good mood! Something that satisifies your taste buds)",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Potato and Broccoli Croqouttes (5 nos )",
+          "price": 180,
+          "price_text": "180/-",
+          "description": "Deep fried potato and brocccoli nugettes",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cheesy Potato Bytes",
+          "price": 180,
+          "price_text": "180/-",
+          "description": "Potato Wedges tossed in our in house special cheesy sauce.",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cheesy Tandoori Broccoli and Grilled Peppers",
+          "price": 180,
+          "price_text": "180/-",
+          "description": "Tandoori marinated broccoli and peppers grilled to perfection topped with cheese",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Crispy Chicken Bytes",
+          "price": 200,
+          "price_text": "200/-",
+          "description": "Chicken strips batter fried served with jalapeno mayo and sweet chilly sauce",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Chicken and Cheese Meat Balls (4 nos)",
+          "price": 220,
+          "price_text": "220/-",
+          "description": "Minced chicken engulfing a cheesy centre is deep fried and served with honey chilli sauce",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Hot wings (Regular / BBQ / Buffalo Hot Wings / Cajun Spiced / Gongura)",
+          "price": 210,
+          "price_text": "210/-",
+          "description": "Classic wings spiced with the sauce of your choice",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Fish and Chips",
+          "price": 220,
+          "price_text": "220/-",
+          "description": "Fish coated in batter, deep fried and served with chips",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Tempura Prawn / Cajun Spiced Squid Rings",
+          "price": 240,
+          "price_text": "240/-",
+          "description": "Prawn / squid doused in tempura batter with bread crumbs and deep fry to perfection",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Shrimp and Bacon Bytes",
+          "price": 250,
+          "price_text": "250/-",
+          "description": "Bacon wrapped shrimp batter fried served with sweet chilli sauce",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    },
+    {
+      "section": "Toppings",
+      "items": [
+        {
+          "name": "Napolean Sauce / Barbeque Sauce / Any in House Mayo",
+          "price": 40,
+          "price_text": "40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cheesy Dip / Barbeque Sauce",
+          "price": 50,
+          "price_text": "50/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cheese",
+          "price": 40,
+          "price_text": "40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Hummus",
+          "price": 50,
+          "price_text": "50/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,267 @@
+{
+  "file": "menu-10.jpg",
+  "kind": "menu_page",
+  "notes": "Page title: 'Yummy Salads', plus 'Twisted Sw's' section (heading printed as 'Twisted Sw's' even though items are salads). Branded with 'Junktion77 - The Foodies' Crossroads' logo top-right. Dark forest-green background with gear pattern; headings in white decorative calligraphic serif; item names bold tan/gold serif; descriptions small white sans-serif; prices tan with '/-'. Green/red veg/non-veg markers on all items. Intro: 'If you fancy a salad with a twist, here it is .....'. 'Choose Your Dressing: Mayo / Yogurt / Lemon / Flavoured Mayo / Spicy Ranch Dressing' captured as a no-price section. Bottom photo: crispy fried chicken tenders over salad with shredded cheese. No tax/charges text. Fully legible.",
+  "sections": [
+    {
+      "section": "Yummy Salads",
+      "items": [
+        {
+          "name": "Greek Salad",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "A salad of tomato, cucumber, peppers, olives and veggies served with lemon dressing and feta cheese",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Mexican Salad",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "A salad of freshcut veggies served with lemon dressing to excite  your taste buds",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Crispy Potato Salad",
+          "price": 170,
+          "price_text": "170/-",
+          "description": "Crispy potato bytes along with assorted veggies and cheesy dressing",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Crispy Paneer Salad",
+          "price": 180,
+          "price_text": "180/-",
+          "description": "Crispy paneer bytes along with lettuce and assorted veggies blend in creamy dressing",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cheesy Corn Salad",
+          "price": 190,
+          "price_text": "190/-",
+          "description": "Corn kernels with peas and assorted veggies with spicy vinagarette dressing and shredded cheese",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Italian Salad",
+          "price": 180,
+          "price_text": "180/-",
+          "description": "Assorted veggies along with crispy pineapple with italian dressing and parmesan cheese",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Jamaican Egg Salad",
+          "price": 180,
+          "price_text": "180/-",
+          "description": "Crispy lettuce paired with slices of deep fried egg in jamaican spices and cheese",
+          "veg": false,
+          "egg": true,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Chicken & Cheese",
+          "price": 190,
+          "price_text": "190/-",
+          "description": "Good old grilled chicken salad with loads of cheese",
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Thai Chicken and Cheese Salad",
+          "price": 215,
+          "price_text": "215/-",
+          "description": "Chicken and veggies made into a salad with Thai spices",
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Hawain Chicken Salad",
+          "price": 220,
+          "price_text": "220/-",
+          "description": "A chicken salad with a twist of pineapple",
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Crunchy Chicken / Crispy Fish Salad",
+          "price": 230,
+          "price_text": "230/-",
+          "description": "Fish / chicken batter fried served along with fresh veggies topped with jalapeno mayo and cheese",
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Tuna Mac Salad",
+          "price": 240,
+          "price_text": "240/-",
+          "description": "Savour the elating combination of Tuna and macaroni",
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    },
+    {
+      "section": "Twisted Sw's",
+      "items": [
+        {
+          "name": "Monsoon Ceasar Salad",
+          "price": 250,
+          "price_text": "250/-",
+          "description": "Ceasar salad with bacon and parmesan cheese",
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Nicoise Salad",
+          "price": 250,
+          "price_text": "250/-",
+          "description": "Assorted vegetables with mashed tuna, grilled tilapia , grated boiled egg",
+          "veg": false,
+          "egg": true,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Seafood Ceviche Salad",
+          "price": 250,
+          "price_text": "250/-",
+          "description": "A combination of shrimp, crispy squid rings and grilled tilapia fish",
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    },
+    {
+      "section": "Choose Your Dressing",
+      "items": [
+        {
+          "name": "Mayo",
+          "price": null,
+          "price_text": null,
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Yogurt",
+          "price": null,
+          "price_text": null,
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Lemon",
+          "price": null,
+          "price_text": null,
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Flavoured Mayo",
+          "price": null,
+          "price_text": null,
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Spicy Ranch Dressing",
+          "price": null,
+          "price_text": null,
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    },
+    {
+      "section": "Toppings",
+      "items": [
+        {
+          "name": "Olives / Jalapenos",
+          "price": 30,
+          "price_text": "30/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Veggie Toppings",
+          "price": 60,
+          "price_text": "60 /-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Non Veg Toppings",
+          "price": 80,
+          "price_text": "80/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cheese Topping",
+          "price": 40,
+          "price_text": "40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    }
+  ]
+}

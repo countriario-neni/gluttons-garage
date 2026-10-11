@@ -1,0 +1,300 @@
+{
+  "file": "menu-03.jpg",
+  "kind": "menu_page",
+  "notes": "Page title 'Egg Specials'. Branded 'kaloreez' (green circular logo) top-right, NOT 'Gluttons Garage'. Design: off-white/light grey background with faint gear/cog pattern; section headings in crimson red calligraphic display font; item names bold dark maroon serif, descriptions dark grey condensed sans; prices maroon 'NN/-'; nutrition boxes outlined in maroon. No veg/non-veg markers printed on this page (all items egg-based). Items carry a printed nutrition table (columns: kCal | Fat (g) | Carb(g) | Protein(g)); captured per item in an extra 'nutrition' field. Bottom third is food photo (omelette with tomato slice and arugula on white plate, ketchup dip, eggs). No tax/service-charge text. Legibility good.",
+  "sections": [
+    {
+      "section": "Egg Specials",
+      "subtitle": "Eggs can be your best friends when you are on your work out routine",
+      "items": [
+        {
+          "name": "Boiled Eggs",
+          "price": 30,
+          "price_text": "30/-",
+          "description": "2 Boiled eggs served with fresh cut Veggies",
+          "veg": null,
+          "egg": true,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 125.07,
+            "fat_g": 12,
+            "carb_g": 24,
+            "protein_g": 12
+          }
+        },
+        {
+          "name": "The Gladsome Egg",
+          "price": 60,
+          "price_text": "60/-",
+          "description": "The classic sunny side up",
+          "veg": null,
+          "egg": true,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 140,
+            "fat_g": 13,
+            "carb_g": 30,
+            "protein_g": 12
+          }
+        },
+        {
+          "name": "Plain Omelette / Baked Plain Omelette / Poached Eggs",
+          "price": 70,
+          "price_text": "70/-",
+          "description": "Plain Omelette, pan fried / baked with low fat butter / poached",
+          "veg": null,
+          "egg": true,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 140,
+            "fat_g": 13,
+            "carb_g": 30,
+            "protein_g": 12
+          }
+        },
+        {
+          "name": "Double Protein Egg Fillet",
+          "price": 115,
+          "price_text": "115/-",
+          "description": "Broccoli and tofu stuffed in egg white with creamy sauce",
+          "veg": null,
+          "egg": true,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 145.3,
+            "fat_g": 6.4,
+            "carb_g": 28,
+            "protein_g": 14
+          }
+        }
+      ]
+    },
+    {
+      "section": "Healthy Stuffed Omelettes",
+      "items": [
+        {
+          "name": "Bread Omelette / Masala Omelette / Masala Bread Omelette",
+          "price": 85,
+          "price_text": "85/- / 95/- / 105/-",
+          "description": "Eggs beaten and fried with Veggies/ spices / bread to a fine indian omelette",
+          "veg": null,
+          "egg": true,
+          "variants": [
+            {
+              "label": "Bread Omelette",
+              "price": 85
+            },
+            {
+              "label": "Masala Omelette",
+              "price": 95
+            },
+            {
+              "label": "Masala Bread Omelette",
+              "price": 105
+            }
+          ],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 154,
+            "fat_g": 10,
+            "carb_g": 28,
+            "protein_g": 10
+          }
+        },
+        {
+          "name": "Mushroom Omelette",
+          "price": 145,
+          "price_text": "145/-",
+          "description": "3 Eggs beaten and fried to a nice fluffy omelette, stuffed with grilled mushrooms.",
+          "veg": null,
+          "egg": true,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 260,
+            "fat_g": 17,
+            "carb_g": 51,
+            "protein_g": 12
+          }
+        },
+        {
+          "name": "Broccoli and Peppers Omelette",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "3 Eggs beaten and fried to a nice fluffy omelette, stuffed with grilled broccoli and peppers",
+          "veg": null,
+          "egg": true,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 216,
+            "fat_g": 10,
+            "carb_g": 54,
+            "protein_g": 14
+          }
+        },
+        {
+          "name": "Herbed Paneer and Tofu Omlette",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "3 Eggs beaten and fried to a nice fluffy omelette, stuffed with herb grilled Paneer and tofu",
+          "veg": null,
+          "egg": true,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 280,
+            "fat_g": 12,
+            "carb_g": 60,
+            "protein_g": 15
+          }
+        },
+        {
+          "name": "Spinach and Corn Omelette",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "3 Eggs beaten and fried to a nice fluffy omelette, stuffed with creamy spinach and corn",
+          "veg": null,
+          "egg": true,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 280,
+            "fat_g": 12,
+            "carb_g": 54,
+            "protein_g": 14
+          }
+        },
+        {
+          "name": "Chicken Fajita Omelette",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "3 Eggs beaten and fried to a nice fluffy omelette, stuffed with grilled chicken and fresh cream",
+          "veg": false,
+          "egg": true,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 240,
+            "fat_g": 18,
+            "carb_g": 57,
+            "protein_g": 15
+          }
+        }
+      ]
+    },
+    {
+      "section": "Healthy Scrambles",
+      "subtitle": "(Served with toasted bread)",
+      "items": [
+        {
+          "name": "Soft Scrambled Eggs",
+          "price": 130,
+          "price_text": "130/-",
+          "description": "The Classic English scrambled Eggs.",
+          "veg": null,
+          "egg": true,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 200,
+            "fat_g": 12,
+            "carb_g": 48,
+            "protein_g": 12
+          }
+        },
+        {
+          "name": "Simple Spinach Scrambled Eggs",
+          "price": 140,
+          "price_text": "140/-",
+          "description": "English scrambled eggs with spinach puree and herbs",
+          "veg": null,
+          "egg": true,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 250,
+            "fat_g": 14,
+            "carb_g": 60,
+            "protein_g": 13
+          }
+        },
+        {
+          "name": "Tuscan Scramble",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "Fantastically fresh and totally Tuscan-inspired scramble with grilled mushrooms and diced tomatoes",
+          "veg": null,
+          "egg": true,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 220,
+            "fat_g": 12,
+            "carb_g": 38,
+            "protein_g": 13
+          }
+        }
+      ]
+    },
+    {
+      "section": "Toppings",
+      "items": [
+        {
+          "name": "Omelettes with 3 Egg Whites",
+          "price": 50,
+          "price_text": ": 50/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cheese, Mayo, Fresh Cream",
+          "price": 40,
+          "price_text": ": 40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Olives/Jalapenos",
+          "price": 40,
+          "price_text": ": 40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Veggie Toppings",
+          "price": 60,
+          "price_text": ": 60 /-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Non Veg Toppings",
+          "price": 80,
+          "price_text": ": 80/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    }
+  ]
+}

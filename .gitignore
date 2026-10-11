@@ -1,0 +1,7 @@
+research/raw/
+node_modules/
+.next/
+out/
+.env*.local
+test-results/
+playwright-report/

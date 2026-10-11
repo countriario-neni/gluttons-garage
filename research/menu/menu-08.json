@@ -1,0 +1,249 @@
+{
+  "file": "menu-08.jpg",
+  "kind": "menu_page",
+  "notes": "Page title: 'Cheesy Sandwiches', plus 'Twisted Sw's' section. Branded with 'Junktion77 - The Foodies' Crossroads' logo top-right. Dark olive-green background with gear pattern; headings in red/crimson decorative calligraphic serif; item names bold tan/gold serif; descriptions small white sans-serif; prices tan with '/-'. Green/red circular veg/non-veg markers; 'Pesto veg sandwich / Pesto Chicken Sandwich' and 'Crispy Veg / Crispy Nonveg Sandwich' have no marker; 'Omlette Sandwich Veg / Non Veg' has a red marker. Intro: 'Life is like a sandwich,the more you add the better it is. (All the sandwiches are double cheese sandwiches made with white bread)'. Note: Olives / Jalapenos topping is 30/- here vs 40/- on menu-07. Bottom photo: grilled white-bread sandwich with chips, ketchup and green chutney. No tax/charges text. Fully legible.",
+  "sections": [
+    {
+      "section": "Cheesy Sandwiches",
+      "items": [
+        {
+          "name": "Choco Nut Sandwich",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "Roasted dryfruits layered with chocolate sauce and godly nutella",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cheesy Coleslaw Sandwich",
+          "price": 130,
+          "price_text": "130/-",
+          "description": "Basic coleslaw sandwich with a cheesy twist",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Falafel Sandwich",
+          "price": 155,
+          "price_text": "155/-",
+          "description": "Middle East mashed chickpea sw layered with hummus spread",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Aloo Cheese Sandwich",
+          "price": 155,
+          "price_text": "155/-",
+          "description": "Typical Indian mashed potato sw with lovely spices and rich cheese",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Mushroom & Tomato Sandwich",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "Grilled mushroom and balsamic grilled tomato sandwiched with jalapeno mayo",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Pesto veg sandwich / Pesto Chicken Sandwich",
+          "price": 160,
+          "price_text": "160/-  190/-",
+          "description": "Grilled veggies stuffed with our inhouse special pesto base",
+          "veg": null,
+          "egg": null,
+          "variants": [
+            {
+              "label": "Pesto veg sandwich",
+              "price": 160
+            },
+            {
+              "label": "Pesto Chicken Sandwich",
+              "price": 190
+            }
+          ],
+          "uncertain": false
+        },
+        {
+          "name": "Mac N Cheese Sandwich",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "Grilled sw stuffed with cooked cheesy macaroni for cheesy deliciousness",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Fried Egg & Cheese Sandwich",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "Simple yet inviting",
+          "veg": false,
+          "egg": true,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Chetinad Chicken Cheese Sandwich",
+          "price": 175,
+          "price_text": "175/-",
+          "description": "Authentic Chettinad spices abundantly used to make a nice Chettinad chicken sw",
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Carribean Sandwich",
+          "price": 175,
+          "price_text": "175/-",
+          "description": "Surely a thrilling mayonnaise sw with mashed beans and slices of chicken topped with barbeque sauce",
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Crispy Fish Sandwich",
+          "price": 180,
+          "price_text": "180/-",
+          "description": "A Classic Deep fried fish sw with grilled tomatoes",
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Crispy Shrimp Sandwich",
+          "price": 180,
+          "price_text": "180/-",
+          "description": "The goodness of deepfried shrimp in a mayonnaisey sw",
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Seafood Delight (Double Layered)",
+          "price": 230,
+          "price_text": "230/-",
+          "description": "Delicious shrimp and fish. Taste it and you will definitely be asking for more",
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    },
+    {
+      "section": "Twisted Sw's",
+      "items": [
+        {
+          "name": "Omlette Sandwich Veg / Non Veg",
+          "price": 240,
+          "price_text": "240/-  / 270/-",
+          "description": "Layered cheese omlette with your choice of two fillings from the above",
+          "veg": false,
+          "egg": true,
+          "variants": [
+            {
+              "label": "Veg",
+              "price": 240
+            },
+            {
+              "label": "Non Veg",
+              "price": 270
+            }
+          ],
+          "uncertain": false
+        },
+        {
+          "name": "Crispy Veg Sandwich / Crispy Nonveg Sandwich",
+          "price": 210,
+          "price_text": "210/-  / 230/-",
+          "description": "A classic deep fried sw with choice of your mains",
+          "veg": null,
+          "egg": null,
+          "variants": [
+            {
+              "label": "Crispy Veg Sandwich",
+              "price": 210
+            },
+            {
+              "label": "Crispy Nonveg Sandwich",
+              "price": 230
+            }
+          ],
+          "uncertain": false
+        }
+      ]
+    },
+    {
+      "section": "Toppings",
+      "items": [
+        {
+          "name": "Mayo / Cheese",
+          "price": 40,
+          "price_text": "40 /-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Olives / Jalapenos",
+          "price": 30,
+          "price_text": "30/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Veggie Toppings",
+          "price": 60,
+          "price_text": "60 /-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Non Veg Toppings",
+          "price": 80,
+          "price_text": "80/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Hummus Dip",
+          "price": 50,
+          "price_text": "50/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    }
+  ]
+}

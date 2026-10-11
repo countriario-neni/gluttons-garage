@@ -1,0 +1,170 @@
+{
+  "file": "menu-02.jpg",
+  "kind": "menu_page",
+  "notes": "Page title 'The Beginning'. Branded 'Junktion77' with tagline 'The Foodies' Crossroads' (multicolour diamond logo with fork/spoon icons) top-right, NOT 'Gluttons Garage'. Design: deep maroon/brown background with darker gear/cog pattern; title in pale pink calligraphic display font; item names cream/off-white bold serif, descriptions white condensed sans; prices cream 'NN/-'. Veg/non-veg circular markers: green on most items, red on Chicken Sausages and Chicken Cutlets. Note: 'Grilled Bacon Strips and Scrambled Eggs' and 'English Breakfast combo' carry GREEN markers despite meat/egg content (likely print error) - recorded veg false / null accordingly. Bottom third is food photo (bowl of chocolate cereal 'chocos' on burlap). No tax/service-charge text. Legibility good.",
+  "sections": [
+    {
+      "section": "The Beginning",
+      "subtitle": "Our sumptous breakfast turns on your engines to life",
+      "items": [
+        {
+          "name": "The Maple Sprouts",
+          "price": 65,
+          "price_text": "65/-",
+          "description": "Assorted sprouts topped with maple syrup and dry fruits",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Chocolatey Chocos",
+          "price": 90,
+          "price_text": "90/-",
+          "description": "Chocos served with milk and chocolate sauce",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "The Fruit Fitters",
+          "price": 85,
+          "price_text": "85/-",
+          "description": "Fresh fruits batter fried and served with maple syrup and fresh cream",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Chicken Sausages",
+          "price": 105,
+          "price_text": "105/-",
+          "description": "Grilled chicken sausages",
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Chicken Cutlets",
+          "price": 130,
+          "price_text": "130/-",
+          "description": "Chicken patties served with 2 slices of toasted bread",
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Chocolate Raagi Malt",
+          "price": 95,
+          "price_text": "95/-",
+          "description": "Finely ground raagi cooked in chocolate milk topped with chocolate sauce",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cheesy Bread Toast",
+          "price": 95,
+          "price_text": "95/-",
+          "description": "Bread slices toasted and topped with cheese",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Pineapple & Raisins Toast / Cinnamon Toast / Orange and Dates Toast",
+          "price": 95,
+          "price_text": "95/-",
+          "description": "Bread toasted in butter with pineapple, raisin puree and grilled pineapple / cinnamon and caramelised sugar / orange and dates puree",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Hashbrowns",
+          "price": 100,
+          "price_text": "100/-",
+          "description": "Deep fried hashbrowns with a twist of pineapple",
+          "veg": true,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Grilled Bacon Strips and Scrambled Eggs",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "Bacon strips pan grilled with butter and served with scrambled eggs.",
+          "veg": false,
+          "egg": true,
+          "variants": [],
+          "uncertain": false,
+          "note": "Printed with a green (veg) marker despite bacon - marker appears to be a print error"
+        },
+        {
+          "name": "English Breakfast combo",
+          "price": 200,
+          "price_text": "200/-",
+          "description": "1 cereal /bread, fruits / egg, grilled veggies / grilled sausages, with choice of your beverage (coffee / green tea / canned juice / yogurt)",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "note": "(10:30 am to 11: 55 am) - availability window printed after name; printed green marker but includes egg/sausage options"
+        }
+      ]
+    },
+    {
+      "section": "Toppings",
+      "items": [
+        {
+          "name": "Fresh Fruits/Dry fruits",
+          "price": 40,
+          "price_text": ": 40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Fresh cream /Cheese",
+          "price": 40,
+          "price_text": ": 40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Honey / Maple Syrup",
+          "price": 25,
+          "price_text": ": 25 /-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "whipped cream/icecream",
+          "price": 40,
+          "price_text": ": 40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    }
+  ]
+}

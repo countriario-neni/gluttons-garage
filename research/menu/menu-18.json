@@ -1,0 +1,253 @@
+{
+  "file": "menu-18.jpg",
+  "kind": "menu_page",
+  "notes": "Page title 'Burger Breaks', subtitle '\"Where there is a burger there is hope ( All the burgers are served with coleslaw salad )\"'. Kaloreez logo top right. Beige/cream background with faint gear pattern; dark brown decorative serif headings, dark green bold serif item names, brown descriptions; green dot = veg, red dot = non-veg. Nutrition table (kCal, Fat (g), Carb(g), Protein(g)) per item in maroon-outlined boxes, captured in 'nutrition'. Sub-section 'Inverted Burgers' with subtitle 'Burgers with a twist'. Bottom: photo of stuffed grilled chicken breast with chips and tomato. No tax info. Fully legible. Big Stack has no veg/non-veg dot. Spellings kept as printed ('Poppeye', 'cripsy').",
+  "sections": [
+    {
+      "section": "Burger Breaks",
+      "items": [
+        {
+          "name": "Legume Burger",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "Mashed beans, tomato, onion and fresh lettuce with hummus",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 220,
+            "fat_g": 11,
+            "carb_g": 48,
+            "protein_g": 12
+          }
+        },
+        {
+          "name": "Poppeye Burger",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "Spinach, corn and potato patty, onion and fresh lettuce",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 205,
+            "fat_g": 12,
+            "carb_g": 59,
+            "protein_g": 12
+          }
+        },
+        {
+          "name": "Grilled Paneer Burger",
+          "price": 170,
+          "price_text": "170/-",
+          "description": "Grilled paneer, tomato, onion and fresh lettuce with mayo",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 220,
+            "fat_g": 13,
+            "carb_g": 64,
+            "protein_g": 14
+          }
+        },
+        {
+          "name": "Poached Egg Burger",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "Poached egg with crispy lettuce and onions with jalapeno mayo",
+          "veg": false,
+          "egg": true,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 190,
+            "fat_g": 12,
+            "carb_g": 61,
+            "protein_g": 14
+          }
+        },
+        {
+          "name": "Minced Chicken Burger",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "Minced chicken with lettuce and onion in lite mayo",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 200,
+            "fat_g": 11,
+            "carb_g": 65,
+            "protein_g": 15
+          }
+        },
+        {
+          "name": "Chicken Salami Burger",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "Chicken salami, onion, peppers, cripsy lettuce jalapeno mayo",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 210,
+            "fat_g": 12,
+            "carb_g": 58,
+            "protein_g": 14
+          }
+        },
+        {
+          "name": "Grilled Fish Burger",
+          "price": 180,
+          "price_text": "180/-",
+          "description": "Grilled fish, onion, Crispy lettuce with jalapeno mayo",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 220,
+            "fat_g": 12,
+            "carb_g": 48,
+            "protein_g": 13
+          }
+        },
+        {
+          "name": "Tuna Burger",
+          "price": 180,
+          "price_text": "180/-",
+          "description": "Mashed tuna with mayo, and freshcut veggies",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 220,
+            "fat_g": 13,
+            "carb_g": 45,
+            "protein_g": 15
+          }
+        }
+      ]
+    },
+    {
+      "section": "Inverted Burgers",
+      "items": [
+        {
+          "name": "Fruit Burgers",
+          "price": 130,
+          "price_text": "130/-",
+          "description": "Apple slices stuffed with batter fried banana topped with whipped cream and honey",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 154,
+            "fat_g": 7,
+            "carb_g": 37,
+            "protein_g": 4
+          }
+        },
+        {
+          "name": "Double Protein Burger",
+          "price": 250,
+          "price_text": "250/-",
+          "description": "Grilled chicken slices stuffed with grilled broccoli and peppers",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 240,
+            "fat_g": 12,
+            "carb_g": 55,
+            "protein_g": 18
+          }
+        }
+      ]
+    },
+    {
+      "section": "GG Specials",
+      "items": [
+        {
+          "name": "Big Stack Healthy Burger Veg / Non Veg",
+          "price": 250,
+          "price_text": "250/-",
+          "description": "Broccoli, tofu, soya, assorted veggies /  chicken, fish, egg whites and fresh veggies",
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 240,
+            "fat_g": 14,
+            "carb_g": 60,
+            "protein_g": 13
+          }
+        }
+      ]
+    },
+    {
+      "section": "Toppings",
+      "items": [
+        {
+          "name": "Napolean Sauce / Barbeque Sauce / Any in House Mayo",
+          "price": 40,
+          "price_text": ": 40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Hummus Dip",
+          "price": 50,
+          "price_text": ": 50/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cheesy Dip / Barbeque Sauce",
+          "price": 50,
+          "price_text": ":50/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Veggie Toppings",
+          "price": 60,
+          "price_text": ": 60",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Non Veg Toppings",
+          "price": 80,
+          "price_text": ": 80/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,297 @@
+{
+  "file": "menu-12.jpg",
+  "kind": "menu_page",
+  "notes": "Page title 'The Soup Stories', tagline 'Only a pure heart can make a good soup'. Beige/cream background with faint gear pattern; headings in maroon decorative serif, item names bold dark-brown serif, descriptions small grey sans, prices bold maroon with '/-'. Green/red dot markers (no marker on: Winter Veg / Non Veg Soup, Ragi Soup Veg / Chicken, Oats Soup Veg / Chicken). 'kaloreez - A blend of taste, health and hygiene' logo top right; each item has a printed nutrition table kCal | Fat (g) | Carb(g) | Protein(g), stored per item in 'nutrition'. Bottom photo: tomato soup with cream hearts in white bowl. No tax note. Fully legible.",
+  "sections": [
+    {
+      "section": "The Soup Stories",
+      "items": [
+        {
+          "name": "Winter Veg  / Non Veg Soup",
+          "price": 120,
+          "price_text": "120/- / 140/-",
+          "description": "A clear soup served with assorted vegetables / chicken",
+          "veg": null,
+          "egg": null,
+          "variants": [
+            {
+              "label": "Veg",
+              "price": 120
+            },
+            {
+              "label": "Non Veg",
+              "price": 140
+            }
+          ],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 42,
+            "fat_g": 1.4,
+            "carb_g": 18,
+            "protein_g": 2
+          }
+        },
+        {
+          "name": "Tomato Basil Soup",
+          "price": 140,
+          "price_text": "140/-",
+          "description": "Tomato puree and basil herbed soup simmered to reach its full flavour",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 65,
+            "fat_g": 1.8,
+            "carb_g": 19,
+            "protein_g": 1.9
+          }
+        },
+        {
+          "name": "Beans & Sprouts Soup / Spinach & Sprouts Soup",
+          "price": 140,
+          "price_text": "140/-",
+          "description": "Fresh beans & assorted sprouts / fresh spinach and assorted sprouts blended together to make an authentic Indian soup",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 60,
+            "fat_g": 1.3,
+            "carb_g": 21,
+            "protein_g": 2.4
+          }
+        },
+        {
+          "name": "Rajma Spinach Soup",
+          "price": 140,
+          "price_text": "140/-",
+          "description": "Fresh steamed rajma and spinach blended together for a garlicky Indian soup",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 60,
+            "fat_g": 1.4,
+            "carb_g": 24,
+            "protein_g": 2.5
+          }
+        },
+        {
+          "name": "Lemony Quinoa Spinach Soup",
+          "price": 140,
+          "price_text": "140/-",
+          "description": "Spinach soup topped with quinoa and a dash of lemon",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 53,
+            "fat_g": 1.2,
+            "carb_g": 22,
+            "protein_g": 3.1
+          }
+        },
+        {
+          "name": "Broccoli Broth Soup",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "This basic homemade vegetable soup is perfect for a cool evening",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 42,
+            "fat_g": 1.6,
+            "carb_g": 20,
+            "protein_g": 3.2
+          }
+        },
+        {
+          "name": "Broccoli and Almond Soup",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "This protein rich soup with fresh broccoli and almonds is everyone's favourite",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 47,
+            "fat_g": 0.8,
+            "carb_g": 22,
+            "protein_g": 4.1
+          }
+        },
+        {
+          "name": "Mushroom Walnut Soup",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "An unusual but exciting dish with unique savoury ingredients",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 50,
+            "fat_g": 2.1,
+            "carb_g": 24,
+            "protein_g": 3.2
+          }
+        },
+        {
+          "name": "Ragi Soup Veg / Chicken",
+          "price": 120,
+          "price_text": "120/- / 140/-",
+          "description": "Fine ragi and veggies / chicken to pump up your day",
+          "veg": null,
+          "egg": null,
+          "variants": [
+            {
+              "label": "Veg",
+              "price": 120
+            },
+            {
+              "label": "Chicken",
+              "price": 140
+            }
+          ],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 54,
+            "fat_g": 2.3,
+            "carb_g": 28,
+            "protein_g": 1.7
+          }
+        },
+        {
+          "name": "Oats Soup Veg / Chicken",
+          "price": 120,
+          "price_text": "120/- / 140/-",
+          "description": "Absolutely delicious and nourishing, roasted oats soup with fine spices, veggies / chicken and herbs",
+          "veg": null,
+          "egg": null,
+          "variants": [
+            {
+              "label": "Veg",
+              "price": 120
+            },
+            {
+              "label": "Chicken",
+              "price": 140
+            }
+          ],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 56,
+            "fat_g": 1.2,
+            "carb_g": 22,
+            "protein_g": 1.4
+          }
+        },
+        {
+          "name": "Chicken Lemon Grass Soup",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "A thin chicken clear soup cooked in lemon grass and indian spices",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 44,
+            "fat_g": 1.7,
+            "carb_g": 23,
+            "protein_g": 4.1
+          }
+        }
+      ]
+    },
+    {
+      "section": "GG Specials",
+      "items": [
+        {
+          "name": "Curried Carrot and Ginger Soup",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "A delectable combination of carrot, coconut and ginger",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 40,
+            "fat_g": 2.2,
+            "carb_g": 24,
+            "protein_g": 2.8
+          }
+        },
+        {
+          "name": "Spiced Coconut Tomato Soup",
+          "price": 170,
+          "price_text": "170/-",
+          "description": "Spiced tomato soup with shredded coconut, almonds and brown rice",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false,
+          "nutrition": {
+            "kcal": 44,
+            "fat_g": 2.4,
+            "carb_g": 28,
+            "protein_g": 2.4
+          }
+        }
+      ]
+    },
+    {
+      "section": "Toppings",
+      "items": [
+        {
+          "name": "Toasted Bread",
+          "price": 35,
+          "price_text": "35/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cheese / Fresh Cream",
+          "price": 30,
+          "price_text": "30/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Veggie Toppings",
+          "price": 60,
+          "price_text": "60 /-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Non Veg Toppings",
+          "price": 80,
+          "price_text": "80/-",
+          "description": null,
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    }
+  ]
+}

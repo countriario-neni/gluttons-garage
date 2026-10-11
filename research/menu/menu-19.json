@@ -1,0 +1,206 @@
+{
+  "file": "menu-19.jpg",
+  "kind": "menu_page",
+  "notes": "Page title 'Greasy Burgers', subtitle '\"We all need to make time for burger once in a while ( All the burgers are served with chips )\"'. Junktion77 logo top right. Orange/mustard background with gear pattern; dark brown decorative serif headings, dark green bold serif item names, white descriptions; green dot = veg, red dot = non-veg. Sub-sections 'Fusion Burgers' (subtitle 'Burgers turned crazy to add charm to your plate') and 'GG Special' (singular, as printed). Bottom: photo of crumb-fried stuffed burger cut open with melted cheese and grilled peppers. No nutrition table, no tax info. Fully legible. Pizza Burger has no veg dot and two prices (Veg 180 / Non Veg 200). Spellings kept as printed ('Pouched', 'Cripsy', 'letttuce', 'descibe').",
+  "sections": [
+    {
+      "section": "Greasy Burgers",
+      "items": [
+        {
+          "name": "Aloo Delight Burger",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "Aloo patty, lettuce, cheddar cheese, mayo",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Grilled Mushroom & Peppers Burger",
+          "price": 170,
+          "price_text": "170/-",
+          "description": "Grilled mushrooms, peppers, crispy lettuce, onions, cheese and mayo",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Tomato and Cheese Burger",
+          "price": 170,
+          "price_text": "170/-",
+          "description": "Grilled tomato, onion, cucumber, cheese, mayo",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Fried Egg & Cheese Burger",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "Fried egg, cheese and crispy lettuce",
+          "veg": false,
+          "egg": true,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Crunchy Chicken Burger",
+          "price": 180,
+          "price_text": "180/-",
+          "description": "Crispy chicken patty, lettuce, cheese, jalapeno mayo",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Fried prawn Burger",
+          "price": 190,
+          "price_text": "190/-",
+          "description": "Cripsy deep fried prawns ,lettuce , mayo, cheese",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Lamb Feast Burger",
+          "price": 190,
+          "price_text": "190/-",
+          "description": "Curried lamb, onion and cripsy letttuce and cheese",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Bacon N Pouched Egg Burger",
+          "price": 200,
+          "price_text": "200/-",
+          "description": "A mix of bacon and poached egg with crispy lettuce and onions with jalapeno mayo",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    },
+    {
+      "section": "Fusion Burgers",
+      "items": [
+        {
+          "name": "Carnivore Burger (Chicken & Lamb)",
+          "price": 250,
+          "price_text": "250/-",
+          "description": "Curried chicken and lamb stuffed in burger, dipped in batter and deep fried for a crispy deep fried burger",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Pizza Burger Veg / Non Veg",
+          "price": 180,
+          "price_text": "180/- / 200/-",
+          "description": "Veggies / Non Veg patty Stuffed in between two mini pizzas",
+          "veg": null,
+          "egg": null,
+          "variants": [
+            {
+              "label": "Veg",
+              "price": 180
+            },
+            {
+              "label": "Non Veg",
+              "price": 200
+            }
+          ],
+          "uncertain": false
+        }
+      ]
+    },
+    {
+      "section": "GG Special",
+      "items": [
+        {
+          "name": "Juicy lucy Chicken Burger",
+          "price": 270,
+          "price_text": "270/-",
+          "description": "Too messy to descibe",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    },
+    {
+      "section": "Toppings",
+      "items": [
+        {
+          "name": "Napolean Sauce / Barbeque Sauce / Any In-house Mayo",
+          "price": 40,
+          "price_text": ": 40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cheesy Dip / Barbeque Sauce",
+          "price": 50,
+          "price_text": ": 50/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Veggie Toppings",
+          "price": 60,
+          "price_text": ": 60,",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Non Veg Toppings",
+          "price": 80,
+          "price_text": ": 80/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cheese",
+          "price": 40,
+          "price_text": ": 40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Hummus Dip",
+          "price": 50,
+          "price_text": ": 50/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    }
+  ]
+}

@@ -43,7 +43,7 @@ Each external integration is an interface in `src/integrations/<name>/` with a `
 
 | Adapter | Demo implementation | Live implementation (post-sign) |
 |---|---|---|
-| `payments` | Razorpay-styled mock modal (UPI / card / netbanking; success or failure). If `NEXT_PUBLIC_RAZORPAY_TEST_KEY` is set, uses real Razorpay Checkout in test mode instead. | Razorpay Orders API + signature-verified webhook (Vercel route) |
+| `payments` | Full checkout sheet covering every Indian payment method (see §4.1); success or failure is simulated. If `NEXT_PUBLIC_RAZORPAY_TEST_KEY` is set, uses real Razorpay Checkout in test mode instead. | Razorpay Orders API + signature-verified webhook (Vercel route); Razorpay supports all methods in §4.1 |
 | `whatsapp` | Writes messages to a `message_log` table; UI shows them in a phone mockup | WhatsApp Cloud API template messages |
 | `reviews` | Static JSON: labelled sample reviews, or real reviews supplied by us | Google Places API (Place Details reviews) |
 | `instagram` | Static image grid linking to the profile | Instagram Graph API |
@@ -93,6 +93,22 @@ Companion functions: `confirm_online_payment(order_id, ref, success)` (demo stan
 - Location: Google Maps embed (from their maps link), hours, click-to-call.
 - Floating WhatsApp button on every public page with pre-filled greeting.
 - Swiggy / Zomato "Order for delivery" buttons (links configurable; hidden if not set).
+
+### Real content
+- Menu, prices, descriptions and veg/egg markers are transcribed from photos of the café's printed menu (magicpin listing); items not legible are omitted rather than guessed. Source notes in `research/`.
+- Photos: real café, food and logo photos from public listings (magicpin / yappe) and, when the browser is available, Instagram screenshots. Used for the client pitch only; to be replaced or confirmed with the client's own assets before go-live.
+- Facts: address 7-5-182, Dr NTR Beach Rd, beside Aqua Sports Complex, Pandurangapuram, Visakhapatnam 530003; phone +91 77023 68884; hours 8:00 AM–10:00 PM (Mon until 8:30 PM); amenities: indoor & outdoor seating, kids' play area, book corner, party area. Ratings shown only as "4.1★ on Google" with a link, not fabricated review text.
+
+### 4.1 Payment methods (checkout sheet)
+- **UPI apps** (GPay, PhonePe, Paytm, BHIM): intent buttons on mobile.
+- **UPI ID** (VPA entry with format validation).
+- **Scan & pay UPI QR**: dynamic QR with amount and order reference, countdown timer, "waiting for payment" state. Demo QR encodes a non-routable demo VPA so scanning cannot move real money; staff can also mark it received.
+- **Cards**: credit/debit (Visa, Mastercard, RuPay, Amex) with Luhn and expiry validation and card-brand detection; never stored.
+- **Netbanking**: popular-bank grid + search.
+- **Wallets**: Paytm, PhonePe, Amazon Pay, Mobikwik.
+- **Pay Later / EMI** (shown as available via Razorpay, simulated).
+- **Cash at counter** (dine-in) and **split** online + cash (dine-in).
+- **Static counter QR** in the staff area for walk-in payments, recorded against an order.
 
 ### Ordering flow
 1. Entry: `/t?table=N` sets dine-in at table N; `/order` asks dine-in (enter table) or takeaway (choose pickup slot from today's remaining slots within hours).

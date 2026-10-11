@@ -1,0 +1,209 @@
+{
+  "file": "menu-13.jpg",
+  "kind": "menu_page",
+  "notes": "Page title 'Sizzling Soups', tagline 'Fill your tummies with our hot n happening soups'. Dark chocolate-brown background with gear pattern; title in beige/khaki decorative serif, item names in cream bold serif, descriptions small khaki sans, prices right-aligned cream with '/-'. Green/red dot markers ('Cream Soups' has no marker). 'Junktion77 - The Foodies' Crossroads' logo top right. Bottom photo: creamy broccoli soup in white bowl with broccoli florets and spoon on burlap. No tax note. Fully legible. Toppings 'Toasted bread : 40' and 'Cheese : 40' printed without '/-'. Spellings as printed: 'Hawain', 'pine apple'.",
+  "sections": [
+    {
+      "section": "Sizzling Soups",
+      "items": [
+        {
+          "name": "Creamy Corn Veg Soup",
+          "price": 140,
+          "price_text": "140/-",
+          "description": "A creamy corn soup with assorted veggies",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Broccoli Cheese Soup",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "Creamy soup made with fresh broccoli and homecrafted cheese, Basic but protein rich",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Potato Cheese Ball Soup",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "Creamy soup with potato cheese balls",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Monsoon Vegetable Soup",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "A clear soup simmered with assorted vegetables",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "French Onion Soup",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "Clear soup with the goodness of onion and cheese ( Cooked with white wine )",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Egg N Mushroom Delight",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "Egg and chopped mushrooms make this cheesy soup \"beauty in a bowl\"",
+          "veg": false,
+          "egg": true,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Chicken and Mushroom Soup",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "A Classic mushroom and chicken soup",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cream Soups (Tomato / Mushroom / Broccoli / Chicken)",
+          "price": 140,
+          "price_text": "140/- / 150/- 160/- / 170/-",
+          "description": "Tomato / Mushroom / Broccoli / Chicken cooked in cream cheese for a creamy soup.",
+          "veg": null,
+          "egg": null,
+          "variants": [
+            {
+              "label": "Tomato",
+              "price": 140
+            },
+            {
+              "label": "Mushroom",
+              "price": 150
+            },
+            {
+              "label": "Broccoli",
+              "price": 160
+            },
+            {
+              "label": "Chicken",
+              "price": 170
+            }
+          ],
+          "uncertain": false
+        },
+        {
+          "name": "Coconut Chicken Soup",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "An indian flavoured thick chicken coconut soup.",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Shrimp & Corn Soup",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "Delish enough for a date night. Wonderful texture of shrimp relieves your senses",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Thai Lamb Soup",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "A thai delicacy. Minced lamb cooked in Thai spices",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    },
+    {
+      "section": "GG Special Soups",
+      "items": [
+        {
+          "name": "Cheesy  Meat Ball Soup",
+          "price": 170,
+          "price_text": "170/-",
+          "description": "A classic cheesy chicken soup with crispy chicken meat balls",
+          "veg": false,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Hawain Chocolate Soup",
+          "price": 170,
+          "price_text": "170/-",
+          "description": "A dark chocolate soup with rum soaked pine apple dices",
+          "veg": true,
+          "egg": false,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    },
+    {
+      "section": "Toppings",
+      "items": [
+        {
+          "name": "Toasted bread",
+          "price": 40,
+          "price_text": "40",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cheese",
+          "price": 40,
+          "price_text": "40",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Veggie Toppings",
+          "price": 60,
+          "price_text": "60 /-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Non Veg Toppings",
+          "price": 80,
+          "price_text": "80/-",
+          "description": null,
+          "veg": false,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    }
+  ]
+}

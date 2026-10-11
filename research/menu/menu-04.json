@@ -1,0 +1,199 @@
+{
+  "file": "menu-04.jpg",
+  "kind": "menu_page",
+  "notes": "Page title 'The Eggtastic Specials'. Branded 'Junktion77' ('The Foodies' Crossroads', multicolour diamond logo) top-right, NOT 'Gluttons Garage'. Design: charcoal/near-black background with dark gear/cog pattern; section headings in bright red calligraphic display font; item names golden-yellow bold serif; descriptions white condensed sans; prices golden-yellow 'NN/-'. No veg/non-veg markers printed on this page. Bottom third is food photo (rolled stuffed omelette with tomato slice on white plate, ketchup, onion, burlap, greens). No tax/service-charge text. Legibility good.",
+  "sections": [
+    {
+      "section": "The Eggtastic Specials",
+      "subtitle": "Love and eggs are best when they are fresh, and we serve you tasty and fresh egg creations",
+      "items": [
+        {
+          "name": "The Gladsome Egg",
+          "price": 60,
+          "price_text": "60/-",
+          "description": "The classic sunny side up",
+          "veg": null,
+          "egg": true,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Deviled Eggs - Perfect Everyday Snack with a Twist",
+          "price": 95,
+          "price_text": "95/-",
+          "description": "Fried eggs stuffed with egg yellow, mayo and cheese",
+          "veg": null,
+          "egg": true,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Italian Deviled Eggs",
+          "price": 135,
+          "price_text": "135/-",
+          "description": "Fried eggs stuffed with Cheesy blend of chicken and egg yellow",
+          "veg": false,
+          "egg": true,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    },
+    {
+      "section": "Cheesy Stuffed Omelettes",
+      "items": [
+        {
+          "name": "Double Egg Delight",
+          "price": 140,
+          "price_text": "140/-",
+          "description": "For all the Egg lovers : This is EGGS-actly what u are looking for (Fried eggs with cheese stuffed in omelette)",
+          "veg": null,
+          "egg": true,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Hashbrown Omelette",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "Omelette Stuffed with hashbrown and cheese that melts in your mouth",
+          "veg": null,
+          "egg": true,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Tangy Paneer Omelette",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "3 eggs beaten and fried to a nice fluffy omelet, stuffed with tangy paneer",
+          "veg": null,
+          "egg": true,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Sausage & Cheese omelette",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "Omelette stuffed with grilled sausages and cheese fried to perfection",
+          "veg": false,
+          "egg": true,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Baconny Cheeselet",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "\"Omelette stuffed with grilled bacon strips and cheese (Sometimes classics are the best and this bacon and cheese omelet is no exception to that rule)\"",
+          "veg": false,
+          "egg": true,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Gongura Chicken Cheese Omelet - Go Traditional, Go Andhra",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "Omelette stuffed with gongura chicken and cheese",
+          "veg": false,
+          "egg": true,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    },
+    {
+      "section": "Smokey Scrambles",
+      "subtitle": "Served with toasted white bread",
+      "items": [
+        {
+          "name": "Spinach and Cheesy Scrambled Eggs",
+          "price": 140,
+          "price_text": "140/-",
+          "description": "Eggs scrambled with fresh, nutricious spinach puree and a blend of rich cheese",
+          "veg": null,
+          "egg": true,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Californian Scrambled Egg",
+          "price": 150,
+          "price_text": "150/-",
+          "description": "Flavours as light and bright as the Californian sun, fluffy eggs with chicken and grated cheese",
+          "veg": false,
+          "egg": true,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Italian Minced Lamb",
+          "price": 160,
+          "price_text": "160/-",
+          "description": "A creamy Italian scrambled egg with minced lamb and grated cheese",
+          "veg": false,
+          "egg": true,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    },
+    {
+      "section": "Toppings",
+      "items": [
+        {
+          "name": "Omelet with 3 Egg Whites",
+          "price": 50,
+          "price_text": ": 50/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Cheese, Fresh Cream",
+          "price": 40,
+          "price_text": ": 40/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Olives / Jalapenos",
+          "price": 30,
+          "price_text": ": 30/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Veggie Toppings",
+          "price": 60,
+          "price_text": ": 60 /-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        },
+        {
+          "name": "Non Veg Toppings",
+          "price": 80,
+          "price_text": ": 80/-",
+          "description": null,
+          "veg": null,
+          "egg": null,
+          "variants": [],
+          "uncertain": false
+        }
+      ]
+    }
+  ]
+}
