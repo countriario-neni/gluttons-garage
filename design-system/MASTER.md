@@ -50,7 +50,7 @@ Ink background (#1C1A19), cream text 14.65:1, cards `kitchen-surface` #272321 (1
 ## Accessibility
 
 - Body text 4.5:1 minimum; UI boundaries and focus rings 3:1.
-- Touch targets 44px minimum: Button default is `h-11`, `lg` is `h-12`, icon buttons `size-11`.
+- Touch targets 44px minimum: Every Button size is at least `h-11`/`size-11` (lg `h-12`); checkbox, switch and radio use a centred 44px `after:` hit area.
 - Focus is always visible (2px ring token, 2px offset). Never remove outlines.
 - Keyboard order matches visual order; icons next to text are decorative (`aria-hidden`), icon-only buttons get an `aria-label`.
 

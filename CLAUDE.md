@@ -26,4 +26,5 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Menu data comes only from `research/menu/*.json` transcriptions; skip items marked `uncertain`. No Kaloreez/Junktion77 branding anywhere.
 - No raw hex in components; use semantic tokens. Fonts are `--font-display` (Playfair Display) and `--font-sans` (Karla).
 - `useSearchParams` must be wrapped in `<Suspense>` or the static export build fails.
+- Keep the `turbopack.rules` Tailwind loader in `next.config.ts`; Tailwind does not run without it.
 - Next.js here is v16 with breaking changes: read `node_modules/next/dist/docs/` before using unfamiliar APIs (see `AGENTS.md`).
