@@ -15,18 +15,28 @@ export function razorpayAvailable(): boolean {
   return typeof window !== "undefined" && !!testKey() && testKey().startsWith("rzp_test_");
 }
 
+const LOAD_TIMEOUT_MS = 15_000;
+
 let loading: Promise<void> | null = null;
+/** Loads checkout.js once; rejects on a network error or after 15 s, and clears the cache so a retry can try again. */
 function loadScript(): Promise<void> {
   if ((window as unknown as { Razorpay?: unknown }).Razorpay) return Promise.resolve();
   loading ??= new Promise<void>((resolve, reject) => {
     const s = document.createElement("script");
+    const fail = (msg: string) => {
+      clearTimeout(timer);
+      loading = null;
+      s.remove();
+      reject(new Error(msg));
+    };
+    const timer = setTimeout(() => fail("Razorpay checkout took too long to load"), LOAD_TIMEOUT_MS);
     s.src = SCRIPT_SRC;
     s.async = true;
-    s.onload = () => resolve();
-    s.onerror = () => {
-      loading = null;
-      reject(new Error("Could not load Razorpay checkout"));
+    s.onload = () => {
+      clearTimeout(timer);
+      resolve();
     };
+    s.onerror = () => fail("Could not load Razorpay checkout");
     document.head.appendChild(s);
   });
   return loading;
@@ -45,21 +55,31 @@ export async function razorpayCheckout(r: PayRequest): Promise<PayResult> {
   } catch (e) {
     return fail(e instanceof Error ? e.message : "Could not load Razorpay checkout");
   }
-  const Razorpay = (window as unknown as { Razorpay: RazorpayCtor }).Razorpay;
+  const Razorpay = (window as unknown as { Razorpay?: RazorpayCtor }).Razorpay;
+  if (typeof Razorpay !== "function") return fail("Razorpay checkout is unavailable");
   return new Promise<PayResult>((resolve) => {
-    const rz = new Razorpay({
-      key: testKey(),
-      amount: r.amount * 100,
-      currency: "INR",
-      name: "Gluttons Garage",
-      description: `Order ${r.orderCode}`,
-      prefill: { name: r.customer.name, contact: r.customer.phone },
-      notes: { orderId: r.orderId },
-      theme: { color: brandColor() },
-      handler: (res: { razorpay_payment_id: string }) => resolve({ success: true, channel: "card", reference: res.razorpay_payment_id }),
-      modal: { ondismiss: () => resolve(fail("Payment cancelled")) },
-    });
-    rz.on("payment.failed", (e) => resolve(fail(e.error?.description ?? "Payment failed")));
-    rz.open();
+    // Razorpay lets the customer retry inside its modal after a failure, so a failure is only
+    // remembered here and reported when the modal is dismissed; a later success still wins.
+    let lastFailure: string | null = null;
+    try {
+      const rz = new Razorpay({
+        key: testKey(),
+        amount: r.amount * 100,
+        currency: "INR",
+        name: "Gluttons Garage",
+        description: `Order ${r.orderCode}`,
+        prefill: { name: r.customer.name, contact: r.customer.phone },
+        notes: { orderId: r.orderId },
+        theme: { color: brandColor() },
+        handler: (res: { razorpay_payment_id: string }) => resolve({ success: true, channel: "card", reference: res.razorpay_payment_id }),
+        modal: { ondismiss: () => resolve(fail(lastFailure ?? "Payment cancelled")) },
+      });
+      rz.on("payment.failed", (e) => {
+        lastFailure = e.error?.description ?? "Payment failed";
+      });
+      rz.open();
+    } catch (e) {
+      resolve(fail(e instanceof Error ? e.message : "Razorpay checkout failed to open"));
+    }
   });
 }
