@@ -4,6 +4,8 @@ import { createContext, createElement, useCallback, useContext, useEffect, useRe
 import type { DataStore, Topic } from "./DataStore";
 import { CHANNEL_NAME, type KV } from "./local/db";
 import { LocalStore } from "./local/LocalStore";
+import { getSupabase } from "./supabase/client";
+import { SupabaseStore } from "./supabase/SupabaseStore";
 
 export type { DataStore } from "./DataStore";
 
@@ -15,11 +17,9 @@ const memoryKV = (): KV => {
   return { getItem: (k) => m.get(k) ?? null, setItem: (k, v) => void m.set(k, v), removeItem: (k) => void m.delete(k) };
 };
 
-/**
- * Single seam for choosing the backend. SupabaseStore does not exist yet (Task 6):
- * that task makes this return it when `isSupabaseConfigured()`. Until then the demo store is always used.
- */
+/** Single seam for choosing the backend: Supabase when both env vars are set, else the localStorage demo. */
 export function createStore(): DataStore {
+  if (isSupabaseConfigured()) return new SupabaseStore(getSupabase());
   const browser = typeof window !== "undefined";
   return new LocalStore({
     storage: browser ? window.localStorage : memoryKV(),
