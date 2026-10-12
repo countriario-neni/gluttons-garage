@@ -1,8 +1,8 @@
 import type { MenuItem, MenuOption } from "@/data/menu";
 import { dietOf, type Diet } from "@/lib/menu";
 
-/** An option being edited; `id` is "" for options added in the editor (given a stable id on save). */
-export type DraftOption = { key: string; id: string; group: string; label: string; priceDelta: string };
+/** An option being edited; `groupKey` is a stable identity for its group so renaming the group never remounts or merges it; `id` is "" for options added in the editor (given a stable id on save). */
+export type DraftOption = { key: string; groupKey: string; id: string; group: string; label: string; priceDelta: string };
 export type ItemDraft = {
   name: string;
   description: string;
@@ -24,6 +24,7 @@ let keySeq = 0;
 export const newKey = () => `k${++keySeq}`;
 
 export function toDraft(item: MenuItem): ItemDraft {
+  const groupKeys = new Map<string, string>();
   return {
     name: item.name,
     description: item.description ?? "",
@@ -31,7 +32,10 @@ export function toDraft(item: MenuItem): ItemDraft {
     diet: dietOf(item) ?? "",
     bestseller: item.tags.includes("Bestseller"),
     image: item.image,
-    options: item.options.map((o) => ({ key: newKey(), id: o.id, group: o.group, label: o.label, priceDelta: String(o.priceDelta) })),
+    options: item.options.map((o) => {
+      if (!groupKeys.has(o.group)) groupKeys.set(o.group, newKey());
+      return { key: newKey(), groupKey: groupKeys.get(o.group)!, id: o.id, group: o.group, label: o.label, priceDelta: String(o.priceDelta) };
+    }),
   };
 }
 
@@ -52,11 +56,15 @@ export function fromDraft(base: MenuItem, d: ItemDraft): { ok: true; item: MenuI
 
   const used = new Set(d.options.map((o) => o.id).filter(Boolean));
   const seen = new Set<string>();
+  const groupOf = new Map<string, string>(); // slugged group name -> groupKey
   const options: MenuOption[] = [];
   for (const o of d.options) {
     const group = o.group.trim();
     const label = o.label.trim();
     if (!group) return { ok: false, error: "Every option group needs a name." };
+    const prior = groupOf.get(slug(group));
+    if (prior !== undefined && prior !== o.groupKey) return { ok: false, error: `Two option groups are both called "${group}". Rename one.` };
+    groupOf.set(slug(group), o.groupKey);
     if (!label) return { ok: false, error: `Give every option in "${group}" a label.` };
     if (!isInt(o.priceDelta)) return { ok: false, error: `The extra price for "${label}" must be a whole number (use 0 for none).` };
     const dupe = `${slug(group)}|${slug(label)}`;

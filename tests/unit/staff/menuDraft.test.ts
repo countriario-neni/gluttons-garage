@@ -23,8 +23,8 @@ describe("menuDraft", () => {
     const d = toDraft(withOptions);
     const first = withOptions.options[0];
     d.options.push(
-      { key: newKey(), id: "", group: "Spice", label: "Hot", priceDelta: "5" },
-      { key: newKey(), id: `${withOptions.id}--spice-hot`, group: "Heat", label: "Legacy", priceDelta: "0" },
+      { key: newKey(), groupKey: newKey(), id: "", group: "Spice", label: "Hot", priceDelta: "5" },
+      { key: newKey(), groupKey: newKey(), id: `${withOptions.id}--spice-hot`, group: "Heat", label: "Legacy", priceDelta: "0" },
     );
     const r = fromDraft(withOptions, d);
     if (!r.ok) throw new Error(r.error);
@@ -39,5 +39,16 @@ describe("menuDraft", () => {
     expect(on.ok && on.item.tags[0]).toBe("Bestseller");
     const off = fromDraft(plainItem, { ...toDraft(plainItem), bestseller: false });
     expect(off.ok && off.item.tags).not.toContain("Bestseller");
+  });
+
+  it("keeps a stable groupKey per group across renames and rejects duplicate group names", () => {
+    const d = toDraft(withOptions);
+    const keys = new Set(d.options.map((o) => o.groupKey));
+    expect(keys.size).toBe(new Set(withOptions.options.map((o) => o.group)).size);
+    d.options.push({ key: newKey(), groupKey: newKey(), id: "", group: "Extras", label: "A", priceDelta: "0" });
+    d.options.push({ key: newKey(), groupKey: newKey(), id: "", group: "extras ", label: "B", priceDelta: "0" });
+    const r = fromDraft(withOptions, d);
+    expect(r.ok).toBe(false);
+    expect(!r.ok && r.error).toMatch(/both called/);
   });
 });

@@ -217,7 +217,7 @@ function EditForm({ item, onClose }: { item: MenuItem; onClose: () => void }) {
   const set = <K extends keyof ItemDraft>(k: K, v: ItemDraft[K]) => setD((p) => ({ ...p, [k]: v }));
   const setOpt = (key: string, patch: Partial<DraftOption>) =>
     setD((p) => ({ ...p, options: p.options.map((o) => (o.key === key ? { ...o, ...patch } : o)) }));
-  const groups = [...new Set(d.options.map((o) => o.group))];
+  const groups = [...new Map(d.options.map((o) => [o.groupKey, o.group])).entries()].map(([key, name]) => ({ key, name }));
 
   async function save() {
     const r = fromDraft(item, d);
@@ -238,7 +238,7 @@ function EditForm({ item, onClose }: { item: MenuItem; onClose: () => void }) {
     <>
       <SheetHeader className="border-b border-border p-5">
         <SheetTitle className="text-2xl font-bold">Edit dish</SheetTitle>
-        <SheetDescription className="text-base">Changes show on the public menu straight away.</SheetDescription>
+        <SheetDescription className="text-base">Changes show on the online ordering page straight away.</SheetDescription>
       </SheetHeader>
       <div className="flex-1 space-y-6 overflow-y-auto p-5">
         <div className="space-y-2">
@@ -315,15 +315,15 @@ function EditForm({ item, onClose }: { item: MenuItem; onClose: () => void }) {
           <h3 className="text-base font-bold">Options</h3>
           {groups.length === 0 && <p className="text-sm text-muted-foreground">No options. Guests add this dish with one tap.</p>}
           {groups.map((g) => (
-            <div key={g} className="space-y-2 rounded-xl border border-border p-3">
+            <div key={g.key} className="space-y-2 rounded-xl border border-border p-3">
               <Input
                 aria-label="Group name"
                 className="h-11 text-base font-bold"
-                value={g}
-                onChange={(e) => setD((p) => ({ ...p, options: p.options.map((o) => (o.group === g ? { ...o, group: e.target.value } : o)) }))}
+                value={g.name}
+                onChange={(e) => setD((p) => ({ ...p, options: p.options.map((o) => (o.groupKey === g.key ? { ...o, group: e.target.value } : o)) }))}
               />
               {d.options
-                .filter((o) => o.group === g)
+                .filter((o) => o.groupKey === g.key)
                 .map((o) => (
                   <div key={o.key} className="flex flex-wrap items-center gap-2">
                     <Input aria-label="Option label" className="h-11 min-w-0 basis-full text-base sm:flex-1 sm:basis-0" value={o.label} onChange={(e) => setOpt(o.key, { label: e.target.value })} />
@@ -347,16 +347,16 @@ function EditForm({ item, onClose }: { item: MenuItem; onClose: () => void }) {
                 ))}
               <Button
                 variant="secondary"
-                onClick={() => setD((p) => ({ ...p, options: [...p.options, { key: newKey(), id: "", group: g, label: "", priceDelta: "0" }] }))}
+                onClick={() => setD((p) => ({ ...p, options: [...p.options, { key: newKey(), groupKey: g.key, id: "", group: g.name, label: "", priceDelta: "0" }] }))}
               >
-                <Plus aria-hidden="true" /> Add option to {g || "group"}
+                <Plus aria-hidden="true" /> Add option to {g.name || "group"}
               </Button>
             </div>
           ))}
           <Button
             variant="outline"
             onClick={() =>
-              setD((p) => ({ ...p, options: [...p.options, { key: newKey(), id: "", group: `Group ${groups.length + 1}`, label: "", priceDelta: "0" }] }))
+              setD((p) => ({ ...p, options: [...p.options, { key: newKey(), groupKey: newKey(), id: "", group: `Group ${groups.length + 1}`, label: "", priceDelta: "0" }] }))
             }
           >
             <Plus aria-hidden="true" /> Add option group
