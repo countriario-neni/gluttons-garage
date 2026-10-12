@@ -1,5 +1,5 @@
 import type { SeedDB } from "@/data/seed";
-import type { Segment } from "@/domain/types";
+import { tagsFor } from "@/domain/segments";
 import type { Customer, CustomerStats, Order } from "../DataStore";
 
 export type KV = { getItem(k: string): string | null; setItem(k: string, v: string): void; removeItem(k: string): void };
@@ -24,16 +24,6 @@ export function paymentStatusOf(o: Order): Order["paymentStatus"] {
   return paid >= o.bill.total ? "paid" : paid > 0 ? "partial" : "unpaid";
 }
 
-/** Temporary simple tag rule; Task 12 replaces it with domain/segments.ts. */
-function tagsFor(orders: number, spend: number, lastOrderAt: string | null, now: Date): CustomerStats["tags"] {
-  const tags: CustomerStats["tags"] = [];
-  if (orders === 1) tags.push("new");
-  if (orders >= 3) tags.push("regular");
-  if (spend >= 5000 || orders >= 8) tags.push("vip");
-  if (lastOrderAt && now.getTime() - new Date(lastOrderAt).getTime() > 30 * 86400000) tags.push("inactive");
-  return tags;
-}
-
 export function customerStats(db: SeedDB, c: Customer, now: Date): CustomerStats {
   const mine = db.orders.filter((o) => o.customerId === c.id && !DEAD.has(o.status));
   const totalSpend = mine.reduce((s, o) => s + o.bill.total, 0);
@@ -52,20 +42,8 @@ export function customerStats(db: SeedDB, c: Customer, now: Date): CustomerStats
     avgBill: mine.length ? Math.round(totalSpend / mine.length) : 0,
     favourites,
     points: pointsBalance(db, c.id),
-    tags: tagsFor(mine.length, totalSpend, lastOrderAt, now),
+    tags: tagsFor({ orders: mine.length, totalSpend, lastOrderAt }, now),
   };
-}
-
-export function inSegment(s: CustomerStats, segment: Segment): boolean {
-  if (!s.marketingOptIn) return false;
-  switch (segment) {
-    case "all_opted_in":
-      return true;
-    case "inactive_30d":
-      return s.tags.includes("inactive");
-    default:
-      return s.tags.includes(segment);
-  }
 }
 
 /** Newest first; ties (same timestamp) keep the most recently inserted first. */

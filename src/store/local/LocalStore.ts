@@ -3,6 +3,7 @@ import { generateSeed, type SeedDB } from "@/data/seed";
 import { couponDiscount } from "@/domain/coupons";
 import { pointsEarned } from "@/domain/loyalty";
 import { priceOrder } from "@/domain/pricing";
+import { inSegment } from "@/domain/segments";
 import type { Coupon, OrderStatus, Segment } from "@/domain/types";
 import { isIndianMobile, splitRemainder } from "@/domain/validation";
 import type {
@@ -17,7 +18,7 @@ import type {
   StaffRole,
   Topic,
 } from "../DataStore";
-import { customerStats, DB_KEY, inSegment, isFirstOrder, type KV, newestFirst, normPhone, paymentStatusOf, pointsBalance, SESSION_KEY } from "./db";
+import { customerStats, DB_KEY, isFirstOrder, type KV, newestFirst, normPhone, paymentStatusOf, pointsBalance, SESSION_KEY } from "./db";
 import { messageFor } from "./messages";
 
 /** Structural subset of BroadcastChannel (also satisfied by test fakes). */
@@ -424,7 +425,7 @@ export class LocalStore implements DataStore {
     this.requireOwner();
     return this.tx(["messages"], (db) => {
       const now = this.now();
-      const recipients = db.customers.filter((x) => inSegment(customerStats(db, x, now), c.segment));
+      const recipients = db.customers.filter((x) => inSegment(customerStats(db, x, now), c.segment, now));
       const campaign: Campaign = { id: this.newId(), name: c.name, segment: c.segment, body: c.body, sentCount: recipients.length, createdAt: now.toISOString() };
       db.campaigns.push(campaign);
       for (const r of recipients) {

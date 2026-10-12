@@ -207,7 +207,8 @@ select c.id, c.phone, c.name, c.marketing_opt_in, c.notes, c.created_at,
        ), '{}') as favourites,
        coalesce((select sum(points) from public.loyalty_ledger g where g.customer_id = c.id), 0)::int as points,
        array_remove(array[
-         case when a.orders = 1 then 'new' end,
+         -- mirrors domain/segments.ts tagsFor: inactive takes precedence over new
+         case when a.orders = 1 and not (a.last_order_at < now() - interval '30 days') then 'new' end,
          case when a.orders >= 3 then 'regular' end,
          case when a.total_spend >= 5000 or a.orders >= 8 then 'vip' end,
          case when a.last_order_at < now() - interval '30 days' then 'inactive' end

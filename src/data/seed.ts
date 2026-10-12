@@ -110,6 +110,7 @@ export function generateSeed(now: Date, rng: () => number = mulberry32(42)): See
     { code: "WELCOME10", type: "percent", value: 10, minOrder: 0, maxDiscount: 100, expiresAt: null, usageLimit: null, usedCount: 0, firstOrderOnly: true, active: true },
     { code: "TIRAMISU50", type: "flat", value: 50, minOrder: 400, maxDiscount: null, expiresAt: null, usageLimit: null, usedCount: 0, firstOrderOnly: false, active: true },
     { code: "GG100", type: "flat", value: 100, minOrder: 500, maxDiscount: null, expiresAt: iso(nowMs - 30 * DAY_MS), usageLimit: null, usedCount: 0, firstOrderOnly: false, active: true },
+    { code: "WINBACK15", type: "percent", value: 15, minOrder: 300, maxDiscount: 150, expiresAt: null, usageLimit: null, usedCount: 0, firstOrderOnly: false, active: true },
   ];
 
   const orders: Order[] = [];

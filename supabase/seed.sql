@@ -1805,7 +1805,8 @@ insert into public.seed_customers (id, phone, name, marketing_opt_in, notes, tag
 insert into public.seed_coupons (code, type, value, min_order, max_discount, expires_at, usage_limit, used_count, first_order_only, active, created_at) values
   ('WELCOME10', 'percent', 10, 0, 100, null, null, 19, true, true, '2026-08-02T09:30:00.000Z'::timestamptz),
   ('TIRAMISU50', 'flat', 50, 400, null, null, null, 17, false, true, '2026-08-02T09:30:01.000Z'::timestamptz),
-  ('GG100', 'flat', 100, 500, null, '2026-09-01T09:30:00.000Z'::timestamptz, null, 0, false, true, '2026-08-02T09:30:02.000Z'::timestamptz);
+  ('GG100', 'flat', 100, 500, null, '2026-09-01T09:30:00.000Z'::timestamptz, null, 0, false, true, '2026-08-02T09:30:02.000Z'::timestamptz),
+  ('WINBACK15', 'percent', 15, 300, 150, null, null, 0, false, true, '2026-08-02T09:30:03.000Z'::timestamptz);
 
 insert into public.seed_orders (id, short_code, customer_id, customer_name, phone, mode, table_number, pickup_time, status, subtotal, discount, loyalty_discount, points_redeemed, taxable, cgst, sgst, tax, total, online_due, payment_status, coupon_code, idempotency_key, created_at, updated_at, seq) values
   ('00000000-0000-4000-8002-000000001001', 'GG-1001', '00000000-0000-4000-8001-000000000012', 'Priya Nair', '9000059232', 'dine_in', 3, null, 'completed', 540, 54, 0, 0, 486, 12, 12, 24, 510, 0, 'paid', 'WELCOME10', null, '2026-08-02T05:35:00.000Z'::timestamptz, '2026-08-02T05:55:00.000Z'::timestamptz, 1),

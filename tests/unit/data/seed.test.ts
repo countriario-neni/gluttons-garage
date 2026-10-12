@@ -110,8 +110,8 @@ describe("generateSeed", () => {
     expect(ready.payments.map((p) => [p.method, p.status])).toEqual([["online", "success"], ["cash", "pending"]]);
   });
 
-  it("has the three coupons, GG100 expired, usedCount matching orders", () => {
-    expect(db.coupons.map((c) => c.code)).toEqual(["WELCOME10", "TIRAMISU50", "GG100"]);
+  it("has the four coupons, GG100 expired, usedCount matching orders", () => {
+    expect(db.coupons.map((c) => c.code)).toEqual(["WELCOME10", "TIRAMISU50", "GG100", "WINBACK15"]);
     expect(new Date(db.coupons[2].expiresAt!).getTime()).toBeLessThan(NOW.getTime());
     for (const c of db.coupons) expect(db.orders.filter((o) => o.couponCode === c.code).length).toBe(c.usedCount);
   });
