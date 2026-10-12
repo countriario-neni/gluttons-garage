@@ -12,6 +12,11 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Local tooling output (agent worktrees, SDD workspace, Playwright artefacts).
+    ".claude/**",
+    ".superpowers/**",
+    "test-results/**",
+    "playwright-report/**",
   ]),
 ]);
 
