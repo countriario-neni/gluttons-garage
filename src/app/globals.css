@@ -272,3 +272,14 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* Kitchen board: a new ticket flashes its background a few times (only under motion-safe). */
+@keyframes kds-flash {
+  0%,
+  100% {
+    background-color: var(--card);
+  }
+  50% {
+    background-color: color-mix(in oklch, var(--primary) 28%, var(--card));
+  }
+}
