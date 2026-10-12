@@ -474,7 +474,7 @@ begin
   perform pg_advisory_xact_lock(hashtext('place_order:' || v_key));
   select * into prior from public.orders where idempotency_key = v_key;
   if found then
-    return jsonb_build_object('ok', true, 'order', public._order_json(prior.id), 'onlineDue', prior.online_due);
+    return jsonb_build_object('ok', true, 'order', public._order_for_caller(prior.id), 'onlineDue', prior.online_due);
   end if;
 
   select * into s from public.settings;
@@ -720,6 +720,7 @@ begin
                                            ('accepted', 'cancelled'), ('preparing', 'ready'), ('ready', 'completed')), false) then
     raise exception 'BAD_TRANSITION';
   end if;
+  if p_status = 'completed' and o.payment_status <> 'paid' then raise exception 'UNPAID'; end if;
 
   update public.orders set status = p_status, updated_at = v_now where id = o.id;
   if p_status = 'completed' then
