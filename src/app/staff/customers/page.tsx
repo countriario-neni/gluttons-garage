@@ -4,7 +4,7 @@ import { CustomersView } from "@/components/staff/CustomersView";
 import { RequireStaff } from "@/components/staff/RequireStaff";
 import { StaffShell } from "@/components/staff/StaffShell";
 
-export const metadata: Metadata = { title: "Customers · Gluttons Garage" };
+export const metadata: Metadata = { title: "Customers" };
 
 export default function StaffCustomersPage() {
   return (

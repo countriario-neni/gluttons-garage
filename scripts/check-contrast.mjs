@@ -37,6 +37,9 @@ const pairs = [
   ["--warning-foreground", "--warning", 4.5],
   ["--primary", "--background", 4.5], // maroon/orange used as text or link colour on the page
   ["--ring", "--background", 3],
+  ["--input", "--background", 3], // form-field borders (UI component, 3:1)
+  ["--input", "--card", 3],
+  ["--input", "--muted", 3],
 ];
 
 let failed = 0;

@@ -62,6 +62,7 @@ export function Rail({ label, heading, children, className }: Props) {
       <ul
         ref={ref}
         aria-label={label}
+        tabIndex={0} // keyboard users can scroll the rail even when its items have nothing focusable
         className={cn(
           "-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-4 px-4 pt-1 pb-6 [scrollbar-width:none] sm:-mx-6 sm:scroll-px-6 sm:px-6 lg:-mx-8 lg:gap-6 lg:scroll-px-8 lg:px-8 [&::-webkit-scrollbar]:hidden",
         )}

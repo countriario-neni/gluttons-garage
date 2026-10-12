@@ -3,7 +3,7 @@ import { CheckoutApp } from "@/components/checkout/CheckoutApp";
 import { SiteShell } from "@/components/site/SiteShell";
 
 export const metadata: Metadata = {
-  title: "Checkout · Gluttons Garage",
+  title: "Checkout",
   description: "Review your order and pay by UPI, card, netbanking, wallet or at the counter.",
   robots: { index: false },
 };

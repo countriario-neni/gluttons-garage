@@ -7,7 +7,7 @@ import { Gear } from "@/components/site/primitives/Gear";
 import { categories, items } from "@/data/menu";
 
 export const metadata: Metadata = {
-  title: "Menu · Gluttons Garage, Beach Road Vizag",
+  title: "Menu, Beach Road Vizag",
   description: `The full Gluttons Garage menu: ${items.length} dishes across ${categories.length} sections, from healthy breakfasts and crepes to pizzas, soups and desserts.`,
 };
 

@@ -4,7 +4,7 @@ import { TableLanding } from "@/components/order/TableLanding";
 import { SiteShell } from "@/components/site/SiteShell";
 
 export const metadata: Metadata = {
-  title: "Your table · Gluttons Garage",
+  title: "Your table",
   description: "Order from your table at Gluttons Garage.",
   robots: { index: false },
 };

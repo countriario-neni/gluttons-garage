@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { OwnerPage } from "@/components/staff/OwnerPage";
 import { SettingsForm } from "@/components/staff/SettingsForm";
 
-export const metadata: Metadata = { title: "Settings · Gluttons Garage" };
+export const metadata: Metadata = { title: "Settings" };
 
 export default function StaffSettingsPage() {
   return (

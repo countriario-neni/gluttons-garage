@@ -24,6 +24,9 @@
   --color-kitchen-raised: #332e2b;
   --color-kitchen-line: #4d4540;
   --color-kitchen-soft: #bdb1a0;
+  /* Form-field borders: >= 3:1 against the surfaces they sit on (WCAG 1.4.11). */
+  --color-field-line: #8a7858;
+  --color-kitchen-field-line: #8f8478;
 
   --font-sans: var(--font-karla), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-playfair), ui-serif, Georgia, serif;
@@ -109,7 +112,7 @@
   --warning: var(--color-orange);
   --warning-foreground: var(--color-ink);
   --border: var(--color-line);
-  --input: var(--color-line);
+  --input: var(--color-field-line);
   --ring: var(--color-maroon);
   --chart-1: var(--color-maroon);
   --chart-2: var(--color-orange);
@@ -150,7 +153,7 @@
   --warning: var(--color-orange);
   --warning-foreground: var(--color-ink);
   --border: var(--color-kitchen-line);
-  --input: var(--color-kitchen-line);
+  --input: var(--color-kitchen-field-line);
   --ring: var(--color-orange);
   --sidebar: var(--color-kitchen-surface);
   --sidebar-foreground: var(--color-cream);

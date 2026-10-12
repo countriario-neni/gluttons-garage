@@ -5,7 +5,7 @@ import { TrackApp } from "@/components/track/TrackApp";
 import { TrackSkeleton } from "@/components/track/TrackSkeleton";
 
 export const metadata: Metadata = {
-  title: "Track your order · Gluttons Garage",
+  title: "Track your order",
   description: "Follow your Gluttons Garage order live, from placed to ready.",
   robots: { index: false },
 };

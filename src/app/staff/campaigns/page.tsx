@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { CampaignComposer } from "@/components/staff/CampaignComposer";
 import { OwnerPage } from "@/components/staff/OwnerPage";
 
-export const metadata: Metadata = { title: "Campaigns · Gluttons Garage" };
+export const metadata: Metadata = { title: "Campaigns" };
 
 export default function StaffCampaignsPage() {
   return (

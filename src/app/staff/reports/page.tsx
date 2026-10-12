@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { OwnerPage } from "@/components/staff/OwnerPage";
 import { ReportsView } from "@/components/staff/ReportsView";
 
-export const metadata: Metadata = { title: "Reports · Gluttons Garage" };
+export const metadata: Metadata = { title: "Reports" };
 
 export default function StaffReportsPage() {
   return (

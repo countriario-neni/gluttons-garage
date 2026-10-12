@@ -3,7 +3,7 @@ import { RequireStaff } from "@/components/staff/RequireStaff";
 import { StaffShell } from "@/components/staff/StaffShell";
 import { TablesView } from "@/components/staff/TablesView";
 
-export const metadata: Metadata = { title: "Tables · Gluttons Garage" };
+export const metadata: Metadata = { title: "Tables" };
 
 export default function StaffTablesPage() {
   return (

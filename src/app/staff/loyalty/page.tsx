@@ -3,7 +3,7 @@ import { LoyaltyView } from "@/components/staff/LoyaltyView";
 import { RequireStaff } from "@/components/staff/RequireStaff";
 import { StaffShell } from "@/components/staff/StaffShell";
 
-export const metadata: Metadata = { title: "Loyalty · Gluttons Garage" };
+export const metadata: Metadata = { title: "Loyalty" };
 
 export default function StaffLoyaltyPage() {
   return (

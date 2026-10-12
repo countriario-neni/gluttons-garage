@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { StaffRoot } from "@/components/staff/StaffRoot";
 
 export const metadata: Metadata = {
-  title: "Staff · Gluttons Garage",
+  title: "Staff",
   robots: { index: false, follow: false },
 };
 
