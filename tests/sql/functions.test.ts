@@ -425,3 +425,15 @@ describe("staff and owner functions", () => {
     await expect(call(db, "owner", "send_campaign", ["Hi", "everyone", "x"])).rejects.toThrow("BAD_INPUT");
   });
 });
+
+describe("customer_stats tags (mirror domain/segments.ts)", () => {
+  it("a single recent order is new; the same single order 31 days old is inactive, not new", async () => {
+    const r = await ok(input());
+    const tags = async () => (await rows<{ tags: string[] }>(db, "admin", "select tags from customer_stats where id = $1", [r.order.customerId]))[0].tags;
+    expect(await tags()).toEqual(["new"]);
+    await rows(db, "admin", "update orders set created_at = now() - interval '31 days' where id = $1", [r.order.id]);
+    expect(await tags()).toEqual(["inactive"]);
+    await rows(db, "admin", "update orders set created_at = now() - interval '29 days' where id = $1", [r.order.id]);
+    expect(await tags()).toEqual(["new"]);
+  });
+});
