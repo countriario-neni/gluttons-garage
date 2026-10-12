@@ -10,6 +10,8 @@ export type StaffUser = { email: string; password: string; role: StaffRole; name
 
 /** The whole demo database as persisted by LocalStore. */
 export type SeedDB = {
+  /** ISO time the seed was generated; LocalStore regenerates a seed older than 12 h (fresh demo). */
+  seededAt: string;
   settings: Settings;
   categories: MenuCategory[];
   items: MenuItem[];
@@ -268,6 +270,7 @@ export function generateSeed(now: Date, rng: () => number = mulberry32(42)): See
     campaigns: [],
     messages: [],
     staff: structuredClone(DEMO_STAFF),
+    seededAt: now.toISOString(),
     nextCode: code,
     idempotency: {},
   };

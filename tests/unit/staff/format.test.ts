@@ -4,6 +4,7 @@ import {
   cashDueOf,
   elapsedLabel,
   elapsedTone,
+  isSettled,
   paymentBadge,
   placeLabel,
   quickAmounts,
@@ -34,6 +35,13 @@ describe("payment badge and cash due", () => {
     const o = order(1200, [pay({ amount: 400 }), pay({ method: "cash", channel: "cash", amount: 800, status: "pending" })]);
     expect(paymentBadge(o).label).toBe("Partial ₹800 due");
     expect(cashDueOf(o)).toBe(800);
+  });
+  test("a pending online payment is not settled (Complete stays blocked)", () => {
+    const o = order(500, [pay({ amount: 500, status: "pending" })]);
+    expect(cashDueOf(o)).toBe(0);
+    expect(isSettled(o)).toBe(false);
+    expect(isSettled(order(500, [pay({ amount: 500 })]))).toBe(true);
+    expect(staffErrorCopy(new Error("UNPAID"))).toMatch(/fully paid/);
   });
   test("cash order before settling", () => {
     const o = order(1500, [pay({ method: "cash", channel: "cash", amount: 1500, status: "pending" })]);

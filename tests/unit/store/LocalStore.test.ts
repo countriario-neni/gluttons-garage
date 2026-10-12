@@ -304,15 +304,28 @@ describe("updateOrderStatus", () => {
     await expect(store.updateOrderStatus(order.id, "rejected")).rejects.toThrow("BAD_TRANSITION");
     await store.updateOrderStatus(order.id, "preparing");
     await store.updateOrderStatus(order.id, "ready");
+    await store.confirmOnlinePayment(order.id, { channel: "upi", amount: order.bill.total, success: true, reference: "R1" });
     const done = await store.updateOrderStatus(order.id, "completed");
     expect(done.status).toBe("completed");
     await expect(store.updateOrderStatus(order.id, "cancelled")).rejects.toThrow("BAD_TRANSITION");
+  });
+
+  it("refuses to complete an unpaid or part-paid order (no points earned)", async () => {
+    await owner(store);
+    const { order } = ok(await store.placeOrder(input({ plan: { kind: "split", onlineAmount: 100 } })));
+    for (const s of ["accepted", "preparing", "ready"] as const) await store.updateOrderStatus(order.id, s);
+    await expect(store.updateOrderStatus(order.id, "completed")).rejects.toThrow("UNPAID");
+    await store.confirmOnlinePayment(order.id, { channel: "upi", amount: 100, success: true, reference: "R1" });
+    await expect(store.updateOrderStatus(order.id, "completed")).rejects.toThrow("UNPAID");
+    await store.recordCashPayment(order.id, order.bill.total - 100);
+    expect((await store.updateOrderStatus(order.id, "completed")).status).toBe("completed");
   });
 
   it("completed adds an earn ledger entry and a customer message", async () => {
     await owner(store);
     const { order } = ok(await store.placeOrder(input()));
     for (const s of ["accepted", "preparing", "ready"] as const) await store.updateOrderStatus(order.id, s);
+    await store.confirmOnlinePayment(order.id, { channel: "upi", amount: order.bill.total, success: true, reference: "R1" });
     const before = (await store.listMessages({ orderId: order.id })).length;
     await store.updateOrderStatus(order.id, "completed");
     const c = (await store.listCustomers()).find((x) => x.phone === PHONE)!;
@@ -482,5 +495,35 @@ describe("persistence and realtime", () => {
     const b = make(storage, null);
     expect(await b.getOrder(r.order.id)).not.toBeNull();
     expect(storage.getItem("gg-demo-v1")).not.toBeNull();
+  });
+});
+
+describe("seed freshness", () => {
+  const HOUR = 3_600_000;
+  const at = (storage: ReturnType<typeof memoryStorage>, t: number) =>
+    new LocalStore({ storage, channel: null, session: memoryStorage(), now: () => new Date(t), newId });
+
+  it("keeps a DB seeded under 12 h ago and reseeds one older than that", async () => {
+    const storage = memoryStorage();
+    const t0 = NOW.getTime();
+    const s0 = at(storage, t0);
+    await s0.staffSignIn("owner@gluttonsgarage.demo", "garage123");
+    const placed = ok(await s0.placeOrder(input()));
+    const s1 = at(storage, t0 + 11 * HOUR);
+    expect(await s1.getOrder(placed.order.id)).not.toBeNull();
+    const s2 = at(storage, t0 + 13 * HOUR);
+    expect(await s2.getOrder(placed.order.id)).toBeNull();
+    expect(JSON.parse(storage.getItem("gg-demo-v1")!).seededAt).toBe(new Date(t0 + 13 * HOUR).toISOString());
+  });
+
+  it("reseeds a pre-anchor DB that has no seededAt", async () => {
+    const storage = memoryStorage();
+    const s0 = at(storage, NOW.getTime());
+    await s0.getOrder("x");
+    const db = JSON.parse(storage.getItem("gg-demo-v1")!);
+    delete db.seededAt;
+    storage.setItem("gg-demo-v1", JSON.stringify(db));
+    await at(storage, NOW.getTime()).getOrder("x");
+    expect(JSON.parse(storage.getItem("gg-demo-v1")!).seededAt).toBe(NOW.toISOString());
   });
 });

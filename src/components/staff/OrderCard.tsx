@@ -10,7 +10,7 @@ import type { OrderStatus } from "@/domain/types";
 import { useStore } from "@/store";
 import type { Order } from "@/store/DataStore";
 import { ConfirmDialog } from "./ConfirmDialog";
-import { cashDueOf, elapsedLabel, elapsedMinutes, elapsedTone, firstName, paymentBadge, placeLabel, staffErrorCopy } from "./format";
+import { cashDueOf, elapsedLabel, elapsedMinutes, elapsedTone, firstName, isSettled, paymentBadge, placeLabel, staffErrorCopy } from "./format";
 import { SettleCashDialog } from "./SettleCashDialog";
 
 /** The board's single ticking clock (ms); every card reads it instead of running its own timer. */
@@ -41,6 +41,7 @@ export function OrderCard({ order: o, fresh, onAcknowledge }: Props) {
   const tone = elapsedTone(min);
   const badge = paymentBadge(o);
   const cashDue = cashDueOf(o);
+  const awaitingOnline = cashDue === 0 && !isSettled(o);
   const where = placeLabel(o);
   const itemCount = o.bill.lines.reduce((s, l) => s + l.qty, 0);
 
@@ -172,10 +173,10 @@ export function OrderCard({ order: o, fresh, onAcknowledge }: Props) {
               </Button>
             )}
             <Button
-              variant={cashDue > 0 ? "outline" : "default"}
+              variant={cashDue > 0 || awaitingOnline ? "outline" : "default"}
               className={big}
-              disabled={busy || cashDue > 0}
-              aria-describedby={cashDue > 0 ? `${o.id}-settle-hint` : undefined}
+              disabled={busy || cashDue > 0 || awaitingOnline}
+              aria-describedby={cashDue > 0 || awaitingOnline ? `${o.id}-settle-hint` : undefined}
               onClick={() => void move("completed")}
             >
               {spin("completed") || <CircleCheckBig className="size-5" aria-hidden="true" />} Complete
@@ -183,6 +184,11 @@ export function OrderCard({ order: o, fresh, onAcknowledge }: Props) {
             {cashDue > 0 && (
               <p id={`${o.id}-settle-hint`} className="text-center text-sm font-bold text-warning">
                 Settle {formatINR(cashDue)} first
+              </p>
+            )}
+            {awaitingOnline && (
+              <p id={`${o.id}-settle-hint`} className="text-center text-sm font-bold text-warning">
+                Awaiting online payment
               </p>
             )}
           </>

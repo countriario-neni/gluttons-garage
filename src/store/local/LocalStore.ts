@@ -48,6 +48,9 @@ const TRANSITIONS: Partial<Record<OrderStatus, OrderStatus[]>> = {
   ready: ["completed"],
 };
 
+/** Demo semantics: a stored DB older than this is replaced by a fresh seed so the data never looks stale. */
+const SEED_MAX_AGE_MS = 12 * 3_600_000;
+
 function memoryKV(): KV {
   const m = new Map<string, string>();
   return { getItem: (k) => m.get(k) ?? null, setItem: (k, v) => void m.set(k, v), removeItem: (k) => void m.delete(k) };
@@ -88,7 +91,9 @@ export class LocalStore implements DataStore {
     const raw = this.storage.getItem(DB_KEY);
     if (raw) {
       try {
-        return JSON.parse(raw) as SeedDB;
+        const db = JSON.parse(raw) as SeedDB;
+        const age = this.now().getTime() - new Date(db.seededAt).getTime();
+        if (age <= SEED_MAX_AGE_MS) return db; // NaN (no seededAt: pre-anchor DB) falls through to reseed
       } catch {
         /* corrupt: fall through and reseed */
       }
@@ -366,6 +371,7 @@ export class LocalStore implements DataStore {
     return this.tx(["orders", "messages"], (db) => {
       const o = this.orderIn(db, orderId);
       if (!TRANSITIONS[o.status]?.includes(s)) throw new Error("BAD_TRANSITION");
+      if (s === "completed" && paymentStatusOf(o) !== "paid") throw new Error("UNPAID");
       const at = this.now().toISOString();
       o.status = s;
       o.updatedAt = at;

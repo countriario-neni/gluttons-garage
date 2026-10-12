@@ -148,6 +148,10 @@ describe("place_order", () => {
     const b = await ok(i);
     expect(b.order.id).toBe(a.order.id);
     expect(b.onlineDue).toBe(a.onlineDue);
+    // replay to anon must not leak the phone / customer id / payment references
+    expect(JSON.stringify(b.order)).not.toContain(i.phone);
+    expect(b.order).not.toHaveProperty("phone");
+    expect(b.order).not.toHaveProperty("customerId");
     expect(await messages(a.order.id)).toHaveLength(2);
   });
 
@@ -296,9 +300,11 @@ describe("update_order_status", () => {
     await status(order.id, "preparing", "kitchen");
     expect((await messages(order.id)).length).toBe(m0);
     await status(order.id, "ready", "kitchen");
+    await expect(status(order.id, "completed", "kitchen")).rejects.toThrow("UNPAID");
+    await confirm(order.id, order.bill.total);
     const done = await status(order.id, "completed", "kitchen");
     expect(done.status).toBe("completed");
-    expect((await messages(order.id)).length).toBe(m0 + 2);
+    expect((await messages(order.id)).length).toBe(m0 + 3);
     const earn = await rows<{ points: number }>(db, "admin", "select points from loyalty_ledger where order_id = $1 and reason = 'earn'", [order.id]);
     expect(earn).toEqual([{ points: pointsEarned(order.bill.total) }]);
     await expect(status(order.id, "cancelled")).rejects.toThrow("BAD_TRANSITION");

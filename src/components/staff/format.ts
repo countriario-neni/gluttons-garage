@@ -11,6 +11,9 @@ export function cashDueOf(o: Order): number {
   return Math.max(0, o.bill.total - covered);
 }
 
+/** Σ successful payments covers the total (the only state in which an order may be completed). */
+export const isSettled = (o: Order): boolean => o.payments.reduce((s, p) => (p.status === "success" ? s + p.amount : s), 0) >= o.bill.total;
+
 export type PaymentBadge = { label: string; tone: "paid" | "due" | "unpaid" };
 
 export function paymentBadge(o: Order): PaymentBadge {
@@ -58,6 +61,7 @@ const ERRORS: Record<string, string> = {
   BAD_AMOUNT: "That amount doesn't match what's due any more. Check the order and try again.",
   UNAUTHENTICATED: "Your staff session has ended. Sign in again.",
   FORBIDDEN: "Only the owner can do that.",
+  UNPAID: "This order isn't fully paid yet, so it can't be completed. Collect the payment first.",
   ORDER_NOT_FOUND: "This order no longer exists. The board has been refreshed.",
 };
 
